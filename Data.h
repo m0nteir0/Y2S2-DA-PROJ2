@@ -6,6 +6,8 @@
 #define DA_PROJECT2_DATA_H
 
 #include <string>
+#include <vector>
+#include <set>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -16,6 +18,7 @@ using namespace std;
 class Data {
 private:
     Graph g;
+    set<int> vertexes;
 
 public:
     bool readToyData(string filename);

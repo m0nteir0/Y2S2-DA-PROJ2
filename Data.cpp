@@ -8,11 +8,25 @@ bool Data::readToyData(string filename) {
     ifstream input(filename);
     if (input.is_open()) {
         string l;
-        getline(input, l);
+        getline(input, l); // consumes label
+        vector<string> fields;
+        int origem, destino;
+        float distancia;
+        string field;
         while (getline(input, l)) {
             stringstream iss(l);
+            while (getline(iss, field, ',')) {
+                fields.push_back(field);
+            }
+            origem = stoi(fields[0]);
+            destino = stoi(fields[1]);
+            distancia = stof(fields[2]);
 
-
+            if (vertexes.insert(origem).second) //return false if already exists
+                g.addVertex(origem);
+            if (vertexes.insert(destino).second)
+                g.addVertex(destino);
+            g.addBidirectionalEdge(origem, destino, distancia);
         }
         input.close();
         return true;
