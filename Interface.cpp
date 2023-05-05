@@ -110,16 +110,16 @@ bool Interface::readFiles() {
                         else{
                             switch(input2[0]){
                                 case ('1'):
-                                    d_.readToyData(DEFAULT_SHIPPINGS);
-                                    d_.readToyData(DEFAULT_SHIPPINGS);
+                                    //d_.readToyData(DEFAULT_SHIPPINGS);
+                                    //d_.readToyData(DEFAULT_SHIPPINGS);
                                     return false;
                                 case ('2'):
-                                    d_.readToyData(DEFAULT_STADIUMS);
-                                    d_.readToyData(DEFAULT_STADIUMS);
+                                    //d_.readToyData(DEFAULT_STADIUMS);
+                                    //d_.readToyData(DEFAULT_STADIUMS);
                                     return false;
                                 case ('3'):
-                                    d_.readToyData(DEFAULT_TOURISM);
-                                    d_.readToyData(DEFAULT_TOURISM);
+                                    //d_.readToyData(DEFAULT_TOURISM);
+                                    //d_.readToyData(DEFAULT_TOURISM);
                                     return false;
                                 case 'b':
                                     return false;
@@ -149,13 +149,13 @@ bool Interface::readFiles() {
                         else{
                             switch(input3[0]){
                                 case ('1'):
-                                    d_.readRealData(path);
+                                    //d_.readRealData(path);
                                     return false;
                                 case ('2'):
-                                    d_.readRealData(path);
+                                    //d_.readRealData(path);
                                     return false;
                                 case ('3'):
-                                    d_.readRealData(path);
+                                    //d_.readRealData(path);
                                     return false;
                                 case ('b'):
                                     return false;
@@ -203,16 +203,16 @@ void Interface::mainMenu() {
 
             switch (input[0]) {
                 case ('1'):
-                    if (bruteTSP())
-                        return;
+                    //if (bruteTSP())
+                    //    return;
                     break;
                 case ('2'):
-                    if (triangleTSP())
-                        return;
+                    //if (triangleTSP())
+                    //    return;
                     break;
                 case ('3'):
-                    if (customedTSP())
-                        return;
+                    //if (customedTSP())
+                    //    return;
                     break;
                 case ('e'):
                     cout << endl << "Exiting program..." << endl;

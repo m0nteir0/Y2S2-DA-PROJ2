@@ -9,18 +9,25 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "Graph.h"
 
 using namespace std;
 
 class Data {
+private:
+    Graph g;
 
 public:
     bool readToyData(string filename);
     bool readRealData(string filename);
 
+    void tspBTAux(unsigned int n, unsigned int path[], unsigned int currentPath[],
+                  unsigned int curr, unsigned int &best, unsigned int curr_n);
+    unsigned int tspBT(unsigned int n, unsigned int path[]);
+
 };
 
-
+/*
 bool Data::readStations(string filename) {
     ifstream input(filename);
     string labels = "Name,District,Municipality,Township,Line";
@@ -117,6 +124,6 @@ bool Data::readNetwork(std::string filename) {
     } else cout << "\nCould not open " << filename << endl;
     return false;
 }
-
+*/
 
 #endif //DA_PROJECT2_DATA_H
