@@ -21,6 +21,7 @@ bool Data::readToyData(string filename) {
             origem = stoi(fields[0]);
             destino = stoi(fields[1]);
             distancia = stof(fields[2]);
+            fields.clear();
 
             if (vertexes.insert(origem).second) //return false if already exists
                 g.addVertex(origem);
