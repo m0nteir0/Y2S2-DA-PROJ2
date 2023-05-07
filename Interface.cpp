@@ -42,7 +42,8 @@ void Interface::welcomePage() {
     while (true){
         cout << endl << "=========WELCOME PAGE=========" << endl;
         cout << endl << "Options:\n\t1-Read files\n\t2-Credits\n\te-Exit"<<endl;
-        cout << "Choose option: ";
+        cout << "Choose option:  ";
+        cout << endl;
         getline(cin, input);
         if(input.size()>1){
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
@@ -85,6 +86,7 @@ bool Interface::readFiles() {
 
     while (true){
         cout << "Choose option: ";
+        cout << endl;
         getline( cin, input);
         if(input.size()>1){
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
@@ -100,7 +102,8 @@ bool Interface::readFiles() {
                     ;
 
                     while(true){
-                        cout << "Choose option: ";
+                        cout << "Choose option:  ";
+                        cout << endl;
                         getline( cin, input2);
 
                         if(input.size()>1){
@@ -112,14 +115,19 @@ bool Interface::readFiles() {
                                 case ('1'):
                                     //d_.readToyData(DEFAULT_SHIPPINGS);
                                     //d_.readToyData(DEFAULT_SHIPPINGS);
+                                    cout << "The best answer to the TSP is: " << d_.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv") << endl;
+
                                     return false;
                                 case ('2'):
                                     //d_.readToyData(DEFAULT_STADIUMS);
                                     //d_.readToyData(DEFAULT_STADIUMS);
+                                    cout << "The best answer to the TSP is: " << d_.readToyData("../data/Project2Graphs/Toy-Graphs/stadiums.csv") << endl;
+
                                     return false;
                                 case ('3'):
                                     //d_.readToyData(DEFAULT_TOURISM);
                                     //d_.readToyData(DEFAULT_TOURISM);
+                                    cout << "The best answer to the TSP is: " << d_.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv") << endl;
                                     return false;
                                 case 'b':
                                     return false;
@@ -131,7 +139,7 @@ bool Interface::readFiles() {
                             }
                         }
                     }
-                    return false;
+                    return false; //nunca vai chegar aqui
 
                 case ('2'):
                     cout << endl << "Choose the graphic you want to analyse.\n\n"
@@ -139,7 +147,7 @@ bool Interface::readFiles() {
                     cout << endl << "Options:\n\t1-Graph 1\n\t2-Graph 2\n\t3-Graph 3\n\tb-back\n\te-Exit" << endl;
 
                     while(true){
-                        cout << "Choose option: ";
+                        cout << "Choose option:  " << endl;
                         getline( cin, input3);
 
                         if(input.size()>1){
@@ -194,7 +202,8 @@ void Interface::mainMenu() {
         cout << "I want to get informations regarding:" << endl;
         cout << endl << "Options:\n\t1-Brute-Force/Backtracking Algorithm [T2.1]\n\t2-Triangular Approximation Heuristic [T2.2]\n\t3-Other Heuristics [T2.3]\n\te-Exit"<<endl;
         string input;
-        cout << "Choose option: ";
+        cout << "Choose option:  ";
+        cout << endl;
         getline( cin, input);
         if(input.size()>1){
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
@@ -235,7 +244,8 @@ bool Interface::credits() const {
     cout << endl << endl << "Options:\n\tb-Back\n\te-Exit"<< endl;
     string input;
     while (true) {
-        cout << "Choose option: ";
+        cout << "Choose option:  ";
+        cout << endl;
         getline( cin, input);
         if(input.size()>1){
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
