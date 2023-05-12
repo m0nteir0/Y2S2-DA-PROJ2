@@ -4,7 +4,6 @@
 
 #ifndef DA_PROJECT2_DATA_H
 #define DA_PROJECT2_DATA_H
-
 #include <string>
 #include <vector>
 #include <set>
@@ -34,6 +33,8 @@ public:
     void tspBTAux(unsigned int n, unsigned int path[], unsigned int currentPath[],
                   unsigned int curr, unsigned int &best, unsigned int curr_n);
     unsigned int tspBT(unsigned int n, unsigned int path[]);
+    
+    
 
 
 

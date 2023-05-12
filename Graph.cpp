@@ -95,3 +95,57 @@ Graph::~Graph() {
     deleteMatrix(distMatrix, vertexSet.size());
     deleteMatrix(pathMatrix, vertexSet.size());
 }
+
+//================== T4.2 =======================================
+ /*
+  * - para cada vertice percorrer todos os vertices do grafo
+- verificar se existe uma edge a ligar, senão calcular distancia com haversine
+- prosseguir normalmente com o algoritmo
+  */
+
+std::vector<Vertex *> Graph::prim() {
+
+    MutablePriorityQueue<Vertex> q;
+
+    for(auto &v : vertexSet){
+        v->setDist(INT_MAX);
+        v->setPath(nullptr);
+    }
+
+    vertexSet[0]->setDist(0);
+    q.insert(vertexSet[0]);
+
+    while(!q.empty()){
+        auto u = q.extractMin();
+        u->setVisited(true);
+
+        //for(auto &e : u->getAdj()){
+        for (auto &vertex : vertexSet) {
+            if (vertex->getId() != u->getId()) {
+                double dist = -1;
+                for (auto &e: u->getAdj()) {
+                    auto v = e->getDest();
+                    if (v == vertex) {
+                        dist = e->getWeight();
+                        break;
+                    }
+                }
+                if (dist == -1) dist = haversine();
+
+                if (!vertex->isVisited() && dist < vertex->getDist()) {
+                    vertex->setPath(e);
+                    auto oldDist = v->getDist();
+                    vertex->setDist(dist);
+
+                    if (oldDist != INT_MAX) {
+                        q.decreaseKey(vertex);
+                    } else {
+                        q.insert(vertex);
+                    }
+                }
+            }
+        }
+    }
+
+    return this->vertexSet;
+}

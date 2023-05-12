@@ -1,7 +1,3 @@
-//
-// Created by Guilherme Monteiro on 06/05/2023.
-//
-
 #ifndef DA_PROJECT2_MUTABLEPRIORITYQUEUE_H
 #define DA_PROJECT2_MUTABLEPRIORITYQUEUE_H
 

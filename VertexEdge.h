@@ -8,7 +8,7 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
-//#include "../data_structures/MutablePriorityQueue.h"
+#include "MutablePriorityQueue.h"
 
 class Edge;
 
@@ -20,6 +20,7 @@ class Vertex {
 public:
     Vertex(int id);
     Vertex(int id, float longitude, float latitude);
+    friend class MutablePriorityQueue<Vertex>;
 
 
     bool operator<(Vertex & vertex) const; // // required by MutablePriorityQueue

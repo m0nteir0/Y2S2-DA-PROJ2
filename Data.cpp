@@ -165,3 +165,6 @@ unsigned int Data::tspBT(unsigned int n, unsigned int path[]) {
 const Graph &Data::getG() const {
     return g;
 }
+
+
+//-----------------T4.2-----------------//
