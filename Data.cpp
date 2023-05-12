@@ -3,6 +3,7 @@
 //
 
 #include "Data.h"
+#include <math.h>
 
 bool Data::readToyData(string filename) {
     ifstream input(filename);
@@ -162,9 +163,26 @@ unsigned int Data::tspBT(unsigned int n, unsigned int path[]) {
     return best;
 }
 
-const Graph &Data::getG() const {
+Graph &Data::getG() {
     return g;
 }
 
 
 //-----------------T4.2-----------------//
+double Data::haversine(double lat1, double lon1, double lat2, double lon2)
+{
+    // distance between latitudes and longitudes
+    double dLat = (lat2 - lat1) * M_PI / 180.0;
+    double dLon = (lon2 - lon1) * M_PI / 180.0;
+
+    // convert to radians
+    lat1 = (lat1) * M_PI / 180.0;
+    lat2 = (lat2) * M_PI / 180.0;
+
+    // apply formulae
+    double a = pow(sin(dLat / 2), 2) +
+               pow(sin(dLon / 2), 2) * cos(lat1) * cos(lat2);
+    double rad = 6371000;
+    double c = 2 * asin(sqrt(a));
+    return rad * c;
+}

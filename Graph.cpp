@@ -1,6 +1,7 @@
 // By: Gonçalo Leão
 
 #include "Graph.h"
+#include "Data.h"
 
 int Graph::getNumVertex() const {
     return vertexSet.size();
@@ -103,23 +104,24 @@ Graph::~Graph() {
 - prosseguir normalmente com o algoritmo
   */
 
-std::vector<Vertex *> Graph::prim() {
+double Graph::prim() {
 
     MutablePriorityQueue<Vertex> q;
 
     for(auto &v : vertexSet){
-        v->setDist(INT_MAX);
+        v->setDist(INF);
         v->setPath(nullptr);
     }
 
     vertexSet[0]->setDist(0);
     q.insert(vertexSet[0]);
 
+    double sum = 0;
+
     while(!q.empty()){
         auto u = q.extractMin();
         u->setVisited(true);
 
-        //for(auto &e : u->getAdj()){
         for (auto &vertex : vertexSet) {
             if (vertex->getId() != u->getId()) {
                 double dist = -1;
@@ -130,14 +132,21 @@ std::vector<Vertex *> Graph::prim() {
                         break;
                     }
                 }
-                if (dist == -1) dist = haversine();
+                if (dist == -1) {
+                    dist = Data::haversine(u->getLatitude(), u->getLongitude(), vertex->getLatitude(), vertex->getLatitude());
+                    // may not be necessary
+                    addBidirectionalEdge(u->getId(), vertex->getId(), dist);
+
+                }
 
                 if (!vertex->isVisited() && dist < vertex->getDist()) {
-                    vertex->setPath(e);
-                    auto oldDist = v->getDist();
+                    vertex->setPath(u);
+                    sum += dist;
+                    auto oldDist = vertex->getDist();
                     vertex->setDist(dist);
 
-                    if (oldDist != INT_MAX) {
+                    if (oldDist != INF) {
+                        sum -= oldDist;
                         q.decreaseKey(vertex);
                     } else {
                         q.insert(vertex);
@@ -147,5 +156,5 @@ std::vector<Vertex *> Graph::prim() {
         }
     }
 
-    return this->vertexSet;
+    return sum;
 }

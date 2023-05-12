@@ -83,7 +83,7 @@ double Vertex::getDist() const {
     return this->dist;
 }
 
-Edge *Vertex::getPath() const {
+Vertex *Vertex::getPath() const {
     return this->path;
 }
 
@@ -111,7 +111,7 @@ void Vertex::setDist(double dist) {
     this->dist = dist;
 }
 
-void Vertex::setPath(Edge *path) {
+void Vertex::setPath(Vertex *path) {
     this->path = path;
 }
 

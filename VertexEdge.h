@@ -31,7 +31,7 @@ public:
     bool isProcessing() const;
     unsigned int getIndegree() const;
     double getDist() const;
-    Edge *getPath() const;
+    Vertex *getPath() const;
     std::vector<Edge *> getIncoming() const;
 
     void setId(int info);
@@ -39,7 +39,7 @@ public:
     void setProcesssing(bool processing);
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
-    void setPath(Edge *path);
+    void setPath(Vertex *path);
     Edge * addEdge(Vertex *dest, double w);
     bool removeEdge(int destID);
     void removeOutgoingEdges();
@@ -69,7 +69,7 @@ protected:
     bool processing = false; // used by isDAG (in addition to the visited attribute)
     unsigned int indegree; // used by topsort
     double dist = 0;
-    Edge *path = nullptr;
+    Vertex *path = nullptr;
 
     std::vector<Edge *> incoming; // incoming edges
 

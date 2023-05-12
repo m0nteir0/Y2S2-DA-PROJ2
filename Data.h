@@ -22,7 +22,7 @@ private:
     set<int> vertexes;
 
 public:
-    const Graph &getG() const;
+    Graph &getG();
 
     bool readToyData(string filename);
     bool readRealData(string folder);
@@ -33,9 +33,9 @@ public:
     void tspBTAux(unsigned int n, unsigned int path[], unsigned int currentPath[],
                   unsigned int curr, unsigned int &best, unsigned int curr_n);
     unsigned int tspBT(unsigned int n, unsigned int path[]);
-    
-    
 
+
+    static double haversine(double lat1, double lon1, double lat2, double lon2);
 
 
 };
