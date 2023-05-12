@@ -19,6 +19,9 @@ class Edge;
 class Vertex {
 public:
     Vertex(int id);
+    Vertex(int id, float longitude, float latitude);
+
+
     bool operator<(Vertex & vertex) const; // // required by MutablePriorityQueue
 
     int getId() const;
@@ -40,11 +43,26 @@ public:
     bool removeEdge(int destID);
     void removeOutgoingEdges();
 
+    float getLongitude() const;
+    float getLatitude() const;
+    void setLatitude(float latitude);
+    void setLongitude(float longitude);
     //friend class MutablePriorityQueue<Vertex>;
 protected:
     int id;                // identifier
     std::vector<Edge *> adj;  // outgoing edges
 
+
+    float longitude;
+public:
+
+
+protected:
+    float latitude;
+public:
+
+
+protected:
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
     bool processing = false; // used by isDAG (in addition to the visited attribute)

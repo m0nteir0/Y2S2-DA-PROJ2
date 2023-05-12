@@ -6,6 +6,9 @@
 
 Vertex::Vertex(int id): id(id) {}
 
+Vertex::Vertex(int id, float longitude, float latitude) : id(id), longitude(longitude), latitude(latitude) {}
+
+
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
@@ -125,6 +128,22 @@ void Vertex::deleteEdge(Edge *edge) {
         }
     }
     delete edge;
+}
+
+float Vertex::getLongitude() const {
+    return longitude;
+}
+
+void Vertex::setLongitude(float longitude) {
+    Vertex::longitude = longitude;
+}
+
+float Vertex::getLatitude() const {
+    return latitude;
+}
+
+void Vertex::setLatitude(float latitude) {
+    Vertex::latitude = latitude;
 }
 
 /********************** Edge  ****************************/

@@ -40,6 +40,13 @@ bool Graph::addVertex(const int &id) {
     return true;
 }
 
+bool Graph::addVertex(const int &id, float longitude, float latitude) {
+    if (findVertex(id) != nullptr)
+        return false;
+    vertexSet.push_back(new Vertex(id, longitude, latitude));
+    return true;
+}
+
 /*
  * Adds an edge to a graph (this), given the contents of the source and
  * destination vertices and the edge weight (w).

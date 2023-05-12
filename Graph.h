@@ -10,6 +10,7 @@
 #include <algorithm>
 
 #include "VertexEdge.h"
+#include "MutablePriorityQueue.h"
 
 class Graph {
 public:
@@ -23,6 +24,8 @@ public:
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
     bool addVertex(const int &id);
+    bool addVertex(const int &id, float longitude, float latitude);
+
 
     /*
      * Adds an edge to a graph (this), given the contents of the source and
@@ -34,6 +37,10 @@ public:
 
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
+
+    std::vector<Vertex *> prim();
+
+
 protected:
     std::vector<Vertex *> vertexSet;    // vertex set
 
