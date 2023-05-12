@@ -17,6 +17,4 @@ int main() {
         cout << path[i] << " ";
     }
     cout << endl << dist << endl;
-
-    return 0;
 }
