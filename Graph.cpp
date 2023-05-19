@@ -111,6 +111,7 @@ double Graph::prim() {
     for(auto &v : vertexSet){
         v->setDist(INF);
         v->setPath(nullptr);
+        v->setIndegree(0);
     }
 
     vertexSet[0]->setDist(0);
@@ -140,7 +141,14 @@ double Graph::prim() {
                 }
 
                 if (!vertex->isVisited() && dist < vertex->getDist()) {
+                    Vertex* path = vertex->getPath();
+                    if (path != nullptr){
+                        path->setIndegree(path->getIndegree() - 1);
+                    }
+
                     vertex->setPath(u);
+                    u->setIndegree(u->getIndegree() + 1);
+
                     sum += dist;
                     auto oldDist = vertex->getDist();
                     vertex->setDist(dist);
@@ -150,6 +158,7 @@ double Graph::prim() {
                         q.decreaseKey(vertex);
                     } else {
                         q.insert(vertex);
+                        vertex->setIndegree(vertex->getIndegree() + 1);
                     }
                 }
             }

@@ -7,8 +7,8 @@ int main() {
     Data d = Data();
     cout << "EXECUTION TIMES:" << endl;
     const clock_t begin_time = clock();
-    // d.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
-    d.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv");
+     d.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
+    //d.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv");
     // d.readRealData("../data/Project2Graphs/Real-World-Graphs/graph1");
     cout << endl <<"Total: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC <<"s" << endl;
     /*
