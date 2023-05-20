@@ -49,6 +49,11 @@ public:
     void setLatitude(float latitude);
     void setLongitude(float longitude);
     //friend class MutablePriorityQueue<Vertex>;
+
+    void addReversePath(Vertex* v);
+
+    const std::vector<Vertex *> &getReversePath() const;
+
 protected:
     int id;                // identifier
     std::vector<Edge *> adj;  // outgoing edges
@@ -70,6 +75,7 @@ protected:
     unsigned int indegree; // used by topsort
     double dist = 0;
     Vertex *path = nullptr;
+    std::vector<Vertex*> reversePath;
 
     std::vector<Edge *> incoming; // incoming edges
 

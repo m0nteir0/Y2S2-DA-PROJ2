@@ -146,6 +146,14 @@ void Vertex::setLatitude(float latitude) {
     Vertex::latitude = latitude;
 }
 
+void Vertex::addReversePath(Vertex* v) {
+    this->reversePath.push_back(v);
+}
+
+const std::vector<Vertex *> &Vertex::getReversePath() const {
+    return reversePath;
+}
+
 /********************** Edge  ****************************/
 
 Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w) {}

@@ -186,3 +186,40 @@ double Data::haversine(double lat1, double lon1, double lat2, double lon2)
     double c = 2 * asin(sqrt(a));
     return rad * c;
 }
+
+vector<Vertex*> Data::getPreorderWalk() {
+    for (Vertex* v : g.getVertexSet())
+        v->setVisited(false);
+
+    vector<Vertex*> preorderWalk;
+
+    g.dfsPrim(g.getVertexSet()[0], preorderWalk);
+
+    return preorderWalk;
+}
+
+double Data::tspTriangle() {
+    double cost = 0;
+
+    g.prim();
+
+    vector<Vertex*> path = getPreorderWalk();
+    path.push_back(g.getVertexSet()[0]);
+
+    for (int i = 0; i < path.size() - 1; i++) {
+        double dist = -1;
+        for (Edge* e : path[i]->getAdj()) {
+            if (e->getDest()->getId() == path[i + 1]->getId()) {
+                dist = e->getWeight();
+                break;
+            }
+        }
+
+        if (dist == -1) dist = Data::haversine(path[i]->getLatitude(), path[i]->getLongitude(),
+                                               path[i+1]->getLatitude(), path[i+1]->getLatitude());
+
+        cost += dist;
+    }
+
+    return cost;
+}

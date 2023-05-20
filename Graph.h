@@ -38,7 +38,8 @@ public:
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
 
-    double prim();
+    void prim();
+    void dfsPrim(Vertex* source, std::vector<Vertex*>& res);
 
 
 protected:

@@ -21,6 +21,7 @@ int main() {
     */
 
     cout << endl << endl;
+    /*
     cout << d.getG().prim() << endl;
     for (Vertex* v : d.getG().getVertexSet()){
         if (v->getPath() == nullptr) {
@@ -29,6 +30,6 @@ int main() {
         }
         cout << v->getId() << " ------ " << v->getPath()->getId() << endl;
     }
-
-
+     */
+    cout << d.tspTriangle()<< endl;
 }

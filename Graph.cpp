@@ -104,20 +104,19 @@ Graph::~Graph() {
 - prosseguir normalmente com o algoritmo
   */
 
-double Graph::prim() {
+
+
+void Graph::prim() {
 
     MutablePriorityQueue<Vertex> q;
 
     for(auto &v : vertexSet){
         v->setDist(INF);
         v->setPath(nullptr);
-        v->setIndegree(0);
     }
 
     vertexSet[0]->setDist(0);
     q.insert(vertexSet[0]);
-
-    double sum = 0;
 
     while(!q.empty()){
         auto u = q.extractMin();
@@ -135,35 +134,33 @@ double Graph::prim() {
                 }
                 if (dist == -1) {
                     dist = Data::haversine(u->getLatitude(), u->getLongitude(), vertex->getLatitude(), vertex->getLatitude());
-                    // may not be necessary
-                    addBidirectionalEdge(u->getId(), vertex->getId(), dist);
-
                 }
 
                 if (!vertex->isVisited() && dist < vertex->getDist()) {
-                    Vertex* path = vertex->getPath();
-                    if (path != nullptr){
-                        path->setIndegree(path->getIndegree() - 1);
-                    }
-
                     vertex->setPath(u);
-                    u->setIndegree(u->getIndegree() + 1);
-
-                    sum += dist;
                     auto oldDist = vertex->getDist();
                     vertex->setDist(dist);
 
                     if (oldDist != INF) {
-                        sum -= oldDist;
                         q.decreaseKey(vertex);
                     } else {
                         q.insert(vertex);
-                        vertex->setIndegree(vertex->getIndegree() + 1);
                     }
                 }
             }
         }
     }
 
-    return sum;
+    for (Vertex* v : vertexSet) {
+        if (v->getPath() != nullptr)
+            v->getPath()->addReversePath(v);
+    }
+}
+
+void Graph::dfsPrim(Vertex* source, vector<Vertex*>& res) {
+    source->setVisited(true);
+    res.push_back(source);
+    for (Vertex* dest : source->getReversePath())
+        if (!dest->isVisited())
+            dfsPrim(dest, res);
 }
