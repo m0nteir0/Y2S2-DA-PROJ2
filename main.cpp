@@ -31,5 +31,13 @@ int main() {
         cout << v->getId() << " ------ " << v->getPath()->getId() << endl;
     }
      */
-    cout << d.tspTriangle()<< endl;
+    cout << "BACKTRACKING\n";
+    unsigned int n = d.getG().getNumVertex();
+    int a[n];
+    cout << d.tspBT(n,a)<< endl;
+    for (int i = 0; i < n; i++) cout << a[i] << ' ';
+    cout << endl << endl;
+
+    cout << "Triangular Approximation\n";
+    cout << d.tspTriangle() << endl;
 }

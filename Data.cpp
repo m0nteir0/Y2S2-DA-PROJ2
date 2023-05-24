@@ -121,8 +121,8 @@ bool Data::readRealEdges(string filename) {
     }
 }
 
-void Data::tspBTAux(unsigned int n, unsigned int path[], unsigned int currentPath[],
-         unsigned int curr, unsigned int &best, unsigned int curr_n) {
+void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
+         double curr, double &best, unsigned int curr_n) {
     if (curr_n == n) {               //visited all nodes
         bool canReturn = false;
         for (Edge* e : g.findVertex(currentPath[curr_n - 1])->getAdj()){
@@ -153,10 +153,11 @@ void Data::tspBTAux(unsigned int n, unsigned int path[], unsigned int currentPat
     }
 }
 
-unsigned int Data::tspBT(unsigned int n, unsigned int path[]) {
-    unsigned int currentPath[n];
+double Data::tspBT(unsigned int n, int path[]) {
+    int currentPath[n];
     currentPath[0] = 0;
-    unsigned int best = std::numeric_limits<unsigned int>::max();
+    g.getVertexSet()[0]->setVisited(true);
+    double best = std::numeric_limits<double>::max();
 
     tspBTAux(n, path, currentPath ,0, best, 1);
 
@@ -204,6 +205,9 @@ double Data::tspTriangle() {
     g.prim();
 
     vector<Vertex*> path = getPreorderWalk();
+    for (Vertex* v : path)
+        cout << v->getId() << ' ';
+    cout << endl;
     path.push_back(g.getVertexSet()[0]);
 
     for (int i = 0; i < path.size() - 1; i++) {

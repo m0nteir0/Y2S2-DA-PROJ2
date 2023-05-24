@@ -30,9 +30,9 @@ public:
     bool readRealNodes(string filename);
     bool readRealEdges(string filename);
 
-    void tspBTAux(unsigned int n, unsigned int path[], unsigned int currentPath[],
-                  unsigned int curr, unsigned int &best, unsigned int curr_n);
-    unsigned int tspBT(unsigned int n, unsigned int path[]);
+    void tspBTAux(unsigned int n, int path[], int currentPath[],
+                  double curr, double &best, unsigned int curr_n);
+    double tspBT(unsigned int n, int path[]);
 
 
     static double haversine(double lat1, double lon1, double lat2, double lon2);
