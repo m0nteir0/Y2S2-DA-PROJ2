@@ -113,7 +113,7 @@ void Graph::prim() {
 
                 if (dist < vertex.second->getDist()) {
                     vertex.second->setPath(u);
-                    auto oldDist = vertex.second->getDist();
+                    double oldDist = vertex.second->getDist();
                     vertex.second->setDist(dist);
 
                     if (oldDist != INF) {

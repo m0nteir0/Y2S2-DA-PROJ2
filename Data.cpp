@@ -6,22 +6,23 @@ bool Data::readToyData(string filename) {
     if (input.is_open()) {
         string l;
         getline(input, l); // consumes label
-
+        vector<string> fields;
         int orig, dest;
-        size_t first_comma, last_comma;
-        double distance;
-
+        float dist;
+        string field;
         while (getline(input, l)) {
-            first_comma = l.find_first_of(',');
-            last_comma = l.find_last_of(',');
-
-            orig = stoi(l.substr(0, first_comma));
-            dest = stoi(l.substr(first_comma + 1, last_comma - first_comma - 1));
-            distance = stod(l.substr(last_comma + 1, l.size() - last_comma));
+            stringstream iss(l);
+            while (getline(iss, field, ',')) {
+                fields.push_back(field);
+            }
+            orig = stoi(fields[0]);
+            dest = stoi(fields[1]);
+            dist = stof(fields[2]);
+            fields.clear();
 
             g.addVertex(orig);
             g.addVertex(dest);
-            g.addBidirectionalEdge(orig, dest, distance);
+            g.addBidirectionalEdge(orig, dest, dist);
         }
         input.close();
         return true;
