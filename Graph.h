@@ -8,6 +8,7 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <unordered_map>
 
 #include "VertexEdge.h"
 #include "MutablePriorityQueue.h"
@@ -15,16 +16,13 @@
 class Graph {
 public:
     ~Graph();
-    /*
-    * Auxiliary function to find a vertex with a given ID.
-    */
-    Vertex *findVertex(const int &id) const;
+
     /*
      *  Adds a vertex with a given content or info (in) to a graph (this).
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
     bool addVertex(const int &id);
-    bool addVertex(const int &id, float longitude, float latitude);
+    bool addVertex(const int &id, double latitude, double longitude);
 
 
     /*
@@ -36,22 +34,17 @@ public:
     bool addBidirectionalEdge(const int &sourc, const int &dest, double w);
 
     int getNumVertex() const;
-    std::vector<Vertex *> getVertexSet() const;
+    std::unordered_map<int, Vertex*> getVertexSet() const;
 
     void prim();
     void dfsPrim(Vertex* source, std::vector<Vertex*>& res);
 
 
 protected:
-    std::vector<Vertex *> vertexSet;    // vertex set
+    std::unordered_map<int, Vertex*> vertexSet;    // vertex set
 
     double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
-
-    /*
-     * Finds the index of the vertex with a given content.
-     */
-    int findVertexIdx(const int &id) const;
 };
 
 void deleteMatrix(int **m, int n);

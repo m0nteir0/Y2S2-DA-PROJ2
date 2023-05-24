@@ -7,9 +7,9 @@ int main() {
     Data d = Data();
     cout << "EXECUTION TIMES:" << endl;
     const clock_t begin_time = clock();
-     d.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
+     //d.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
     //d.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv");
-    // d.readRealData("../data/Project2Graphs/Real-World-Graphs/graph1");
+    d.readRealData("../data/Project2Graphs/Real-world Graphs/graph1");
     cout << endl <<"Total: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC <<"s" << endl;
     /*
     unsigned int path[5];
@@ -31,13 +31,15 @@ int main() {
         cout << v->getId() << " ------ " << v->getPath()->getId() << endl;
     }
      */
-    cout << "BACKTRACKING\n";
+    /*cout << "BACKTRACKING\n";
     unsigned int n = d.getG().getNumVertex();
     int a[n];
     cout << d.tspBT(n,a)<< endl;
     for (int i = 0; i < n; i++) cout << a[i] << ' ';
-    cout << endl << endl;
+    cout << endl << endl;*/
 
     cout << "Triangular Approximation\n";
+    const clock_t tsp = clock();
     cout << d.tspTriangle() << endl;
+    cout << endl <<"Total: " << float( clock () - tsp) /  CLOCKS_PER_SEC <<"s" << endl;
 }

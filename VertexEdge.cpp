@@ -6,7 +6,7 @@
 
 Vertex::Vertex(int id): id(id) {}
 
-Vertex::Vertex(int id, float longitude, float latitude) : id(id), longitude(longitude), latitude(latitude) {}
+Vertex::Vertex(int id, double latitude, double longitude) : id(id), latitude(latitude), longitude(longitude) {}
 
 
 /*
@@ -130,19 +130,19 @@ void Vertex::deleteEdge(Edge *edge) {
     delete edge;
 }
 
-float Vertex::getLongitude() const {
+double Vertex::getLongitude() const {
     return longitude;
 }
 
-void Vertex::setLongitude(float longitude) {
+void Vertex::setLongitude(double longitude) {
     Vertex::longitude = longitude;
 }
 
-float Vertex::getLatitude() const {
+double Vertex::getLatitude() const {
     return latitude;
 }
 
-void Vertex::setLatitude(float latitude) {
+void Vertex::setLatitude(double latitude) {
     Vertex::latitude = latitude;
 }
 

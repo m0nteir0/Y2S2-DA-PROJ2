@@ -19,7 +19,7 @@ class Edge;
 class Vertex {
 public:
     Vertex(int id);
-    Vertex(int id, float longitude, float latitude);
+    Vertex(int id, double latitude, double longitude);
     friend class MutablePriorityQueue<Vertex>;
 
 
@@ -44,10 +44,10 @@ public:
     bool removeEdge(int destID);
     void removeOutgoingEdges();
 
-    float getLongitude() const;
-    float getLatitude() const;
-    void setLatitude(float latitude);
-    void setLongitude(float longitude);
+    double getLongitude() const;
+    double getLatitude() const;
+    void setLatitude(double latitude);
+    void setLongitude(double longitude);
     //friend class MutablePriorityQueue<Vertex>;
 
     void addReversePath(Vertex* v);
@@ -59,14 +59,8 @@ protected:
     std::vector<Edge *> adj;  // outgoing edges
 
 
-    float longitude;
-public:
-
-
-protected:
-    float latitude;
-public:
-
+    double longitude;
+    double latitude;
 
 protected:
     // auxiliary fields

@@ -1,7 +1,3 @@
-//
-// Created by Guilherme Monteiro on 01/05/2023.
-//
-
 #include "Data.h"
 #include <math.h>
 
@@ -10,25 +6,22 @@ bool Data::readToyData(string filename) {
     if (input.is_open()) {
         string l;
         getline(input, l); // consumes label
-        vector<string> fields;
-        int origem, destino;
-        float distancia;
-        string field;
-        while (getline(input, l)) {
-            stringstream iss(l);
-            while (getline(iss, field, ',')) {
-                fields.push_back(field);
-            }
-            origem = stoi(fields[0]);
-            destino = stoi(fields[1]);
-            distancia = stof(fields[2]);
-            fields.clear();
 
-            if (vertexes.insert(origem).second) //return false if already exists
-                g.addVertex(origem);
-            if (vertexes.insert(destino).second)
-                g.addVertex(destino);
-            g.addBidirectionalEdge(origem, destino, distancia);
+        int orig, dest;
+        size_t first_comma, last_comma;
+        double distance;
+
+        while (getline(input, l)) {
+            first_comma = l.find_first_of(',');
+            last_comma = l.find_last_of(',');
+
+            orig = stoi(l.substr(0, first_comma));
+            dest = stoi(l.substr(first_comma + 1, last_comma - first_comma - 1));
+            distance = stod(l.substr(last_comma + 1, l.size() - last_comma));
+
+            g.addVertex(orig);
+            g.addVertex(dest);
+            g.addBidirectionalEdge(orig, dest, distance);
         }
         input.close();
         return true;
@@ -55,22 +48,20 @@ bool Data::readRealNodes(string filename) {
     if (input.is_open()) {
         string l;
         getline(input, l); // consumes label
-        vector<string> fields;
-        int id;
-        float lat, lon;
-        string field;
-        while (getline(input, l)) {
-            stringstream iss(l);
-            while (getline(iss, field, ',')) {
-                fields.push_back(field);
-            }
-            id = stoi(fields[0]);
-            lon = stof(fields[1]);
-            lat = stof(fields[2]);
-            fields.clear();
 
-            if (vertexes.insert(id).second) //return false if already exists
-                g.addVertex(id, lon, lat);
+        int id;
+        size_t first_comma, last_comma;
+        double lat, lon;
+
+        while (getline(input, l)) {
+            first_comma = l.find_first_of(',');
+            last_comma = l.find_last_of(',');
+
+            id = stoi(l.substr(0, first_comma));
+            lon = stod(l.substr(first_comma + 1, last_comma - first_comma - 1));
+            lat = stod(l.substr(last_comma + 1, l.size() - last_comma));
+
+            g.addVertex(id, lat, lon);
         }
         input.close();
         return true;
@@ -85,33 +76,20 @@ bool Data::readRealEdges(string filename) {
     if (input.is_open()) {
         string l;
         getline(input, l); // consumes label
-        vector<string> fields;
-        fields.reserve(3);
-        int origem, destino;
-        float distancia;
-        string field;
+
+        int orig, dest;
+        size_t first_comma, last_comma;
+        double dist;
+
         while (getline(input, l)) {
-            stringstream iss(l);
+            first_comma = l.find_first_of(',');
+            last_comma = l.find_last_of(',');
 
-            while (getline(iss, field, ',')) {
-                fields.push_back(field);
-            }
-            origem = stoi(fields[0]);
-            destino = stoi(fields[1]);
-            distancia = stof(fields[2]);
+            orig = stoi(l.substr(0, first_comma));
+            dest = stoi(l.substr(first_comma + 1, last_comma - first_comma - 1));
+            dist = stod(l.substr(last_comma + 1, l.size() - last_comma));
 
-            /*
-            for (int i = 0; std::getline(iss, field, ','); i++) {
-                if (i == 0) origem = std::stoi(field);
-                else if (i == 1) destino = std::stoi(field);
-                else if (i == 2) distancia = std::stof(field);
-                fields.push_back(std::move(field));
-            }
-             */
-
-            fields.clear();
-
-            g.addBidirectionalEdge(origem, destino, distancia);
+            g.addBidirectionalEdge(orig, dest, dist);
         }
         input.close();
         return true;
@@ -125,7 +103,7 @@ void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
          double curr, double &best, unsigned int curr_n) {
     if (curr_n == n) {               //visited all nodes
         bool canReturn = false;
-        for (Edge* e : g.findVertex(currentPath[curr_n - 1])->getAdj()){
+        for (Edge* e : g.getVertexSet()[currentPath[curr_n - 1]]->getAdj()){
             if (e->getDest()->getId() == 0){
                 curr += e->getWeight();
                 canReturn = true;
@@ -141,7 +119,7 @@ void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
 
     if (curr >= best) return;
 
-    for (Edge* e : g.findVertex(currentPath[curr_n - 1])->getAdj()){
+    for (Edge* e : g.getVertexSet()[currentPath[curr_n - 1]]->getAdj()){
         if (!e->getDest()->isVisited()){
             currentPath[curr_n] = e->getDest()->getId();
             e->getDest()->setVisited(true);
@@ -189,8 +167,8 @@ double Data::haversine(double lat1, double lon1, double lat2, double lon2)
 }
 
 vector<Vertex*> Data::getPreorderWalk() {
-    for (Vertex* v : g.getVertexSet())
-        v->setVisited(false);
+    for (auto& v : g.getVertexSet())
+        v.second->setVisited(false);
 
     vector<Vertex*> preorderWalk;
 

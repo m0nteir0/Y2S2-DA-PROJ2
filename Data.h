@@ -1,7 +1,3 @@
-//
-// Created by Guilherme Monteiro on 01/05/2023.
-//
-
 #ifndef DA_PROJECT2_DATA_H
 #define DA_PROJECT2_DATA_H
 #include <string>
@@ -18,9 +14,6 @@ using namespace std;
 class Data {
 private:
     Graph g;
-private:
-    set<int> vertexes;
-
 public:
     Graph &getG();
 

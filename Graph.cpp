@@ -7,45 +7,20 @@ int Graph::getNumVertex() const {
     return vertexSet.size();
 }
 
-std::vector<Vertex *> Graph::getVertexSet() const {
+std::unordered_map<int, Vertex*> Graph::getVertexSet() const {
     return vertexSet;
 }
 
-/*
- * Auxiliary function to find a vertex with a given content.
- */
-Vertex * Graph::findVertex(const int &id) const {
-    for (auto v : vertexSet)
-        if (v->getId() == id)
-            return v;
-    return nullptr;
-}
-
-/*
- * Finds the index of the vertex with a given content.
- */
-int Graph::findVertexIdx(const int &id) const {
-    for (unsigned i = 0; i < vertexSet.size(); i++)
-        if (vertexSet[i]->getId() == id)
-            return i;
-    return -1;
-}
 /*
  *  Adds a vertex with a given content or info (in) to a graph (this).
  *  Returns true if successful, and false if a vertex with that content already exists.
  */
 bool Graph::addVertex(const int &id) {
-    if (findVertex(id) != nullptr)
-        return false;
-    vertexSet.push_back(new Vertex(id));
-    return true;
+    return vertexSet.insert({id, new Vertex(id)}).second;
 }
 
-bool Graph::addVertex(const int &id, float longitude, float latitude) {
-    if (findVertex(id) != nullptr)
-        return false;
-    vertexSet.push_back(new Vertex(id, longitude, latitude));
-    return true;
+bool Graph::addVertex(const int &id, double latitude, double longitude) {
+    return vertexSet.insert({id, new Vertex(id, longitude, latitude)}).second;
 }
 
 /*
@@ -54,21 +29,21 @@ bool Graph::addVertex(const int &id, float longitude, float latitude) {
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
 bool Graph::addEdge(const int &sourc, const int &dest, double w) {
-    auto v1 = findVertex(sourc);
-    auto v2 = findVertex(dest);
-    if (v1 == nullptr || v2 == nullptr)
+    auto v1 = vertexSet.find(sourc);
+    auto v2 = vertexSet.find(dest);
+    if (v1 == vertexSet.end() || v2 == vertexSet.end())
         return false;
-    v1->addEdge(v2, w);
+    (*v1).second->addEdge((*v2).second, w);
     return true;
 }
 
 bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
-    auto v1 = findVertex(sourc);
-    auto v2 = findVertex(dest);
-    if (v1 == nullptr || v2 == nullptr)
+    auto v1 = vertexSet.find(sourc);
+    auto v2 = vertexSet.find(dest);
+    if (v1 == vertexSet.end() || v2 == vertexSet.end())
         return false;
-    auto e1 = v1->addEdge(v2, w);
-    auto e2 = v2->addEdge(v1, w);
+    auto e1 = (*v1).second->addEdge((*v2).second, w);
+    auto e2 = (*v2).second->addEdge((*v1).second, w);
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;
@@ -111,8 +86,8 @@ void Graph::prim() {
     MutablePriorityQueue<Vertex> q;
 
     for(auto &v : vertexSet){
-        v->setDist(INF);
-        v->setPath(nullptr);
+        v.second->setDist(INF);
+        v.second->setPath(nullptr);
     }
 
     vertexSet[0]->setDist(0);
@@ -123,37 +98,37 @@ void Graph::prim() {
         u->setVisited(true);
 
         for (auto &vertex : vertexSet) {
-            if (vertex->getId() != u->getId()) {
+            if (vertex.second->getId() != u->getId() && !vertex.second->isVisited()) {
                 double dist = -1;
                 for (auto &e: u->getAdj()) {
                     auto v = e->getDest();
-                    if (v == vertex) {
+                    if (v == vertex.second) {
                         dist = e->getWeight();
                         break;
                     }
                 }
                 if (dist == -1) {
-                    dist = Data::haversine(u->getLatitude(), u->getLongitude(), vertex->getLatitude(), vertex->getLatitude());
+                    dist = Data::haversine(u->getLatitude(), u->getLongitude(), vertex.second->getLatitude(), vertex.second->getLatitude());
                 }
 
-                if (!vertex->isVisited() && dist < vertex->getDist()) {
-                    vertex->setPath(u);
-                    auto oldDist = vertex->getDist();
-                    vertex->setDist(dist);
+                if (dist < vertex.second->getDist()) {
+                    vertex.second->setPath(u);
+                    auto oldDist = vertex.second->getDist();
+                    vertex.second->setDist(dist);
 
                     if (oldDist != INF) {
-                        q.decreaseKey(vertex);
+                        q.decreaseKey(vertex.second);
                     } else {
-                        q.insert(vertex);
+                        q.insert(vertex.second);
                     }
                 }
             }
         }
     }
 
-    for (Vertex* v : vertexSet) {
-        if (v->getPath() != nullptr)
-            v->getPath()->addReversePath(v);
+    for (auto& v : vertexSet) {
+        if (v.second->getPath() != nullptr)
+            v.second->getPath()->addReversePath(v.second);
     }
 }
 
