@@ -18,6 +18,7 @@ public:
     Graph &getG();
 
     bool readToyData(string filename);
+    bool readFullyConnectedData(string filename);
     bool readRealData(string folder);
 
     bool readRealNodes(string filename);
@@ -32,6 +33,8 @@ public:
     vector<Vertex*> getPreorderWalk();
     double tspTriangle();
 
+    double tspNearestNeighbour();
+    double tspNearestNeighbour2opt();
 
 };
 

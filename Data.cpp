@@ -32,6 +32,36 @@ bool Data::readToyData(string filename) {
     }
 }
 
+bool Data::readFullyConnectedData(string filename) {
+    ifstream input(filename);
+    if (input.is_open()) {
+        string l;
+        vector<string> fields;
+        int orig, dest;
+        float dist;
+        string field;
+        while (getline(input, l)) {
+            stringstream iss(l);
+            while (getline(iss, field, ',')) {
+                fields.push_back(field);
+            }
+            orig = stoi(fields[0]);
+            dest = stoi(fields[1]);
+            dist = stof(fields[2]);
+            fields.clear();
+
+            g.addVertex(orig);
+            g.addVertex(dest);
+            g.addBidirectionalEdge(orig, dest, dist);
+        }
+        input.close();
+        return true;
+    } else {
+        cout << "Unable to open file";
+        return false;
+    }
+}
+
 bool Data::readRealData(string folder) {
     const clock_t node_time = clock();
     bool nodes = readRealNodes(folder + "/nodes.csv");
@@ -205,4 +235,64 @@ double Data::tspTriangle() {
     }
 
     return cost;
+}
+
+double Data::tspNearestNeighbour() {
+    for (auto& v : g.getVertexSet())
+        v.second->setVisited(false);
+
+    double cost = 0;
+
+    vector<Vertex*> path;
+    path.push_back(g.getVertexSet()[0]);
+    g.getVertexSet()[0]->setVisited(true);
+
+    while (path.size() < g.getVertexSet().size()) {
+        double minDist = INF;
+        Vertex* minV = nullptr;
+        bool backtrack = true;
+
+        for (Edge* e : path.back()->getAdj()) {
+            if (!e->getDest()->isVisited() && e->getWeight() < minDist && e->getWeight() != INF) {
+                minDist = e->getWeight();
+                minV = e->getDest();
+                backtrack = false;
+            }
+        }
+
+        if (backtrack) {
+            // Backtrack to the previous node
+            auto v = path.back();
+            path.pop_back();
+            v->setVisited(false);
+
+            continue;
+        }
+
+        minV->setVisited(true);
+        path.push_back(minV);
+        cost += minDist;
+    }
+
+    // Add the cost of the final vertex to the initial vertex
+    cost += path.back()->getAdj()[0]->getWeight();
+
+    for (Vertex* v : path)
+        cout << v->getId() << ' ';
+    cout << endl;
+
+    return cost;
+}
+
+
+/*i want an algorithm for TSP using Nearest Neighbour and 2-opt
+ * 1. start at a vertex 0
+ * 2. find the nearest vertex
+ * 3. find the nearest vertex to the nearest vertex
+ * 4. repeat until all vertices are visited
+ * 5. apply 2-opt
+ * 6. repeat until no improvement
+ * */
+double Data::tspNearestNeighbour2opt() {
+
 }
