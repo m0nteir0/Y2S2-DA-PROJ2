@@ -300,7 +300,7 @@ double Data::getPathDist(vector<Vertex *> path) {
 
     for (int i = 0; i < path.size() - 1; i++) {
         for (Edge* e : path[i]->getAdj()) {
-            if (e->getDest() == path[i] + 1) {
+            if (e->getDest() == path[i + 1]) {
                 dist += e->getWeight();
                 break;
             }
