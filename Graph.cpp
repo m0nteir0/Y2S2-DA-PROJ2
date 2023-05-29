@@ -20,7 +20,7 @@ bool Graph::addVertex(const int &id) {
 }
 
 bool Graph::addVertex(const int &id, double latitude, double longitude) {
-    return vertexSet.insert({id, new Vertex(id, longitude, latitude)}).second;
+    return vertexSet.insert({id, new Vertex(id, latitude, longitude)}).second;
 }
 
 /*
@@ -87,7 +87,9 @@ void Graph::prim() {
 
     for(auto &v : vertexSet){
         v.second->setDist(INF);
+        v.second->setVisited(false);
         v.second->setPath(nullptr);
+        v.second->clearReversePath();
     }
 
     vertexSet[0]->setDist(0);
@@ -102,13 +104,13 @@ void Graph::prim() {
                 double dist = -1;
                 for (auto &e: u->getAdj()) {
                     auto v = e->getDest();
-                    if (v == vertex.second) {
+                    if (v->getId() == vertex.second->getId()) {
                         dist = e->getWeight();
                         break;
                     }
                 }
                 if (dist == -1) {
-                    dist = Data::haversine(u->getLatitude(), u->getLongitude(), vertex.second->getLatitude(), vertex.second->getLatitude());
+                    dist = Data::haversine(u->getLatitude(), u->getLongitude(), vertex.second->getLatitude(), vertex.second->getLongitude());
                 }
 
                 if (dist < vertex.second->getDist()) {

@@ -146,6 +146,10 @@ void Vertex::setLatitude(double latitude) {
     Vertex::latitude = latitude;
 }
 
+void Vertex::clearReversePath() {
+    reversePath.clear();
+}
+
 void Vertex::addReversePath(Vertex* v) {
     this->reversePath.push_back(v);
 }

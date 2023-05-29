@@ -50,6 +50,7 @@ public:
     void setLongitude(double longitude);
     //friend class MutablePriorityQueue<Vertex>;
 
+    void clearReversePath();
     void addReversePath(Vertex* v);
 
     const std::vector<Vertex *> &getReversePath() const;

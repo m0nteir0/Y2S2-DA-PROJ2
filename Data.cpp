@@ -229,7 +229,7 @@ double Data::tspTriangle() {
         }
 
         if (dist == -1) dist = Data::haversine(path[i]->getLatitude(), path[i]->getLongitude(),
-                                               path[i+1]->getLatitude(), path[i+1]->getLatitude());
+                                               path[i+1]->getLatitude(), path[i+1]->getLongitude());
 
         cost += dist;
     }
@@ -250,24 +250,26 @@ double Data::tspNearestNeighbour() {
     while (path.size() < g.getVertexSet().size()) {
         double minDist = INF;
         Vertex* minV = nullptr;
-        bool backtrack = true;
+        //bool backtrack = true;
 
         for (Edge* e : path.back()->getAdj()) {
             if (!e->getDest()->isVisited() && e->getWeight() < minDist && e->getWeight() != INF) {
                 minDist = e->getWeight();
                 minV = e->getDest();
-                backtrack = false;
+                e->getDest()->setPath(path.back());
+                //backtrack = false;
             }
         }
 
-        if (backtrack) {
+        /*if (backtrack) {
             // Backtrack to the previous node
             auto v = path.back();
             path.pop_back();
             v->setVisited(false);
 
             continue;
-        }
+        }*/
+        if (minV == nullptr) break;
 
         minV->setVisited(true);
         path.push_back(minV);
@@ -293,6 +295,57 @@ double Data::tspNearestNeighbour() {
  * 5. apply 2-opt
  * 6. repeat until no improvement
  * */
-double Data::tspNearestNeighbour2opt() {
+double Data::getPathDist(vector<Vertex *> path) {
+    double dist = 0;
 
+    for (int i = 0; i < path.size() - 1; i++) {
+        for (Edge* e : path[i]->getAdj()) {
+            if (e->getDest() == path[i] + 1) {
+                dist += e->getWeight();
+                break;
+            }
+        }
+    }
+    return dist;
+}
+
+vector<Vertex *> Data::swap2opt(vector<Vertex *> path, int start, int end) {
+    vector<Vertex*> swapped_path;
+
+    for (int i = 0; i <= start; i++)
+        swapped_path.push_back(path[i]);
+
+    for (int i = end; i > start; i--)
+        swapped_path.push_back(path[i]);
+
+    for (int i = end + 1; i < path.size(); i++)
+        swapped_path.push_back(path[i]);
+
+    return swapped_path;
+}
+
+double Data::tsp2opt(vector<Vertex*> path) {
+    bool improved = true;
+    double path_dist = INF;
+
+    while (improved) {
+        improved = false;
+        path_dist = getPathDist(path);
+
+        for (int i = 0; i <= path.size() - 3; i++) {            //start and end node can't be swapped
+            for (int j = i + 1; j <= path.size() - 2; j++) {
+                vector<Vertex*> temp_path = swap2opt(path, i, j);
+                double temp_dist = getPathDist(temp_path);
+
+                if (temp_dist < path_dist) {
+                    path = temp_path;
+                    path_dist = temp_dist;
+                    improved = true;
+                }
+            }
+        }
+
+    }
+
+    return path_dist;
 }
