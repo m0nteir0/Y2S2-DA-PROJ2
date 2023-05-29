@@ -315,20 +315,33 @@ vector<Vertex *> Data::swap2opt(vector<Vertex *> path, int start, int end) {
 
 double Data::tsp2opt(vector<Vertex*> path) {
     bool improved = true;
-    double path_dist = INF;
+    double path_dist = getPathDist(path);
     int iterations = 0;
 
     while (improved && iterations++ < 1) {
         improved = false;
-        path_dist = getPathDist(path);
 
         for (int i = 1; i <= path.size() - 3; i++) {            //start and end node can't be swapped
             for (int j = i + 1; j <= path.size() - 2; j++) {
-                vector<Vertex*> temp_path = swap2opt(path, i, j);
-                double temp_dist = getPathDist(temp_path);
+                double temp_dist = path_dist;
+
+                //the path that gets reversed goes from [i+1, j]
+                for (Edge* e : path[i]->getAdj()) {
+                    if (e->getDest()->getId() == path[j]->getId())
+                        temp_dist += e->getWeight();
+                    else if (e->getDest()->getId() == path[i+1]->getId())
+                        temp_dist -= e->getWeight();
+                }
+
+                for (Edge* e : path[j + 1]->getAdj()) {
+                    if (e->getDest()->getId() == path[i+1]->getId())
+                        temp_dist += e->getWeight();
+                    else if (e->getDest()->getId() == path[j]->getId())
+                        temp_dist -= e->getWeight();
+                }
 
                 if (temp_dist < path_dist) {
-                    path = temp_path;
+                    path = swap2opt(path, i, j);
                     path_dist = temp_dist;
                     improved = true;
                 }
