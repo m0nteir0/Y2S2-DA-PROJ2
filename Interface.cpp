@@ -340,10 +340,23 @@ bool Interface::mainMenu() {
                     if (displayPage());
                     break;
                 }
-                    //if (triangleTSP())
-                    //    return;
+                case ('3'): {
+                    vector<Vertex*> path;
+                    cout << endl << endl << "---------------------------------" << endl;
+                    cout << "NEAREST NEIGHBORS ALGORITHM" << endl;
+                    begin_time = clock();
+                    total_distance = d_.tspTriangle(path);
+                    cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
+                    cout << "Path: ";
+                    for (int i = 0; i < path.size()-1; i++) {
+                        cout << path[i]->getId() << " -> ";
+                    }
+                    cout << path.back()->getId() << endl;
+                    cout << "Total distance: " << total_distance << endl;
+                    cout << "---------------------------------" << endl;
+                    if (displayPage());
                     break;
-                case ('3'):
+                }
                     //if (customedTSP())
                     //    return;
                     break;
