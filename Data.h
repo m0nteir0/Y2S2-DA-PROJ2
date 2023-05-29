@@ -17,6 +17,7 @@ private:
 public:
     Graph &getG();
 
+
     bool readToyData(string filename);
     bool readFullyConnectedData(string filename);
     bool readRealData(string folder);
@@ -33,12 +34,12 @@ public:
     vector<Vertex*> getPreorderWalk();
     double tspTriangle();
 
-    double tspNearestNeighbour();
+    vector<Vertex*> tspNearestNeighbour();
     double getPathDist(vector<Vertex*> path);
     vector<Vertex*> swap2opt(vector<Vertex*> path, int i, int j);
     double tsp2opt(vector<Vertex*> path);
-
 };
+
 
 
 #endif //DA_PROJECT2_DATA_H

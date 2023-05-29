@@ -72,6 +72,12 @@ Graph::~Graph() {
     deleteMatrix(pathMatrix, vertexSet.size());
 }
 
+void Graph::clearGraph() {
+    for (auto &v : vertexSet)
+        delete v.second;
+    vertexSet.clear();
+}
+
 //================== T4.2 =======================================
  /*
   * - para cada vertice percorrer todos os vertices do grafo

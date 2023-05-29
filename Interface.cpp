@@ -13,12 +13,12 @@ using namespace std;
  * e - exit
  *
  * readFiles:
- * 1- toy graphs
- * 2- real world graphs
+ * 1 -  toy graphs
+ * 2 -  real world graphs
  *
  * dentro do mesmo menu:
  * toy graphs:
- * 1-shippings,2-stadiums,3-tourism  -> readToyData(path file)
+ * 1 - shippings,2 - stadiums,3 - tourism  -> readToyData(path file)
  * real world graphs:
  * 1,2,3 -> readRealData(path folder)
  *
@@ -30,7 +30,7 @@ using namespace std;
  *
  */
 
-Interface::Interface(): d_(Data()) {}
+Interface::Interface() : d_(Data()) {}
 
 /**
  * Função imprime o menu inicial que permite ao utilizador escolher entre as opções: ler ficheiros, ver créditos ou sair do programa.
@@ -39,16 +39,15 @@ Interface::Interface(): d_(Data()) {}
  */
 void Interface::welcomePage() {
     string input;
-    while (true){
+    while (true) {
         cout << endl << "=========WELCOME PAGE=========" << endl;
-        cout << endl << "Options:\n\t1-Read files\n\t2-Credits\n\te-Exit"<<endl;
+        cout << endl << "Options:\n\t1 - Read files\n\t2 - Credits\n\te - Exit" << endl;
         cout << "Choose option:  ";
         cout << endl;
         getline(cin, input);
-        if(input.size()>1){
+        if (input.size() > 1) {
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
-        }
-        else {
+        } else {
             switch (input[0]) {
                 case ('1'):
                     if (readFiles())
@@ -77,57 +76,69 @@ void Interface::welcomePage() {
  * COMPLEXIDADE: O(n).
  */
 bool Interface::readFiles() {
+    d_.getG().clearGraph();
     cout << endl << "=========READ FILES=========" << endl;
     cout << endl;
     cout << "Which files do you want to read?" << endl;
-    cout << endl << "Options:\n\t1-Toy graphs\n\t2-Real world graphs\n\tb-Back\n\te-Exit"<<endl;
+    cout << endl
+         << "Options:\n\t1 - Toy graphs\n\t2 - Real world graphs\n\t3 - Fully connected graphs\n\tb - Back\n\te - Exit"
+         << endl;
 
-    string input, stations, network;
+    string input;
 
-    while (true){
+    while (true) {
         cout << "Choose option: ";
         cout << endl;
-        getline( cin, input);
-        if(input.size()>1){
+        getline(cin, input);
+        if (input.size() > 1) {
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
-        }
-        else {
+        } else {
             string input2;
-            string input3;
             switch (input[0]) {
                 case ('1'):
-                    cout << endl << "Choose the topic of the graphic you want to analyse.\n\n"
+                    cout << endl << "Choose the topic of the graph you want to analyse.\n\n"
                          << endl;
-                    cout << endl << "Options:\n\t1-Shippings\n\t2-Stadiums\n\t3-Tourism\n\tb-back\n\te-Exit" << endl;
-                    ;
+                    cout << endl << "Options:\n\t1 - Shippings\n\t2 - Stadiums\n\t3 - Tourism\n\tb - back\n\te - Exit"
+                         << endl;
 
-                    while(true){
+                    while (true) {
                         cout << "Choose option:  ";
                         cout << endl;
-                        getline( cin, input2);
+                        getline(cin, input2);
 
-                        if(input.size()>1){
-                            cout << endl << "Please, only type one of the characters in the options described above." << endl;
-                        }
-
-                        else{
-                            switch(input2[0]){
+                        if (input2.size() > 1) {
+                            cout << endl << "Please, only type one of the characters in the options described above."
+                                 << endl;
+                        } else {
+                            clock_t begin_time = 0;
+                            switch (input2[0]) {
                                 case ('1'):
-                                    //d_.readToyData(DEFAULT_SHIPPINGS);
-                                    //d_.readToyData(DEFAULT_SHIPPINGS);
-                                    cout << "The best answer to the TSP is: " << d_.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv") << endl;
-
+                                    cout << "---------------------------------" << endl;
+                                    cout << "EXECUTION TIMES:" << endl;
+                                    begin_time = clock();
+                                    d_.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv");
+                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                         << endl;
+                                    // call to algorithm menu
+                                    if (mainMenu());
                                     return false;
                                 case ('2'):
-                                    //d_.readToyData(DEFAULT_STADIUMS);
-                                    //d_.readToyData(DEFAULT_STADIUMS);
-                                    cout << "The best answer to the TSP is: " << d_.readToyData("../data/Project2Graphs/Toy-Graphs/stadiums.csv") << endl;
-
+                                    cout << "---------------------------------" << endl;
+                                    cout << "EXECUTION TIMES:" << endl;
+                                    begin_time = clock();
+                                    d_.readToyData("../data/Project2Graphs/Toy-Graphs/stadiums.csv");
+                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                         << endl;
+                                    // call to algorithm menu
                                     return false;
                                 case ('3'):
-                                    //d_.readToyData(DEFAULT_TOURISM);
-                                    //d_.readToyData(DEFAULT_TOURISM);
-                                    cout << "The best answer to the TSP is: " << d_.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv") << endl;
+                                    cout << "---------------------------------" << endl;
+                                    cout << "EXECUTION TIMES:" << endl;
+                                    begin_time = clock();
+                                    d_.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
+                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                         << endl;
+                                    // call to algorithm menu
                                     return false;
                                 case 'b':
                                     return false;
@@ -142,28 +153,46 @@ bool Interface::readFiles() {
                     return false; //nunca vai chegar aqui
 
                 case ('2'):
-                    cout << endl << "Choose the graphic you want to analyse.\n\n"
+                    cout << endl << "Choose the graph you want to analyse.\n\n"
                          << endl;
-                    cout << endl << "Options:\n\t1-Graph 1\n\t2-Graph 2\n\t3-Graph 3\n\tb-back\n\te-Exit" << endl;
+                    cout << endl << "Options:\n\t1 - Graph 1\n\t2 - Graph 2\n\t3 - Graph 3\n\tb - back\n\te - Exit" << endl;
 
-                    while(true){
+                    while (true) {
                         cout << "Choose option:  " << endl;
-                        getline( cin, input3);
+                        getline(cin, input2);
 
-                        if(input.size()>1){
-                            cout << endl << "Please, only type one of the characters in the options described above." << endl;
-                        }
-
-                        else{
-                            switch(input3[0]){
+                        if (input.size() > 1) {
+                            cout << endl << "Please, only type one of the characters in the options described above."
+                                 << endl;
+                        } else {
+                            clock_t begin_time = 0;
+                            switch (input2[0]) {
                                 case ('1'):
-                                    //d_.readRealData(path);
+                                    cout << "---------------------------------" << endl;
+                                    cout << "EXECUTION TIMES:" << endl;
+                                    begin_time = clock();
+                                    d_.readRealData("../data/Project2Graphs/Real-world Graphs/graph1");
+                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                         << endl;
+                                    // call to algorithm menu
                                     return false;
                                 case ('2'):
-                                    //d_.readRealData(path);
+                                    cout << "---------------------------------" << endl;
+                                    cout << "EXECUTION TIMES:" << endl;
+                                    begin_time = clock();
+                                    d_.readRealData("../data/Project2Graphs/Real-world Graphs/graph2");
+                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                         << endl;
+                                    // call to algorithm menu
                                     return false;
                                 case ('3'):
-                                    //d_.readRealData(path);
+                                    cout << "---------------------------------" << endl;
+                                    cout << "EXECUTION TIMES:" << endl;
+                                    begin_time = clock();
+                                    d_.readRealData("../data/Project2Graphs/Real-world Graphs/graph3");
+                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                         << endl;
+                                    // call to algorithm menu
                                     return false;
                                 case ('b'):
                                     return false;
@@ -176,39 +205,89 @@ bool Interface::readFiles() {
                         }
                     }
                     return false;
-                case ('b'):
-                    return false;
-                case ('e'):
-                    cout << endl << "Exiting program..." << endl;
-                    return true;
-                default:
-                    cout << endl << "Not a valid option" << endl;
-            }
+                case ('3'):
+                    cout << endl
+                         << "Choose the number of vertexes of the fully connected graph you want to analyse.\n\n"
+                         << endl;
+                    cout << endl << "Options:\n\t1 - 25 vertexes\n\t2 - 50 vertexes\n\t3 - 75 vertexes"
+                         << "\n\t4 - 100 vertexes\n\t5 - 200 vertexes\n\t6 - 300 vertexes"
+                         << "\n\t7 - 400 vertexes\n\t8 - 500 vertexes\n\t9 - 600 vertexes"
+                         << "\n\t10 - 700 vertexes\n\t11 -  800 vertexes\n\t12 -  900 vertexes"
+                         << "\n\tb - back\n\te - Exit" << endl;
+
+                    while (true) {
+                        cout << "Choose option:  " << endl;
+                        getline(cin, input2);
+
+                        vector<int> options = {25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900};
+                        if (input2 == "b") return false;
+                        else if (input2 == "e") {
+                            cout << endl << "Exiting program..." << endl;
+                            return true;
+                        } else {
+                            int option;
+                            try {
+                                option = stoi(input2);
+                            }
+                            catch (invalid_argument &e) {
+                                cout << endl << "Not a valid option" << endl;
+                                continue;
+                            }
+                            if (option > 0 && option <= 12) {
+                                cout << "---------------------------------" << endl;
+                                cout << "EXECUTION TIMES:" << endl;
+                                const clock_t begin_time = clock();
+                                int n_vertexes = options[option - 1];
+                                d_.readFullyConnectedData(
+                                        "../data/Project2Graphs/Extra_Fully_Connected_Graphs/edges_" +
+                                        to_string(n_vertexes) + ".csv");
+                                cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                     << endl;
+                                // call to algorithm menu
+                                return false;
+                            }
+                            else {
+                                cout << endl << "Please, only choose one of the options described above." << endl;
+                            }
+                        }
+                    }
+
+            case ('b'):
+                return false;
+            case ('e'):
+                cout << endl << "Exiting program..." << endl;
+            return true;
+            default:
+                cout << endl << "Not a valid option" << endl;
         }
     }
 }
 
+}
 
+
+//main menu devia ver "permissões" dos diferentes tipos de graph. P.ex Real-World não pode ser corrido pelo nosso alg
 /**
  * Função imprime o menu principal do programa e permite ir para os outros "sub"-menus, com as funcionalidades específicas.
  *
  * COMPLEXIDADE: O(n).
  */
-void Interface::mainMenu() {
-    while (true){
+bool Interface::mainMenu() {
+    while (true) {
         cout << endl << "=========ALGORITHM MENU=========" << endl;
         cout << endl;
 
         cout << "I want to get informations regarding:" << endl;
-        cout << endl << "Options:\n\t1-Brute-Force/Backtracking Algorithm [T2.1]\n\t2-Triangular Approximation Heuristic [T2.2]\n\t3-Other Heuristics [T2.3]\n\te-Exit"<<endl;
+        cout << endl
+             << "Options:\n\t1 - Brute-Force/Backtracking Algorithm [T2.1]\n\t2 - Triangular Approximation Heuristic [T2.2]\n\t3 - Other Heuristic [T2.3]\n\tb - Back\n\te - Exit"
+             << endl;
         string input;
         cout << "Choose option:  ";
         cout << endl;
-        getline( cin, input);
-        if(input.size()>1){
+        getline(cin, input);
+        if (input.size() > 1) {
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
-        }
-        else {
+        } else {
 
             switch (input[0]) {
                 case ('1'):
@@ -223,9 +302,11 @@ void Interface::mainMenu() {
                     //if (customedTSP())
                     //    return;
                     break;
+                case ('b'):
+                    return false;
                 case ('e'):
                     cout << endl << "Exiting program..." << endl;
-                    return;
+                    return true;
                 default:
                     cout << endl << "Not a valid option" << endl;
             }
@@ -241,16 +322,15 @@ bool Interface::credits() const {
     cout << "Tomas Gaspar, up202108828" << endl;
     cout << "Guilherme Monteiro, up202108668" << endl;
     cout << "Sofia Sa, up202108676" << endl;
-    cout << endl << endl << "Options:\n\tb-Back\n\te-Exit"<< endl;
+    cout << endl << endl << "Options:\n\tb - Back\n\te - Exit" << endl;
     string input;
     while (true) {
         cout << "Choose option:  ";
         cout << endl;
-        getline( cin, input);
-        if(input.size()>1){
+        getline(cin, input);
+        if (input.size() > 1) {
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
-        }
-        else {
+        } else {
 
             switch (input[0]) {
                 case ('b'):

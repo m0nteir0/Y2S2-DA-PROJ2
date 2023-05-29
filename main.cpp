@@ -1,16 +1,19 @@
 #include <iostream>
 #include <ctime>
 #include "Data.h"
+#include "Interface.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
     Data d = Data();
+    Interface i = Interface();
+    i.welcomePage();
     cout << "EXECUTION TIMES:" << endl;
     const clock_t begin_time = clock();
     //d.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
-    //d.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv");
-    d.readFullyConnectedData("../data/Project2Graphs/Extra_Fully_Connected_Graphs/edges_25.csv");
-    //d.readRealData("../data/Project2Graphs/Real-world Graphs/graph1");
+    //d.readToyData("../data/Project2Graphs/Toy-Graphs/stadiums.csv");
+    d.readFullyConnectedData("../data/Project2Graphs/Extra_Fully_Connected_Graphs/edges_900.csv");
+    //d.readRealData("../data/Project2Graphs/Real-World-Graphs/graph3");
     cout << endl <<"Total: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC <<"s" << endl;
     /*
     unsigned int path[5];
@@ -31,14 +34,14 @@ int main() {
         }
         cout << v->getId() << " ------ " << v->getPath()->getId() << endl;
     }*/
-
-    /*cout << "BACKTRACKING\n";
+    /*
+    cout << "BACKTRACKING\n";
     unsigned int n = d.getG().getNumVertex();
     int a[n];
     cout << d.tspBT(n,a)<< endl;
     for (int i = 0; i < n; i++) cout << a[i] << ' ';
-    cout << endl << endl;*/
-
+    cout << endl << endl;
+    */
 
 
     cout << "Triangular Approximation\n";
@@ -47,16 +50,17 @@ int main() {
     cout << endl <<"Total: " << float( clock () - tsp) /  CLOCKS_PER_SEC <<"s" << endl;
 
 
-
-    /*cout << "Nearest Neighbour\n";
-    const clock_t tsp2 = clock();
-    cout << d.tspNearestNeighbour() << endl;
-    cout << endl <<"Total: " << float( clock () - tsp2) /  CLOCKS_PER_SEC <<"s" << endl;*/
-
     /*
+    cout << "Nearest Neighbour\n";
+    const clock_t tsp2 = clock();
+    const vector<Vertex*> path = d.tspNearestNeighbour();
+    cout << d.getPathDist(path) << endl;
+    cout << endl <<"Total: " << float( clock () - tsp2) /  CLOCKS_PER_SEC <<"s" << endl;
+
+
     cout << "Nearest Neighbour 2opt\n";
     const clock_t tsp3 = clock();
-    cout << d.tspNearestNeighbour2opt() << endl;
-    cout << endl <<"Total: " << float( clock () - tsp3) /  CLOCKS_PER_SEC <<"s" << endl;*/
-
+    cout << d.tsp2opt(path) << endl;
+    cout << endl <<"Total: " << float( clock () - tsp3) /  CLOCKS_PER_SEC <<"s" << endl;
+    */
 }

@@ -39,7 +39,7 @@ public:
     void prim();
     void dfsPrim(Vertex* source, std::vector<Vertex*>& res);
 
-
+    void clearGraph();
 protected:
     std::unordered_map<int, Vertex*> vertexSet;    // vertex set
 

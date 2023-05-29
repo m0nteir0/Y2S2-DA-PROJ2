@@ -237,11 +237,9 @@ double Data::tspTriangle() {
     return cost;
 }
 
-double Data::tspNearestNeighbour() {
+vector<Vertex*> Data::tspNearestNeighbour() {
     for (auto& v : g.getVertexSet())
         v.second->setVisited(false);
-
-    double cost = 0;
 
     vector<Vertex*> path;
     path.push_back(g.getVertexSet()[0]);
@@ -250,40 +248,31 @@ double Data::tspNearestNeighbour() {
     while (path.size() < g.getVertexSet().size()) {
         double minDist = INF;
         Vertex* minV = nullptr;
-        //bool backtrack = true;
 
         for (Edge* e : path.back()->getAdj()) {
-            if (!e->getDest()->isVisited() && e->getWeight() < minDist && e->getWeight() != INF) {
+            if (!e->getDest()->isVisited() && e->getWeight() < minDist) {
                 minDist = e->getWeight();
                 minV = e->getDest();
                 e->getDest()->setPath(path.back());
-                //backtrack = false;
             }
         }
 
-        /*if (backtrack) {
-            // Backtrack to the previous node
-            auto v = path.back();
-            path.pop_back();
-            v->setVisited(false);
-
-            continue;
-        }*/
-        if (minV == nullptr) break;
+        if (minV == nullptr) {
+            cout << "The graph is not complete...\n";
+            break;
+        }
 
         minV->setVisited(true);
         path.push_back(minV);
-        cost += minDist;
     }
 
-    // Add the cost of the final vertex to the initial vertex
-    cost += path.back()->getAdj()[0]->getWeight();
+    path.push_back(g.getVertexSet()[0]);
 
     for (Vertex* v : path)
         cout << v->getId() << ' ';
     cout << endl;
 
-    return cost;
+    return path;
 }
 
 
@@ -327,12 +316,13 @@ vector<Vertex *> Data::swap2opt(vector<Vertex *> path, int start, int end) {
 double Data::tsp2opt(vector<Vertex*> path) {
     bool improved = true;
     double path_dist = INF;
+    int iterations = 0;
 
-    while (improved) {
+    while (improved && iterations++ < 1) {
         improved = false;
         path_dist = getPathDist(path);
 
-        for (int i = 0; i <= path.size() - 3; i++) {            //start and end node can't be swapped
+        for (int i = 1; i <= path.size() - 3; i++) {            //start and end node can't be swapped
             for (int j = i + 1; j <= path.size() - 2; j++) {
                 vector<Vertex*> temp_path = swap2opt(path, i, j);
                 double temp_dist = getPathDist(temp_path);
@@ -349,3 +339,4 @@ double Data::tsp2opt(vector<Vertex*> path) {
 
     return path_dist;
 }
+
