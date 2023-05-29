@@ -43,12 +43,12 @@ int main() {
     cout << endl << endl;
     */
 
-
+    /*
     cout << "Triangular Approximation\n";
     const clock_t tsp = clock();
     cout << d.tspTriangle() << endl;
     cout << endl <<"Total: " << float( clock () - tsp) /  CLOCKS_PER_SEC <<"s" << endl;
-
+    */
 
     /*
     cout << "Nearest Neighbour\n";

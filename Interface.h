@@ -18,6 +18,7 @@ public:
     bool readFiles();
 
     bool credits() const;
+    bool displayPage() const;
 
 };
 

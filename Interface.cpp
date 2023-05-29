@@ -76,6 +76,7 @@ void Interface::welcomePage() {
  * COMPLEXIDADE: O(n).
  */
 bool Interface::readFiles() {
+    /*
     d_.getG().clearGraph();
     cout << endl << "=========READ FILES=========" << endl;
     cout << endl;
@@ -83,10 +84,18 @@ bool Interface::readFiles() {
     cout << endl
          << "Options:\n\t1 - Toy graphs\n\t2 - Real world graphs\n\t3 - Fully connected graphs\n\tb - Back\n\te - Exit"
          << endl;
-
+    */
     string input;
 
     while (true) {
+        d_.getG().clearGraph();
+        cout << endl << "=========READ FILES=========" << endl;
+        cout << endl;
+        cout << "Which files do you want to read?" << endl;
+        cout << endl
+             << "Options:\n\t1 - Toy graphs\n\t2 - Real world graphs\n\t3 - Fully connected graphs\n\tb - Back\n\te - Exit"
+             << endl;
+
         cout << "Choose option: ";
         cout << endl;
         getline(cin, input);
@@ -121,7 +130,8 @@ bool Interface::readFiles() {
                                          << endl;
                                     // call to algorithm menu
                                     if (mainMenu());
-                                    return false;
+                                    break;
+                                    //return false;
                                 case ('2'):
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
@@ -130,7 +140,8 @@ bool Interface::readFiles() {
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     // call to algorithm menu
-                                    return false;
+                                    // return false;
+                                    break;
                                 case ('3'):
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
@@ -139,7 +150,8 @@ bool Interface::readFiles() {
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     // call to algorithm menu
-                                    return false;
+                                    // return false;
+                                    break;
                                 case 'b':
                                     return false;
                                 case 'e':
@@ -148,10 +160,12 @@ bool Interface::readFiles() {
                                 default:
                                     cout << endl << "Not a valid option" << endl;
                             }
+                            if(mainMenu());
+                            break;
                         }
                     }
-                    return false; //nunca vai chegar aqui
-
+                    // return false; //nunca vai chegar aqui
+                    break;
                 case ('2'):
                     cout << endl << "Choose the graph you want to analyse.\n\n"
                          << endl;
@@ -288,13 +302,44 @@ bool Interface::mainMenu() {
         if (input.size() > 1) {
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
         } else {
-
+            double total_distance;
+            clock_t begin_time;
             switch (input[0]) {
-                case ('1'):
-                    //if (bruteTSP())
-                    //    return;
+                case ('1'): {
+                    unsigned int n = d_.getG().getNumVertex();
+                    int a[n];
+                    cout << endl << endl << "---------------------------------" << endl;
+                    cout << "BACKTRACKING ALGORITHM" << endl;
+                    begin_time = clock();
+                    total_distance = d_.tspBT(n,a);
+                    cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
+                    cout << "Path: ";
+                    for (int i = 0; i < n; i++) {
+                        cout << a[i] << " -> ";
+                    }
+                    cout << 0 << endl;
+                    cout << "Total distance: " << total_distance << endl;
+                    cout << "---------------------------------" << endl;
+                    if (displayPage());
                     break;
-                case ('2'):
+                }
+                case ('2'): {
+                    vector<Vertex*> path;
+                    cout << endl << endl << "---------------------------------" << endl;
+                    cout << "TRIANGULAR APPROXIMATION ALGORITHM" << endl;
+                    begin_time = clock();
+                    total_distance = d_.tspTriangle(path);
+                    cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
+                    cout << "Path: ";
+                    for (int i = 0; i < path.size()-1; i++) {
+                        cout << path[i]->getId() << " -> ";
+                    }
+                    cout << path.back()->getId() << endl;
+                    cout << "Total distance: " << total_distance << endl;
+                    cout << "---------------------------------" << endl;
+                    if (displayPage());
+                    break;
+                }
                     //if (triangleTSP())
                     //    return;
                     break;
@@ -313,6 +358,30 @@ bool Interface::mainMenu() {
         }
     }
 }
+
+bool Interface::displayPage() const {
+    cout << endl << endl;
+    cout << endl << "Options:\n\tb-Back\n\te-Exit"<<endl;
+    string input;
+    while (true){
+        cout << "Choose option:";
+        getline(cin, input);
+        if (input.size() > 1) {
+            cout << endl << "Please, only type one of the characters in the options described above." << endl;
+        } else {
+            switch (input[0]) {
+                case ('b'):
+                    return false;
+                case ('e'):
+                    cout << endl << "Exiting program..." << endl;
+                    return true;
+                default:
+                    cout << endl << "Not a valid option" << endl;
+            }
+        }
+    }
+}
+
 
 
 bool Interface::credits() const {

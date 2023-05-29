@@ -163,13 +163,14 @@ void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
 }
 
 double Data::tspBT(unsigned int n, int path[]) {
+    for (auto& v : g.getVertexSet())
+        v.second->setVisited(false);
     int currentPath[n];
     currentPath[0] = 0;
     g.getVertexSet()[0]->setVisited(true);
     double best = std::numeric_limits<double>::max();
 
     tspBTAux(n, path, currentPath ,0, best, 1);
-
     return best;
 }
 
@@ -208,15 +209,12 @@ vector<Vertex*> Data::getPreorderWalk() {
     return preorderWalk;
 }
 
-double Data::tspTriangle() {
+double Data::tspTriangle(vector<Vertex*> &path) {
     double cost = 0;
 
     g.prim();
 
-    vector<Vertex*> path = getPreorderWalk();
-    for (Vertex* v : path)
-        cout << v->getId() << ' ';
-    cout << endl;
+    path = getPreorderWalk();
     path.push_back(g.getVertexSet()[0]);
 
     for (int i = 0; i < path.size() - 1; i++) {

@@ -32,7 +32,7 @@ public:
 
     static double haversine(double lat1, double lon1, double lat2, double lon2);
     vector<Vertex*> getPreorderWalk();
-    double tspTriangle();
+    double tspTriangle(vector<Vertex*> &path);
 
     vector<Vertex*> tspNearestNeighbour();
     double getPathDist(vector<Vertex*> path);
