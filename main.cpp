@@ -4,18 +4,19 @@
 #include "Interface.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
     Data d = Data();
     Interface i = Interface();
     i.welcomePage();
+    /*
     cout << "EXECUTION TIMES:" << endl;
     const clock_t begin_time = clock();
     //d.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
     //d.readToyData("../data/Project2Graphs/Toy-Graphs/stadiums.csv");
     //d.readFullyConnectedData("../data/Project2Graphs/Extra_Fully_Connected_Graphs/edges_900.csv");
-    d.readRealData("../data/Project2Graphs/Real-world Graphs/graph1");
+    //d.readRealData("../data/Project2Graphs/Real-world Graphs/graph1");
     cout << endl <<"Total: " << float( clock () - begin_time ) /  CLOCKS_PER_SEC <<"s" << endl;
-    /*
+    */
+     /*
     unsigned int path[5];
     unsigned int dist = d.tspBT(5, path);
     for (int i = 0; i < 5; ++i) {
@@ -50,7 +51,7 @@ int main() {
     cout << endl <<"Total: " << float( clock () - tsp) /  CLOCKS_PER_SEC <<"s" << endl;
     */
 
-
+    /*
     cout << "Nearest Neighbour\n";
     const clock_t tsp2 = clock();
     const vector<Vertex*> path = d.tspNearestNeighbour();
@@ -62,5 +63,5 @@ int main() {
     const clock_t tsp3 = clock();
     cout << d.tsp2opt(path) << endl;
     cout << endl <<"Total: " << float( clock () - tsp3) /  CLOCKS_PER_SEC <<"s" << endl;
-
+    */
 }

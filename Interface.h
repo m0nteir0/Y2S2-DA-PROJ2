@@ -14,7 +14,7 @@ public:
 
     Interface();
     void welcomePage();
-    bool mainMenu();
+    bool mainMenu(bool isSmall, bool isComplete);
     bool readFiles();
 
     bool credits() const;

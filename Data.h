@@ -37,7 +37,7 @@ public:
     vector<Vertex*> tspNearestNeighbour();
     double getPathDist(vector<Vertex*> path);
     vector<Vertex*> swap2opt(vector<Vertex*> path, int i, int j);
-    double tsp2opt(vector<Vertex*> path);
+    double tsp2opt(vector<Vertex*> &path);
 };
 
 
