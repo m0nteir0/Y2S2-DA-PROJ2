@@ -415,22 +415,21 @@ double Data::tsp2opt(vector<Vertex*> &path, int maxIterations) {
 
 /*=================teste for 3opt=================*/
 
-vector<Vertex*> Data::swap3opt(vector<Vertex*> path, int start, int mid1, int mid2, int end) {
+vector<Vertex*> Data::swap3opt(vector<Vertex*> path, int start, int mid, int end) {
     vector<Vertex*> swapped_path;
 
     for (int i = 0; i <= start; i++)
         swapped_path.push_back(path[i]);
 
-    for (int i = mid2; i >= mid1 + 1; i--)
+    //TODO check this loop
+    for (int i = mid + 1; i <= end; i++)
         swapped_path.push_back(path[i]);
 
-    for (int i = end; i > mid2; i--)
+    //TODO check this loop
+    for (int i = start + 1; i <= mid; i++)
         swapped_path.push_back(path[i]);
 
-    for (int i = start + 1; i <= mid1; i++)
-        swapped_path.push_back(path[i]);
-
-    for (int i = mid2 + 1; i < path.size(); i++)
+    for (int i = end + 1; i < path.size(); i++)
         swapped_path.push_back(path[i]);
 
     return swapped_path;
@@ -444,8 +443,6 @@ double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
 
     while (improved && iterations++ < maxIterations) {
         improved = false;
-        int x = 0;
-        cout << "started iteration";
 
         for (int i = 1; i <= path.size() - 4; i++) {  // start and end node can't be swapped
             for (int j = i + 1; j <= path.size() - 3; j++) {
@@ -458,30 +455,71 @@ double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
                         }
                         else if (e->getDest()->getId() == path[i + 1]->getId()) {
                             d1 -= e->getWeight();
+                            d3 -= e->getWeight();
+                            d4 -= e->getWeight();
+                        } else if (e->getDest()->getId() == path[j + 1]->getId()) {
+                            d3 += e->getWeight();
+                        }
+                        else if (e->getDest()->getId() == path[k]->getId()) {
+                            d4 += e->getWeight();
+                        }
+                    }
+
+                    for (Edge* e : path[i + 1]->getAdj()) {
+                        if (e->getDest()->getId() == path[k + 1]->getId()) {
+                            d4 += e->getWeight();
                         }
                     }
 
                     for (Edge* e : path[j]->getAdj()) {
-                        if (e->getDest()->getId() == path[i+1]->getId()) {
+                        if (e->getDest()->getId() == path[j + 1]->getId()) {
+                            d1 -= e->getWeight();
+                            d2 -= e->getWeight();
+                            d3 -= e->getWeight();
+                        }
+                        else if (e->getDest()->getId() == path[k]->getId()) {
+                            d2 += e->getWeight();
+                        }
+                        else if (e->getDest()->getId() == path[k+1]->getId()) {
+                            d3 += e->getWeight();
+                        }
+                    }
+
+                    for (Edge* e : path[j+1]->getAdj()) {
+                        if (e->getDest()->getId() == path[i + 1]->getId()) {
                             d1 += e->getWeight();
                         }
-                        else if (e->getDest()->getId() == path[j + 1]->getId()) {
-                            d1 -= e->getWeight();
+                        else if (e->getDest()->getId() == path[k + 1]->getId()) {
+                            d2 += e->getWeight();
                         }
                     }
 
                     for (Edge* e : path[k]->getAdj()) {
-                        /*if (e->getDest()->getId() == path[i + 1]->getId()) {
-                            temp_dist += e->getWeight();
+                        if (e->getDest()->getId() == path[k + 1]->getId()) {
+                            d2 -= e->getWeight();
+                            d3 -= e->getWeight();
+                            d4 -= e->getWeight();
                         }
-                        else if (e->getDest()->getId() == path[k + 1]->getId()) {
-                            temp_dist -= e->getWeight();
+                        else if (e->getDest()->getId() == path[i + 1]->getId()) {
+                            d3 += e->getWeight();
                         }
                     }
 
-                    if (temp_dist < path_dist) {
-                        path = swap3opt(path, i, j, k, path.size() - 1);
-                        path_dist = temp_dist;
+                    if (d1 < path_dist) {
+                        path = swap2opt(path, i, j);
+                        path_dist = d1;
+                        improved = true;
+                    } else if (d2 < path_dist) {
+                        path = swap2opt(path, j, k);
+                        path_dist = d2;
+                        improved = true;
+                    } else if (d4 < path_dist) {
+                        path = swap2opt(path, i, k);
+                        path_dist = d4;
+                        improved = true;
+                    } else if (d3 < path_dist) {
+                        path = swap3opt(path, i, j, k);
+                        path_dist = d3;
                         improved = true;
                     }
                 }

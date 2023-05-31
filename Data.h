@@ -48,8 +48,7 @@ public:
 
     double tsp2opt(vector<Vertex *> &path, int maxIterations);
 
-    /*teste*/
-    vector<Vertex *> swap3opt(vector<Vertex *> path, int start, int mid1, int mid2, int end);
+    vector<Vertex *> swap3opt(vector<Vertex *> path, int start, int mid, int end);
 
     double tsp3opt(vector<Vertex *> &path, int maxIterations);
 
