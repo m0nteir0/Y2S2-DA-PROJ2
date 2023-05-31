@@ -188,7 +188,6 @@ void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
     }
 }
 
-
 /**
  * @brief Solves the Travelling Salesperson Problem (TSP) using a Backtracking algorithm.
  *
@@ -275,7 +274,7 @@ vector<Vertex*> Data::getPreorderWalk() {
  * If a direct edge exists between two adjacent vertices in the path, the weight of that edge is used.
  * Otherwise, the Haversine formula is used to calculate the distance between the vertices based on their coordinates.
  *
- * COMPLEXITY: O(V+E) / complexidade do prim?
+ * COMPLEXITY: O(V+E) / COMPLEXITY do prim?
  *
  * @param path A vector of Vertex pointers to store the resulting path.
  * @return The cost of the path.

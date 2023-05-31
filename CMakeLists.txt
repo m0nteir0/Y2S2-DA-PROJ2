@@ -3,4 +3,4 @@ project(DA_PROJECT2)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(DA_PROJECT2 main.cpp Interface.cpp Data.cpp Graph.cpp VertexEdge.cpp)
+add_executable(DA_PROJECT2 main.cpp algorithms/Interface.cpp algorithms/Data.cpp "dataStructures/Graph.cpp" "dataStructures/VertexEdge.cpp")

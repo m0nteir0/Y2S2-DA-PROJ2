@@ -1,15 +1,16 @@
 #include <iostream>
 #include <ctime>
-#include "Data.h"
-#include "Interface.h"
+#include "algorithms/Data.h"
+#include "algorithms/Interface.h"
 
 int main() {
     Data d = Data();
-    d.readToyData("../data/Toy-Graphs/stadiums.csv");
-    /*
+
+
     Interface i = Interface();
     i.welcomePage();
-     */
+    d.getG().clearGraph();
+    d.readToyData("../data/Toy-Graphs/stadiums.csv");
     /*
     cout << "EXECUTION TIMES:" << endl;
     const clock_t begin_time = clock();
