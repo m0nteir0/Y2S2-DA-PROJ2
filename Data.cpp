@@ -1,6 +1,13 @@
 #include "Data.h"
 #include <math.h>
 
+
+Graph &Data::getG() {
+    return g;
+}
+
+/*============================= READ FUNCTIONS =============================*/
+
 bool Data::readToyData(string filename) {
     ifstream input(filename);
     if (input.is_open()) {
@@ -130,6 +137,23 @@ bool Data::readRealEdges(string filename) {
     }
 }
 
+/*============================= ALGORITHMIC FUNCTIONS =============================*/
+
+//------------ T2.1 -------------- */
+
+/**
+ * @brief Auxiliar function to solve the Travelling Salesperson Problem (TSP) using a Backtracking algorithm.
+ *
+ * This function finds the shortest path that visits all nodes in the graph, starting from node 0 and returning to it.
+ * It uses a Backtracking algorithm to explore all possible paths and keeps track of the best path found.
+ *
+ * @param n The number of nodes in the graph.
+ * @param path An array to store the resulting path.
+ * @param currentPath An array to store the current path being explored.
+ * @param curr The current cost of the path being explored.
+ * @param best The best cost found so far.
+ * @param curr_n The current number of nodes visited in the path.
+ */
 void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
          double curr, double &best, unsigned int curr_n) {
     if (curr_n == n) {               //visited all nodes
@@ -162,6 +186,19 @@ void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
     }
 }
 
+
+/**
+ * @brief Solves the Travelling Salesperson Problem (TSP) using a Backtracking algorithm.
+ *
+ * This function finds the shortest path that visits all nodes in the graph, starting from node 0 and returning to it.
+ * It uses a Backtracking algorithm by calling the auxiliary function tspBTAux.
+ * Explores all possible paths and returns the cost of the best path found.
+ * It's only useful for small graphs, because of its time complexity.
+ *
+ * @param n The number of nodes in the graph.
+ * @param path An array to store the resulting path.
+ * @return The cost of the best path found.
+ */
 double Data::tspBT(unsigned int n, int path[]) {
     for (auto& v : g.getVertexSet())
         v.second->setVisited(false);
@@ -174,12 +211,16 @@ double Data::tspBT(unsigned int n, int path[]) {
     return best;
 }
 
-Graph &Data::getG() {
-    return g;
-}
+//-----------------T2.2-----------------//
 
-
-//-----------------T4.2-----------------//
+/**
+ * @brief Calculates distance between two nodes using the Haversine formula with the values of each latitude and longitude.
+ * @param lat1 latitude of the first node
+ * @param lon1 longitude of the first node
+ * @param lat2 latitude of the second node
+ * @param lon2 longitude of the second node
+ * @return distance between the two nodes
+ */
 double Data::haversine(double lat1, double lon1, double lat2, double lon2)
 {
     // distance between latitudes and longitudes
@@ -198,6 +239,10 @@ double Data::haversine(double lat1, double lon1, double lat2, double lon2)
     return rad * c;
 }
 
+/**
+ * @brief
+ * @return
+ */
 vector<Vertex*> Data::getPreorderWalk() {
     for (auto& v : g.getVertexSet())
         v.second->setVisited(false);
@@ -234,6 +279,8 @@ double Data::tspTriangle(vector<Vertex*> &path) {
 
     return cost;
 }
+
+//-----------------T2.3-----------------//
 
 vector<Vertex*> Data::tspNearestNeighbour() {
     for (auto& v : g.getVertexSet())
@@ -273,15 +320,6 @@ vector<Vertex*> Data::tspNearestNeighbour() {
     return path;
 }
 
-
-/*i want an algorithm for TSP using Nearest Neighbour and 2-opt
- * 1. start at a vertex 0
- * 2. find the nearest vertex
- * 3. find the nearest vertex to the nearest vertex
- * 4. repeat until all vertices are visited
- * 5. apply 2-opt
- * 6. repeat until no improvement
- * */
 double Data::getPathDist(vector<Vertex *> path) {
     double dist = 0;
 

@@ -95,7 +95,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
                                     begin_time = clock();
-                                    d_.readToyData("../data/Project2Graphs/Toy-Graphs/shipping.csv");
+                                    d_.readToyData("../data/Toy-Graphs/shipping.csv");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -108,7 +108,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
                                     begin_time = clock();
-                                    d_.readToyData("../data/Project2Graphs/Toy-Graphs/stadiums.csv");
+                                    d_.readToyData("../data/Toy-Graphs/stadiums.csv");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -119,7 +119,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
                                     begin_time = clock();
-                                    d_.readToyData("../data/Project2Graphs/Toy-Graphs/tourism.csv");
+                                    d_.readToyData("../data/Toy-Graphs/tourism.csv");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -159,7 +159,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
                                     begin_time = clock();
-                                    d_.readRealData("../data/Project2Graphs/Real-World-Graphs/graph1");
+                                    d_.readRealData("../data/Real-World-Graphs/graph1");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -170,7 +170,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
                                     begin_time = clock();
-                                    d_.readRealData("../data/Project2Graphs/Real-World-Graphs/graph2");
+                                    d_.readRealData("../data/Real-World-Graphs/graph2");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -181,7 +181,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIMES:" << endl;
                                     begin_time = clock();
-                                    d_.readRealData("../data/Project2Graphs/Real-World-Graphs/graph3");
+                                    d_.readRealData("../data/Real-World-Graphs/graph3");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -237,7 +237,7 @@ bool Interface::readFiles() {
                                 const clock_t begin_time = clock();
                                 int n_vertexes = options[option - 1];
                                 d_.readFullyConnectedData(
-                                        "../data/Project2Graphs/Extra_Fully_Connected_Graphs/edges_" +
+                                        "../data/Extra_Fully_Connected_Graphs/edges_" +
                                         to_string(n_vertexes) + ".csv");
                                 cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                      << endl;
