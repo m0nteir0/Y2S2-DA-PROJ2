@@ -19,27 +19,40 @@ public:
 
 
     bool readToyData(string filename);
+
     bool readFullyConnectedData(string filename);
+
     bool readRealData(string folder);
 
     bool readRealNodes(string filename);
+
     bool readRealEdges(string filename);
 
     void tspBTAux(unsigned int n, int path[], int currentPath[],
                   double curr, double &best, unsigned int curr_n);
+
     double tspBT(unsigned int n, int path[]);
 
 
     static double haversine(double lat1, double lon1, double lat2, double lon2);
-    vector<Vertex*> getPreorderWalk();
-    double tspTriangle(vector<Vertex*> &path);
 
-    vector<Vertex*> tspNearestNeighbour();
-    double getPathDist(vector<Vertex*> path);
-    vector<Vertex*> swap2opt(vector<Vertex*> path, int i, int j);
-    double tsp2opt(vector<Vertex*> &path, int maxIterations);
+    vector<Vertex *> getPreorderWalk();
+
+    double tspTriangle(vector<Vertex *> &path);
+
+    vector<Vertex *> tspNearestNeighbour();
+
+    double getPathDist(vector<Vertex *> path);
+
+    vector<Vertex *> swap2opt(vector<Vertex *> path, int i, int j);
+
+    double tsp2opt(vector<Vertex *> &path, int maxIterations);
+
+    /*teste*/
+    vector<Vertex *> swap3opt(vector<Vertex *> path, int start, int mid1, int mid2, int end);
+
+    double tsp3opt(vector<Vertex *> &path, int maxIterations);
+
 };
-
-
 
 #endif //DA_PROJECT2_DATA_H

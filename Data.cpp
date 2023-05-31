@@ -147,6 +147,7 @@ bool Data::readRealEdges(string filename) {
  * This function finds the shortest path that visits all nodes in the graph, starting from node 0 and returning to it.
  * It uses a Backtracking algorithm to explore all possible paths and keeps track of the best path found.
  *
+ * COMPLEXITY: O(V!)
  * @param n The number of nodes in the graph.
  * @param path An array to store the resulting path.
  * @param currentPath An array to store the current path being explored.
@@ -195,6 +196,7 @@ void Data::tspBTAux(unsigned int n, int path[], int currentPath[],
  * Explores all possible paths and returns the cost of the best path found.
  * It's only useful for small graphs, because of its time complexity.
  *
+ * COMPLEXITY: O(V!)
  * @param n The number of nodes in the graph.
  * @param path An array to store the resulting path.
  * @return The cost of the best path found.
@@ -215,6 +217,8 @@ double Data::tspBT(unsigned int n, int path[]) {
 
 /**
  * @brief Calculates distance between two nodes using the Haversine formula with the values of each latitude and longitude.
+ *
+ * COMPLEXITY: O(1)
  * @param lat1 latitude of the first node
  * @param lon1 longitude of the first node
  * @param lat2 latitude of the second node
@@ -240,8 +244,12 @@ double Data::haversine(double lat1, double lon1, double lat2, double lon2)
 }
 
 /**
- * @brief
- * @return
+ * @brief Get the Preorder Walk of the Graph.
+ *
+ * This function returns a vector of vertices representing the preorder walk of the graph. The preorder walk is obtained by performing a Depth-First Search (DFS) traversal starting from the first vertex of the graph.
+ *
+ * COMPLEXITY: O(V+E)
+ * @return path A vector of vertices representing the preorder walk of the graph.
  */
 vector<Vertex*> Data::getPreorderWalk() {
     for (auto& v : g.getVertexSet())
@@ -254,6 +262,18 @@ vector<Vertex*> Data::getPreorderWalk() {
     return preorderWalk;
 }
 
+/**
+ * @brief Calculates the cost of the TSP path using the Triangle Inequality heuristic.
+ *
+ * It first constructs a minimum spanning tree of the graph using Prim's algorithm.
+ * Then, it generates a preorder walk of the minimum spanning tree and appends the starting vertex to form a closed path.
+ * Finally, it calculates the total cost of the path by summing the weights of the edges.
+ * If a direct edge exists between two adjacent vertices in the path, the weight of that edge is used.
+ * Otherwise, the Haversine formula is used to calculate the distance between the vertices based on their coordinates.
+ *
+ * @param path A vector of Vertex pointers to store the resulting path.
+ * @return The cost of the path.
+ */
 double Data::tspTriangle(vector<Vertex*> &path) {
     double cost = 0;
 
@@ -282,6 +302,10 @@ double Data::tspTriangle(vector<Vertex*> &path) {
 
 //-----------------T2.3-----------------//
 
+/**
+ * @brief Calculates the cost of the TSP path using the Nearest Neighbour heuristic.
+ * @return
+ */
 vector<Vertex*> Data::tspNearestNeighbour() {
     for (auto& v : g.getVertexSet())
         v.second->setVisited(false);
@@ -389,3 +413,81 @@ double Data::tsp2opt(vector<Vertex*> &path, int maxIterations) {
     return path_dist;
 }
 
+/*=================teste for 3opt=================*/
+
+vector<Vertex*> Data::swap3opt(vector<Vertex*> path, int start, int mid1, int mid2, int end) {
+    vector<Vertex*> swapped_path;
+
+    for (int i = 0; i <= start; i++)
+        swapped_path.push_back(path[i]);
+
+    for (int i = mid2; i >= mid1 + 1; i--)
+        swapped_path.push_back(path[i]);
+
+    for (int i = end; i > mid2; i--)
+        swapped_path.push_back(path[i]);
+
+    for (int i = start + 1; i <= mid1; i++)
+        swapped_path.push_back(path[i]);
+
+    for (int i = mid2 + 1; i < path.size(); i++)
+        swapped_path.push_back(path[i]);
+
+    return swapped_path;
+}
+
+double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
+    bool improved = true;
+    double path_dist = getPathDist(path);
+    int iterations = 0;
+
+
+    while (improved && iterations++ < maxIterations) {
+        improved = false;
+        int x = 0;
+        cout << "started iteration";
+
+        for (int i = 1; i <= path.size() - 4; i++) {  // start and end node can't be swapped
+            for (int j = i + 1; j <= path.size() - 3; j++) {
+                for (int k = j + 1; k <= path.size() - 2; k++) {
+                    double d1 = path_dist, d2 = path_dist, d3 = path_dist, d4 = path_dist;
+
+                    for (Edge* e : path[i]->getAdj()) {
+                        if (e->getDest()->getId() == path[j]->getId()) {
+                            d1 += e->getWeight();
+                        }
+                        else if (e->getDest()->getId() == path[i + 1]->getId()) {
+                            d1 -= e->getWeight();
+                        }
+                    }
+
+                    for (Edge* e : path[j]->getAdj()) {
+                        if (e->getDest()->getId() == path[i+1]->getId()) {
+                            d1 += e->getWeight();
+                        }
+                        else if (e->getDest()->getId() == path[j + 1]->getId()) {
+                            d1 -= e->getWeight();
+                        }
+                    }
+
+                    for (Edge* e : path[k]->getAdj()) {
+                        /*if (e->getDest()->getId() == path[i + 1]->getId()) {
+                            temp_dist += e->getWeight();
+                        }
+                        else if (e->getDest()->getId() == path[k + 1]->getId()) {
+                            temp_dist -= e->getWeight();
+                        }
+                    }
+
+                    if (temp_dist < path_dist) {
+                        path = swap3opt(path, i, j, k, path.size() - 1);
+                        path_dist = temp_dist;
+                        improved = true;
+                    }
+                }
+            }
+        }
+    }
+
+    return path_dist;
+}

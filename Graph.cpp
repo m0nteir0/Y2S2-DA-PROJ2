@@ -85,8 +85,20 @@ void Graph::clearGraph() {
 - prosseguir normalmente com o algoritmo
   */
 
-
-
+/**
+ * @brief Constructs a minimum spanning tree using Prim's algorithm.
+ *
+ * The function constructs a minimum spanning tree of the graph using Prim's algorithm.
+ * Iteratively selects the vertex with the minimum distance from the priority queue and marks it as visited.
+ * For each unvisited vertex, it checks if there is a direct edge from the selected vertex to that vertex.
+ * If such an edge exists, it updates the distance and path information of the vertex if the new distance is smaller.
+ * If there is no direct edge, uses the Haversine formula.
+ * If the new distance is smaller than the previous distance, the vertex is inserted or updated in the priority queue accordingly.
+ * Finally, the function establishes the reverse path connections between vertices in the minimum spanning tree.
+ *
+ * COMPLEXITY: O(E * log(V)), where V is the number of vertices in the graph and E the number of edges.
+ * O( (E+V) * log(V))
+ */
 void Graph::prim() {
 
     MutablePriorityQueue<Vertex> q;
@@ -139,6 +151,7 @@ void Graph::prim() {
             v.second->getPath()->addReversePath(v.second);
     }
 }
+
 
 void Graph::dfsPrim(Vertex* source, vector<Vertex*>& res) {
     source->setVisited(true);

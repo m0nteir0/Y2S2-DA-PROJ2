@@ -5,8 +5,11 @@
 
 int main() {
     Data d = Data();
+    d.readToyData("../data/Toy-Graphs/stadiums.csv");
+    /*
     Interface i = Interface();
     i.welcomePage();
+     */
     /*
     cout << "EXECUTION TIMES:" << endl;
     const clock_t begin_time = clock();
@@ -51,17 +54,22 @@ int main() {
     cout << endl <<"Total: " << float( clock () - tsp) /  CLOCKS_PER_SEC <<"s" << endl;
     */
 
-    /*
+
     cout << "Nearest Neighbour\n";
     const clock_t tsp2 = clock();
-    const vector<Vertex*> path = d.tspNearestNeighbour();
+    vector<Vertex*> path = d.tspNearestNeighbour();
+    vector<Vertex*> path2 = path;
     cout << d.getPathDist(path) << endl;
     cout << endl <<"Total: " << float( clock () - tsp2) /  CLOCKS_PER_SEC <<"s" << endl;
 
 
     cout << "Nearest Neighbour 2opt\n";
     const clock_t tsp3 = clock();
-    cout << d.tsp2opt(path) << endl;
+    cout << d.tsp2opt(path, 1) << endl;
     cout << endl <<"Total: " << float( clock () - tsp3) /  CLOCKS_PER_SEC <<"s" << endl;
-    */
+
+    cout << "Nearest Neighbour 3opt\n";
+    const clock_t tsp4 = clock();
+    cout << d.tsp3opt(path2, 1) << endl;
+    cout << endl <<"Total: " << float( clock () - tsp4) /  CLOCKS_PER_SEC <<"s" << endl;
 }
