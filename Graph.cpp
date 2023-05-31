@@ -3,6 +3,7 @@
 #include "Graph.h"
 #include "Data.h"
 
+//=================================== PROVIDED TO US ======================================================
 int Graph::getNumVertex() const {
     return vertexSet.size();
 }
@@ -78,12 +79,8 @@ void Graph::clearGraph() {
     vertexSet.clear();
 }
 
-//================== T4.2 =======================================
- /*
-  * - para cada vertice percorrer todos os vertices do grafo
-- verificar se existe uma edge a ligar, senão calcular distancia com haversine
-- prosseguir normalmente com o algoritmo
-  */
+//================== FOR OUR ALGORITHMS =======================================
+
 
 /**
  * @brief Constructs a minimum spanning tree using Prim's algorithm.
@@ -97,7 +94,7 @@ void Graph::clearGraph() {
  * Finally, the function establishes the reverse path connections between vertices in the minimum spanning tree.
  *
  * COMPLEXITY: O(E * log(V)), where V is the number of vertices in the graph and E the number of edges.
- * O( (E+V) * log(V))
+ * O( (E+V) * log(V)) ?
  */
 void Graph::prim() {
 
@@ -152,7 +149,18 @@ void Graph::prim() {
     }
 }
 
-
+/**
+ * @brief Performs a Depth-First Search traversal on the minimum spanning tree rooted at the specified source vertex.
+ * This function recursively traverses the minimum spanning tree in a depth-first manner starting from the given source vertex.
+ * It marks each visited vertex as visited and adds it to the resulting vector in the order of the traversal.
+ * For each vertex in the reverse path of the current vertex, it recursively calls the dfsPrim function if the vertex has not been visited.
+ *
+ * COMPLEXITY: O(V), where V is the number of vertices
+ *
+ * @param source Vertex pointer that represents the source vertex from which the traversal starts.
+ * @param res A vector of Vertex pointers to store the resulting traversal path.
+ *
+ */
 void Graph::dfsPrim(Vertex* source, vector<Vertex*>& res) {
     source->setVisited(true);
     res.push_back(source);
