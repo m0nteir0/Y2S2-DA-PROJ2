@@ -311,12 +311,12 @@ vector<Vertex *> Data::swap2opt(vector<Vertex *> path, int start, int end) {
     return swapped_path;
 }
 
-double Data::tsp2opt(vector<Vertex*> &path) {
+double Data::tsp2opt(vector<Vertex*> &path, int maxIterations) {
     bool improved = true;
     double path_dist = getPathDist(path);
     int iterations = 0;
 
-    while (improved && iterations++ < 5) {
+    while (improved && iterations++ < maxIterations) {
         improved = false;
 
         for (int i = 1; i <= path.size() - 3; i++) {            //start and end node can't be swapped

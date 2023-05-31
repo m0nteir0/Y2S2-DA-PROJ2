@@ -336,18 +336,30 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     string input;
                     getline(cin, input);
                     if (input == "y") {
-                        cout << endl << endl << "---------------------------------" << endl;
-                        cout << "2-OPT ALGORITHM" << endl;
-                        begin_time = clock();
-                        total_distance = d_.tsp2opt(path);
-                        cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
-                        cout << "Path: ";
-                        for (int i = 0; i < path.size() - 1; i++) {
-                            cout << path[i]->getId() << " -> ";
+                        cout << "Please write the maximum number of iterations: " << endl;
+                        getline(cin, input);
+                        int max_iter = 0;
+                        try {
+                            max_iter = stoi(input);
                         }
-                        cout << path.back()->getId() << endl;
-                        cout << "Total distance: " << total_distance << endl;
-                        cout << "---------------------------------" << endl;
+                        catch (invalid_argument &e) {
+                            cout << endl << "Not a valid number" << endl;
+
+                        }
+                        if (max_iter > 0) {
+                            cout << endl << endl << "---------------------------------" << endl;
+                            cout << "2-OPT ALGORITHM" << endl;
+                            begin_time = clock();
+                            total_distance = d_.tsp2opt(path, max_iter);
+                            cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
+                            cout << "Path: ";
+                            for (int i = 0; i < path.size() - 1; i++) {
+                                cout << path[i]->getId() << " -> ";
+                            }
+                            cout << path.back()->getId() << endl;
+                            cout << "Total distance: " << total_distance << endl;
+                            cout << "---------------------------------" << endl;
+                        }
                     }
 
                     if (displayPage())
@@ -379,18 +391,30 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     string input;
                     getline(cin, input);
                     if (input == "y") {
-                        cout << endl << endl << "---------------------------------" << endl;
-                        cout << "2-OPT ALGORITHM" << endl;
-                        begin_time = clock();
-                        total_distance = d_.tsp2opt(path);
-                        cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
-                        cout << "Path: ";
-                        for (int i = 0; i < path.size() - 1; i++) {
-                            cout << path[i]->getId() << " -> ";
+                        cout << "Please write the maximum number of iterations: " << endl;
+                        getline(cin, input);
+                        int max_iter = 0;
+                        try {
+                            max_iter = stoi(input);
                         }
-                        cout << path.back()->getId() << endl;
-                        cout << "Total distance: " << total_distance << endl;
-                        cout << "---------------------------------" << endl;
+                        catch (invalid_argument &e) {
+                            cout << endl << "Not a valid number" << endl;
+
+                        }
+                        if (max_iter > 0) {
+                            cout << endl << endl << "---------------------------------" << endl;
+                            cout << "2-OPT ALGORITHM" << endl;
+                            begin_time = clock();
+                            total_distance = d_.tsp2opt(path, max_iter);
+                            cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
+                            cout << "Path: ";
+                            for (int i = 0; i < path.size() - 1; i++) {
+                                cout << path[i]->getId() << " -> ";
+                            }
+                            cout << path.back()->getId() << endl;
+                            cout << "Total distance: " << total_distance << endl;
+                            cout << "---------------------------------" << endl;
+                        }
                     }
                     if (displayPage())
                         return true;
