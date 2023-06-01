@@ -457,26 +457,6 @@ double Data::tsp2opt(vector<Vertex*> &path, int maxIterations) {
 
 /* extra for t2.3 */
 
-vector<Vertex*> Data::swap3opt(vector<Vertex*> path, int start, int mid, int end) {
-    vector<Vertex*> swapped_path;
-
-    for (int i = 0; i <= start; i++)
-        swapped_path.push_back(path[i]);
-
-    //TODO check this loop
-    for (int i = mid + 1; i <= end; i++)
-        swapped_path.push_back(path[i]);
-
-    //TODO check this loop
-    for (int i = start + 1; i <= mid; i++)
-        swapped_path.push_back(path[i]);
-
-    for (int i = end + 1; i < path.size(); i++)
-        swapped_path.push_back(path[i]);
-
-    return swapped_path;
-}
-
 double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
     bool improved = true;
     double path_dist = getPathDist(path);
@@ -487,82 +467,124 @@ double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
         improved = false;
 
         for (int i = 1; i <= path.size() - 4; i++) {  // start and end node can't be swapped
-            for (int j = i + 1; j <= path.size() - 3; j++) {
-                for (int k = j + 1; k <= path.size() - 2; k++) {
-                    double d1 = path_dist, d2 = path_dist, d3 = path_dist, d4 = path_dist;
+            for (int j = i + 2; j <= path.size() - 3; j++) {
+                for (int k = j + 2; k <= path.size() - 2; k++) {
+                    double d[8] = {0, path_dist, path_dist, path_dist, path_dist,
+                                   path_dist, path_dist, path_dist};
 
                     for (Edge* e : path[i]->getAdj()) {
                         if (e->getDest()->getId() == path[j]->getId()) {
-                            d1 += e->getWeight();
+                            d[3] += e->getWeight();
+                            d[4] += e->getWeight();
                         }
                         else if (e->getDest()->getId() == path[i + 1]->getId()) {
-                            d1 -= e->getWeight();
-                            d3 -= e->getWeight();
-                            d4 -= e->getWeight();
+                            d[1] -= e->getWeight();
+                            d[3] -= e->getWeight();
+                            d[4] -= e->getWeight();
+                            d[5] -= e->getWeight();
+                            d[6] -= e->getWeight();
+                            d[7] -= e->getWeight();
                         } else if (e->getDest()->getId() == path[j + 1]->getId()) {
-                            d3 += e->getWeight();
+                            d[6] += e->getWeight();
+                            d[7] += e->getWeight();
                         }
                         else if (e->getDest()->getId() == path[k]->getId()) {
-                            d4 += e->getWeight();
+                            d[1] += e->getWeight();
+                            d[5] += e->getWeight();
                         }
                     }
 
                     for (Edge* e : path[i + 1]->getAdj()) {
                         if (e->getDest()->getId() == path[k + 1]->getId()) {
-                            d4 += e->getWeight();
+                            d[1] += e->getWeight();
+                            d[6] += e->getWeight();
                         }
                     }
 
                     for (Edge* e : path[j]->getAdj()) {
                         if (e->getDest()->getId() == path[j + 1]->getId()) {
-                            d1 -= e->getWeight();
-                            d2 -= e->getWeight();
-                            d3 -= e->getWeight();
+                            d[2] -= e->getWeight();
+                            d[3] -= e->getWeight();
+                            d[4] -= e->getWeight();
+                            d[5] -= e->getWeight();
+                            d[6] -= e->getWeight();
+                            d[7] -= e->getWeight();
                         }
                         else if (e->getDest()->getId() == path[k]->getId()) {
-                            d2 += e->getWeight();
+                            d[2] += e->getWeight();
+                            d[6] += e->getWeight();
                         }
                         else if (e->getDest()->getId() == path[k+1]->getId()) {
-                            d3 += e->getWeight();
+                            d[5] += e->getWeight();
+                            d[7] += e->getWeight();
                         }
                     }
 
                     for (Edge* e : path[j+1]->getAdj()) {
                         if (e->getDest()->getId() == path[i + 1]->getId()) {
-                            d1 += e->getWeight();
+                            d[3] += e->getWeight();
+                            d[5] += e->getWeight();
                         }
                         else if (e->getDest()->getId() == path[k + 1]->getId()) {
-                            d2 += e->getWeight();
+                            d[2] += e->getWeight();
+                            d[4] += e->getWeight();
                         }
                     }
 
                     for (Edge* e : path[k]->getAdj()) {
                         if (e->getDest()->getId() == path[k + 1]->getId()) {
-                            d2 -= e->getWeight();
-                            d3 -= e->getWeight();
-                            d4 -= e->getWeight();
+                            d[1] -= e->getWeight();
+                            d[2] -= e->getWeight();
+                            d[4] -= e->getWeight();
+                            d[5] -= e->getWeight();
+                            d[6] -= e->getWeight();
+                            d[7] -= e->getWeight();
                         }
                         else if (e->getDest()->getId() == path[i + 1]->getId()) {
-                            d3 += e->getWeight();
+                            d[4] += e->getWeight();
+                            d[7] += e->getWeight();
                         }
                     }
 
-                    if (d1 < path_dist) {
-                        path = swap2opt(path, i, j);
-                        path_dist = d1;
-                        improved = true;
-                    } else if (d2 < path_dist) {
-                        path = swap2opt(path, j, k);
-                        path_dist = d2;
-                        improved = true;
-                    } else if (d4 < path_dist) {
-                        path = swap2opt(path, i, k);
-                        path_dist = d4;
-                        improved = true;
-                    } else if (d3 < path_dist) {
-                        path = swap3opt(path, i, j, k);
-                        path_dist = d3;
-                        improved = true;
+                    int bestChange = 0;
+                    for (int x = 1; x <= 7; x++) {
+                        if (d[x] < path_dist) {
+                            bestChange = x;
+                            path_dist = d[x];
+                            improved = true;
+                        }
+                    }
+
+                    switch (bestChange) {
+                        case 1:
+                            path = swap2opt(path, i, k);
+                            break;
+                        case 2:
+                            path = swap2opt(path, j, k);
+                            break;
+                        case 3:
+                            path = swap2opt(path, i, j);
+                            break;
+                        case 4:
+                            path = swap2opt(path, i, j);
+                            path = swap2opt(path, j, k);
+                            break;
+                        case 5:
+                            path = swap2opt(path, i, k);
+                            path = swap2opt(path, i, j);
+                            break;
+                        case 6:
+                            path = swap2opt(path, i, k);
+                            path = swap2opt(path, j, k);
+                            break;
+                        case 7:
+                            path = swap2opt(path, i, k);
+                            path = swap2opt(path, i, j);
+                            path = swap2opt(path, j, k);
+                            break;
+                        default:
+                            break;
+
                     }
                 }
             }
