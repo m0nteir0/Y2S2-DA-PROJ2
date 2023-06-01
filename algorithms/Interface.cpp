@@ -31,9 +31,6 @@ void Interface::welcomePage() {
                 case ('1'):
                     if (readFiles())
                         return;
-                    /*else if (!d_.getStations().empty() && !d_.getNetwork().empty())
-                        return mainMenu();*/
-                    break;
                 case ('2'):
                     if (credits())
                         return;
@@ -332,6 +329,7 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     cout << "Total distance: " << total_distance << endl;
                     cout << "---------------------------------" << endl;
                     cout << endl;
+                    //TODO: IF COMPLETE GRAPH
                     cout << "Do you want to see the optimized results after applying a 2-opt algorithm? (y/n)" << endl;
                     string input;
                     getline(cin, input);

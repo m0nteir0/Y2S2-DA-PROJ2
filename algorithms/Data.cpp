@@ -229,6 +229,7 @@ double Data::tspBT(unsigned int n, int path[]) {
  */
 double Data::haversine(double lat1, double lon1, double lat2, double lon2)
 {
+    cout << "haversine" << endl;
     // distance between latitudes and longitudes
     double dLat = (lat2 - lat1) * M_PI / 180.0;
     double dLon = (lon2 - lon1) * M_PI / 180.0;
@@ -469,6 +470,7 @@ double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
         for (int i = 1; i <= path.size() - 4; i++) {  // start and end node can't be swapped
             for (int j = i + 2; j <= path.size() - 3; j++) {
                 for (int k = j + 2; k <= path.size() - 2; k++) {
+                    path_dist = getPathDist(path);
                     double d[8] = {0, path_dist, path_dist, path_dist, path_dist,
                                    path_dist, path_dist, path_dist};
 
@@ -547,40 +549,61 @@ double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
                     }
 
                     int bestChange = 0;
+                    cout << "path_dist: " << path_dist << endl;
+                    cout << "Array:";
                     for (int x = 1; x <= 7; x++) {
+                         cout << " " << d[x];
                         if (d[x] < path_dist) {
                             bestChange = x;
                             path_dist = d[x];
                             improved = true;
                         }
                     }
+                    cout << endl;
+
 
                     switch (bestChange) {
                         case 1:
+                            cout << "change 1" << endl;
+                            cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, k);
                             break;
                         case 2:
+                            cout << "change 2" << endl;
+                            cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, j, k);
                             break;
                         case 3:
+                            cout << "change 3" << endl;
+                            cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, j);
                             break;
                         case 4:
-                            path = swap2opt(path, i, j);
-                            path = swap2opt(path, j, k);
+                            cout << "change 4" << endl;
+                            cout << "dist: " << path_dist << endl;
+                            path = swap2opt(path, i, j); //ACBDEF
+                            path = swap2opt(path, j, k); //ACBEDF
                             break;
                         case 5:
-                            path = swap2opt(path, i, k);
-                            path = swap2opt(path, i, j);
+                            cout << "change 5" << endl;
+                            cout << "dist: " << path_dist << endl;
+                            path = swap2opt(path, i, k); //AEDCBF
+                            //path = swap2opt(path, i, j); //AEDBCF
+                            path = swap2opt(path, j, k); //AEDBCF
                             break;
                         case 6:
-                            path = swap2opt(path, i, k);
-                            path = swap2opt(path, j, k);
+                            cout << "change 6" << endl;
+                            cout << "dist: " << path_dist << endl;
+                            path = swap2opt(path, i, k); //AEDCBF
+                            //path = swap2opt(path, j, k);
+                            path = swap2opt(path, i, j); //ADECBF
                             break;
                         case 7:
-                            path = swap2opt(path, i, k);
-                            path = swap2opt(path, i, j);
-                            path = swap2opt(path, j, k);
+                            cout << "change 7" << endl;
+                            cout << "dist: " << path_dist << endl;
+                            path = swap2opt(path, i, k); //AEDCBF
+                            path = swap2opt(path, i, j); //ADECBF
+                            path = swap2opt(path, j, k); //ADEBCF
                             break;
                         default:
                             break;
