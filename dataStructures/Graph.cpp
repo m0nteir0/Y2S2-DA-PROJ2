@@ -95,6 +95,7 @@ void Graph::clearGraph() {
  *
  * COMPLEXITY: O(E * log(V)), where V is the number of vertices in the graph and E the number of edges.
  * O( (E+V) * log(V)) ?
+ * O( (E*V) * log(V)) ? //tomas
  */
 void Graph::prim() {
 
@@ -155,7 +156,7 @@ void Graph::prim() {
  * It marks each visited vertex as visited and adds it to the resulting vector in the order of the traversal.
  * For each vertex in the reverse path of the current vertex, it recursively calls the dfsPrim function if the vertex has not been visited.
  *
- * COMPLEXITY: O(V), where V is the number of vertices
+ * COMPLEXITY: O(V+E), where V is the number of vertices and E is the number of edges of the MST (obtained by the prim algorithm).
  *
  * @param source Vertex pointer that represents the source vertex from which the traversal starts.
  * @param res A vector of Vertex pointers to store the resulting traversal path.
