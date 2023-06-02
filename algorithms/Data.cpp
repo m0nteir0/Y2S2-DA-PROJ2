@@ -549,58 +549,58 @@ double Data::tsp3opt(vector<Vertex*>& path, int maxIterations) {
                     }
 
                     int bestChange = 0;
-                    cout << "path_dist: " << path_dist << endl;
-                    cout << "Array:";
+                    //cout << "path_dist: " << path_dist << endl;
+                    //cout << "Array:";
                     for (int x = 1; x <= 7; x++) {
-                         cout << " " << d[x];
+                         //cout << " " << d[x];
                         if (d[x] < path_dist) {
                             bestChange = x;
                             path_dist = d[x];
                             improved = true;
                         }
                     }
-                    cout << endl;
+                    //cout << endl;
 
 
                     switch (bestChange) {
                         case 1:
-                            cout << "change 1" << endl;
-                            cout << "dist: " << path_dist << endl;
+                            //cout << "change 1" << endl;
+                            //cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, k);
                             break;
                         case 2:
-                            cout << "change 2" << endl;
-                            cout << "dist: " << path_dist << endl;
+                            //cout << "change 2" << endl;
+                            //cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, j, k);
                             break;
                         case 3:
-                            cout << "change 3" << endl;
-                            cout << "dist: " << path_dist << endl;
+                            //cout << "change 3" << endl;
+                            //cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, j);
                             break;
                         case 4:
-                            cout << "change 4" << endl;
-                            cout << "dist: " << path_dist << endl;
+                            //cout << "change 4" << endl;
+                            //cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, j); //ACBDEF
                             path = swap2opt(path, j, k); //ACBEDF
                             break;
                         case 5:
-                            cout << "change 5" << endl;
-                            cout << "dist: " << path_dist << endl;
+                            //cout << "change 5" << endl;
+                            //cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, k); //AEDCBF
                             //path = swap2opt(path, i, j); //AEDBCF
                             path = swap2opt(path, j, k); //AEDBCF
                             break;
                         case 6:
-                            cout << "change 6" << endl;
-                            cout << "dist: " << path_dist << endl;
+                            //cout << "change 6" << endl;
+                            //cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, k); //AEDCBF
                             //path = swap2opt(path, j, k);
                             path = swap2opt(path, i, j); //ADECBF
                             break;
                         case 7:
-                            cout << "change 7" << endl;
-                            cout << "dist: " << path_dist << endl;
+                            //cout << "change 7" << endl;
+                            //cout << "dist: " << path_dist << endl;
                             path = swap2opt(path, i, k); //AEDCBF
                             path = swap2opt(path, i, j); //ADECBF
                             path = swap2opt(path, j, k); //ADEBCF

@@ -19,6 +19,7 @@ public:
 
     bool credits() const;
     bool displayPage() const;
+    bool optimization(vector<Vertex*> path);
 
 };
 

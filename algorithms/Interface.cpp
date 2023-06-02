@@ -329,37 +329,40 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     cout << "Total distance: " << total_distance << endl;
                     cout << "---------------------------------" << endl;
                     cout << endl;
-                    //TODO: IF COMPLETE GRAPH
-                    cout << "Do you want to see the optimized results after applying a 2-opt algorithm? (y/n)" << endl;
-                    string input;
-                    getline(cin, input);
-                    if (input == "y") {
-                        cout << "Please write the maximum number of iterations: " << endl;
+                    if (isComplete) {
+                        //TODO: IF COMPLETE GRAPH
+                        cout << "Do you want to see the optimized results after applying a 2-opt algorithm? (y/n)"
+                             << endl;
+                        string input;
                         getline(cin, input);
-                        int max_iter = 0;
-                        try {
-                            max_iter = stoi(input);
-                        }
-                        catch (invalid_argument &e) {
-                            cout << endl << "Not a valid number" << endl;
-
-                        }
-                        if (max_iter > 0) {
-                            cout << endl << endl << "---------------------------------" << endl;
-                            cout << "2-OPT ALGORITHM" << endl;
-                            begin_time = clock();
-                            total_distance = d_.tsp2opt(path, max_iter);
-                            cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
-                            cout << "Path: ";
-                            for (int i = 0; i < path.size() - 1; i++) {
-                                cout << path[i]->getId() << " -> ";
+                        if (input == "y") {
+                            cout << "Please write the maximum number of iterations: " << endl;
+                            getline(cin, input);
+                            int max_iter = 0;
+                            try {
+                                max_iter = stoi(input);
                             }
-                            cout << path.back()->getId() << endl;
-                            cout << "Total distance: " << total_distance << endl;
-                            cout << "---------------------------------" << endl;
+                            catch (invalid_argument &e) {
+                                cout << endl << "Not a valid number" << endl;
+
+                            }
+                            if (max_iter > 0) {
+                                cout << endl << endl << "---------------------------------" << endl;
+                                cout << "2-OPT ALGORITHM" << endl;
+                                begin_time = clock();
+                                total_distance = d_.tsp2opt(path, max_iter);
+                                cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                     << endl;
+                                cout << "Path: ";
+                                for (int i = 0; i < path.size() - 1; i++) {
+                                    cout << path[i]->getId() << " -> ";
+                                }
+                                cout << path.back()->getId() << endl;
+                                cout << "Total distance: " << total_distance << endl;
+                                cout << "---------------------------------" << endl;
+                            }
                         }
                     }
-
                     if (displayPage())
                         return true;
                     break;
@@ -430,10 +433,10 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
         }
     }
 }
-
 bool Interface::displayPage() const {
     cout << endl << endl;
     cout << endl << "\tb-Back\n\te-Exit"<<endl;
+
     string input;
     while (true){
         cout << "\nChoose option:" << endl;
@@ -442,6 +445,88 @@ bool Interface::displayPage() const {
             cout << endl << "Please, only type one of the characters in the options described above." << endl;
         } else {
             switch (input[0]) {
+                case ('b'):
+                    return false;
+                case ('e'):
+                    cout << endl << "Exiting program..." << endl;
+                    return true;
+                default:
+                    cout << endl << "Not a valid option" << endl;
+            }
+        }
+    }
+}
+
+bool Interface::optimization(vector<Vertex*> path){
+    string input;
+    while (true){
+        cout << endl << endl;
+        cout << endl << "\t1 - 2-opt\t\n2 - 3-opt\t\n b - Back\n\te - Exit"<<endl;
+        cout << "\nChoose option:" << endl;
+        getline(cin, input);
+        if (input.size() > 1) {
+            cout << endl << "Please, only type one of the characters in the options described above." << endl;
+        } else {
+            clock_t begin_time;
+            double total_distance;
+            switch (input[0]) {
+                case ('1'): {
+                    vector<Vertex*> path2opt = path; //copy of the path
+                    cout << "Please write the maximum number of iterations: " << endl;
+                    getline(cin, input);
+                    int max_iter = 0;
+                    try {
+                        max_iter = stoi(input);
+                    }
+                    catch (invalid_argument &e) {
+                        cout << endl << "Not a valid number" << endl;
+
+                    }
+                    if (max_iter > 0) {
+                        cout << endl << endl << "---------------------------------" << endl;
+                        cout << "2-OPT ALGORITHM" << endl;
+                        begin_time = clock();
+                        total_distance = d_.tsp2opt(path2opt, max_iter);
+                        cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                             << endl;
+                        cout << "Path: ";
+                        for (int i = 0; i < path2opt.size() - 1; i++) {
+                            cout << path2opt[i]->getId() << " -> ";
+                        }
+                        cout << path2opt.back()->getId() << endl;
+                        cout << "Total distance: " << total_distance << endl;
+                        cout << "---------------------------------" << endl;
+                    }
+                }
+                case ('2'): {
+                    vector<Vertex*> path3opt = path; //copy of the path
+                    cout << "Please write the maximum number of iterations: " << endl;
+                    getline(cin, input);
+                    int max_iter = 0;
+                    try {
+                        max_iter = stoi(input);
+                    }
+                    catch (invalid_argument &e) {
+                        cout << endl << "Not a valid number" << endl;
+
+                    }
+                    if (max_iter > 0) {
+                        cout << endl << endl << "---------------------------------" << endl;
+                        cout << "3-OPT ALGORITHM" << endl;
+                        begin_time = clock();
+                        total_distance = d_.tsp3opt(path3opt, max_iter);
+                        cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                             << endl;
+                        cout << "Path: ";
+                        for (int i = 0; i < path3opt.size() - 1; i++) {
+                            cout << path3opt[i]->getId() << " -> ";
+                        }
+                        cout << path3opt.back()->getId() << endl;
+                        cout << "Total distance: " << total_distance << endl;
+                        cout << "---------------------------------" << endl;
+                    }
+
+                }
                 case ('b'):
                     return false;
                 case ('e'):
