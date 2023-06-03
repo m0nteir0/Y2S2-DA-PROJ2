@@ -71,14 +71,6 @@ bool Vertex::isVisited() const {
     return this->visited;
 }
 
-bool Vertex::isProcessing() const {
-    return this->processing;
-}
-
-unsigned int Vertex::getIndegree() const {
-    return this->indegree;
-}
-
 double Vertex::getDist() const {
     return this->dist;
 }
@@ -97,14 +89,6 @@ void Vertex::setId(int id) {
 
 void Vertex::setVisited(bool visited) {
     this->visited = visited;
-}
-
-void Vertex::setProcesssing(bool processing) {
-    this->processing = processing;
-}
-
-void Vertex::setIndegree(unsigned int indegree) {
-    this->indegree = indegree;
 }
 
 void Vertex::setDist(double dist) {
@@ -178,22 +162,6 @@ Edge *Edge::getReverse() const {
     return this->reverse;
 }
 
-bool Edge::isSelected() const {
-    return this->selected;
-}
-
-double Edge::getFlow() const {
-    return flow;
-}
-
-void Edge::setSelected(bool selected) {
-    this->selected = selected;
-}
-
 void Edge::setReverse(Edge *reverse) {
     this->reverse = reverse;
-}
-
-void Edge::setFlow(double flow) {
-    this->flow = flow;
 }

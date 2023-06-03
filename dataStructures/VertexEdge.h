@@ -28,16 +28,12 @@ public:
     int getId() const;
     std::vector<Edge *> getAdj() const;
     bool isVisited() const;
-    bool isProcessing() const;
-    unsigned int getIndegree() const;
     double getDist() const;
     Vertex *getPath() const;
     std::vector<Edge *> getIncoming() const;
 
     void setId(int info);
     void setVisited(bool visited);
-    void setProcesssing(bool processing);
-    void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Vertex *path);
     Edge * addEdge(Vertex *dest, double w);
@@ -48,7 +44,6 @@ public:
     double getLatitude() const;
     void setLatitude(double latitude);
     void setLongitude(double longitude);
-    //friend class MutablePriorityQueue<Vertex>;
 
     void clearReversePath();
     void addReversePath(Vertex* v);
@@ -59,15 +54,11 @@ protected:
     int id;                // identifier
     std::vector<Edge *> adj;  // outgoing edges
 
-
     double longitude;
     double latitude;
 
-protected:
     // auxiliary fields
     bool visited = false; // used by DFS, BFS, Prim ...
-    bool processing = false; // used by isDAG (in addition to the visited attribute)
-    unsigned int indegree; // used by topsort
     double dist = 0;
     Vertex *path = nullptr;
     std::vector<Vertex*> reversePath;
@@ -87,26 +78,17 @@ public:
 
     Vertex * getDest() const;
     double getWeight() const;
-    bool isSelected() const;
     Vertex * getOrig() const;
     Edge *getReverse() const;
-    double getFlow() const;
 
-    void setSelected(bool selected);
     void setReverse(Edge *reverse);
-    void setFlow(double flow);
 protected:
     Vertex * dest; // destination vertex
     double weight; // edge weight, can also be used for capacity
 
-    // auxiliary fields
-    bool selected = false;
-
     // used for bidirectional edges
     Vertex *orig;
     Edge *reverse = nullptr;
-
-    double flow; // for flow-related problems
 };
 
 #endif /* DA_TP_CLASSES_VERTEX_EDGE */

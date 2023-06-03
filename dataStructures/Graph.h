@@ -15,7 +15,6 @@
 
 class Graph {
 public:
-    ~Graph();
 
     /*
      *  Adds a vertex with a given content or info (in) to a graph (this).
@@ -43,11 +42,7 @@ public:
 protected:
     std::unordered_map<int, Vertex*> vertexSet;    // vertex set
 
-    double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
 };
 
-void deleteMatrix(int **m, int n);
-void deleteMatrix(double **m, int n);
 
 #endif /* DA_TP_CLASSES_GRAPH */
