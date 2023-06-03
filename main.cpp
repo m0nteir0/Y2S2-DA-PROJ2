@@ -31,6 +31,8 @@ int main() {
     */
 
     cout << endl << endl;
+    const int max_iter = 1;
+    cout << ((max_iter > 1 )?" iterations)" : " iteration") << endl;
     /*
     cout << d.getG().prim() << endl;
     for (Vertex* v : d.getG().getVertexSet()){
@@ -48,7 +50,7 @@ int main() {
     cout << "Path: ";
     for (int i = 0; i < n; i++) cout << a[i] << ' ';
     cout << endl << endl;
-    */
+
     cout << "Triangular Approximation\n";
     const clock_t tsp = clock();
     vector<Vertex*> path3;
@@ -120,4 +122,5 @@ int main() {
     }
     cout << path2.back()->getId() << endl;
     cout << endl ;
-}
+    */
+     }

@@ -19,7 +19,9 @@ public:
 
     bool credits() const;
     bool displayPage() const;
-    bool optimization(vector<Vertex*> path);
+    bool optimization(vector<Vertex*> path, string algorithm, double lower_bound);
+    void getApproximationRatio(double lower_bound, double dist);
+    void summary(bool isSmall, bool isComplete);
 
 };
 

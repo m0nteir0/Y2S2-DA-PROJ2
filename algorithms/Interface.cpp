@@ -1,5 +1,6 @@
 #include "Interface.h"
 #include <iostream>
+#include <cmath>
 #include <iomanip>
 
 using namespace std;
@@ -73,7 +74,7 @@ bool Interface::readFiles() {
             switch (input[0]) {
                 case ('1'): {
                     cout << endl <<"---------------------------------" << endl;
-                    cout << "Choose the topic of the graph you want to analyse.\n\n";
+                    cout << "Choose the topic of the graph you want to analyse.\n";
                     cout << endl << "\t1 - Shippings\n\t2 - Stadiums\n\t3 - Tourism\n\tb - back\n\te - Exit"
                          << endl;
 
@@ -81,7 +82,7 @@ bool Interface::readFiles() {
                         cout << "\nChoose option:  ";
                         cout << endl;
                         getline(cin, input2);
-
+                        cout << endl;
                         if (input2.size() > 1) {
                             cout << endl << "Please, only type one of the characters in the options described above."
                                  << endl;
@@ -90,7 +91,7 @@ bool Interface::readFiles() {
                             switch (input2[0]) {
                                 case ('1'):
                                     cout << "---------------------------------" << endl;
-                                    cout << "EXECUTION TIMES:" << endl;
+                                    cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readToyData("../data/Toy-Graphs/shipping.csv");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -103,7 +104,7 @@ bool Interface::readFiles() {
                                     //return false;
                                 case ('2'):
                                     cout << "---------------------------------" << endl;
-                                    cout << "EXECUTION TIMES:" << endl;
+                                    cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readToyData("../data/Toy-Graphs/stadiums.csv");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -114,7 +115,7 @@ bool Interface::readFiles() {
                                     break;
                                 case ('3'):
                                     cout << "---------------------------------" << endl;
-                                    cout << "EXECUTION TIMES:" << endl;
+                                    cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readToyData("../data/Toy-Graphs/tourism.csv");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -154,7 +155,7 @@ bool Interface::readFiles() {
                             switch (input2[0]) {
                                 case ('1'):
                                     cout << "---------------------------------" << endl;
-                                    cout << "EXECUTION TIMES:" << endl;
+                                    cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readRealData("../data/Real-World-Graphs/graph1");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -165,7 +166,7 @@ bool Interface::readFiles() {
                                     break;
                                 case ('2'):
                                     cout << "---------------------------------" << endl;
-                                    cout << "EXECUTION TIMES:" << endl;
+                                    cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readRealData("../data/Real-World-Graphs/graph2");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -176,7 +177,7 @@ bool Interface::readFiles() {
                                     break;
                                 case ('3'):
                                     cout << "---------------------------------" << endl;
-                                    cout << "EXECUTION TIMES:" << endl;
+                                    cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readRealData("../data/Real-World-Graphs/graph3");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -200,7 +201,7 @@ bool Interface::readFiles() {
                 }
                 case ('3'): {
                     cout << endl
-                         << "Choose the number of vertexes of the fully connected graph you want to analyse.\n\n"
+                         << "Choose the number of vertexes of the fully connected graph you want to analyse."
                          << endl;
                     cout << endl << "\t1 - 25 vertexes\n\t2 - 50 vertexes\n\t3 - 75 vertexes"
                          << "\n\t4 - 100 vertexes\n\t5 - 200 vertexes\n\t6 - 300 vertexes"
@@ -230,7 +231,7 @@ bool Interface::readFiles() {
                             }
                             if (option > 0 && option <= 12) {
                                 cout << "---------------------------------" << endl;
-                                cout << "EXECUTION TIMES:" << endl;
+                                cout << "EXECUTION TIME:" << endl;
                                 const clock_t begin_time = clock();
                                 int n_vertexes = options[option - 1];
                                 d_.readFullyConnectedData(
@@ -262,20 +263,21 @@ bool Interface::readFiles() {
     }
 }
 
-//main menu devia ver "permissões" dos diferentes tipos de graph. P.ex Real-World não pode ser corrido pelo nosso alg
 /**
  * Função imprime o menu principal do programa e permite ir para os outros "sub"-menus, com as funcionalidades específicas.
  *
  * COMPLEXIDADE: O(n).
  */
 bool Interface::mainMenu(bool isSmall, bool isComplete) {
+    double lower_bound = 0;
     while (true) {
+        cout << endl;
         cout << endl << "=========ALGORITHM MENU=========" << endl;
         cout << endl;
 
-        cout << "I want to get informations regarding:" << endl;
+        cout << "Which algorithm do you want to apply?" << endl;
         cout << endl
-             << "\t1 - Brute-Force/Backtracking Algorithm [T2.1]\n\t2 - Triangular Approximation Heuristic [T2.2]\n\t3 - Our Heuristic (Nearest Neighbour + 2-opt) [T2.3]\n\tb - Back\n\te - Exit"
+             << "\t1 - Brute-Force/Backtracking Algorithm [T2.1]\n\t2 - Triangular Approximation Heuristic [T2.2]\n\t3 - Our Heuristic (Nearest Neighbour) [T2.3]\n\t4 - Find lower bound (MST)\n\t5 - Algorithm summary\n\tb - Back\n\te - Exit"
              << endl;
         string input;
         cout << "\nChoose option:  ";
@@ -298,6 +300,7 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     cout << "BACKTRACKING ALGORITHM" << endl;
                     begin_time = clock();
                     total_distance = d_.tspBT(n, a);
+                    lower_bound = total_distance;
                     cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
                     cout << "Path: ";
                     for (int i = 0; i < n; i++) {
@@ -305,6 +308,7 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     }
                     cout << 0 << endl;
                     cout << "Total distance: " << total_distance << endl;
+                    getApproximationRatio(lower_bound, total_distance);
                     cout << "---------------------------------" << endl;
                     if (displayPage())
                         return true;
@@ -327,9 +331,11 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     }
                     cout << path.back()->getId() << endl;
                     cout << "Total distance: " << total_distance << endl;
+                    getApproximationRatio(lower_bound, total_distance);
                     cout << "---------------------------------" << endl;
                     cout << endl;
                     if (isComplete) {
+                        /*
                         //TODO: IF COMPLETE GRAPH
                         cout << "Do you want to see the optimized results after applying a 2-opt algorithm? (y/n)"
                              << endl;
@@ -362,12 +368,14 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                                 cout << "---------------------------------" << endl;
                             }
                         }
+                         */
+                        if (optimization(path, "TA", lower_bound))
+                            return true;
                     }
-                    if (displayPage())
+                    else if (displayPage())
                         return true;
                     break;
                 }
-
                 case ('3'): {
                     if (!isComplete) {
                         cout << endl << "This algorithm is not available for this graph." << endl;
@@ -386,8 +394,14 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     cout << path.back()->getId() << endl;
                     total_distance = d_.getPathDist(path);
                     cout << "Total distance: " << total_distance << endl;
+                    getApproximationRatio(lower_bound, total_distance);
                     cout << "---------------------------------" << endl;
                     cout << endl;
+                    if (optimization(path, "NN", lower_bound))
+                        return true;
+                    //else if (displayPage())
+                    //    return true;
+                    /*
                     cout << "Do you want to see the optimized results after applying a 2-opt algorithm? (y/n)" << endl;
                     string input;
                     getline(cin, input);
@@ -417,11 +431,34 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                             cout << "---------------------------------" << endl;
                         }
                     }
+                    */
+                    //if (displayPage())
+                    //    return true;
+                    break;
+                }
+                case ('4'): {
+                    if (isSmall) {
+                        cout << endl << "You can find the optimal solution for this graph by running the backtracking algorithm." << endl;
+                        break;
+                    }
+                    cout << endl << endl << "---------------------------------" << endl;
+                    cout << "LOWER BOUND (MST)" << endl;
+                    begin_time = clock();
+                    lower_bound = d_.getG().prim();
+                    cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
+                    cout << "Lower bound: " << lower_bound << endl;
+                    cout << "---------------------------------" << endl;
+                    cout << endl;
                     if (displayPage())
                         return true;
                     break;
                 }
-
+                case ('5'): {
+                    summary(isSmall, isComplete);
+                    if (displayPage())
+                        return true;
+                    break;
+                }
                 case ('b'):
                     return false;
                 case ('e'):
@@ -434,11 +471,9 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
     }
 }
 bool Interface::displayPage() const {
-    cout << endl << endl;
-    cout << endl << "\tb-Back\n\te-Exit"<<endl;
-
     string input;
     while (true){
+        cout << endl << "\tb-Back\n\te-Exit"<<endl;
         cout << "\nChoose option:" << endl;
         getline(cin, input);
         if (input.size() > 1) {
@@ -457,11 +492,12 @@ bool Interface::displayPage() const {
     }
 }
 
-bool Interface::optimization(vector<Vertex*> path){
+bool Interface::optimization(vector<Vertex*> path, string algorithm, double lower_bound) {
     string input;
     while (true){
-        cout << endl << endl;
-        cout << endl << "\t1 - 2-opt\t\n2 - 3-opt\t\n b - Back\n\te - Exit"<<endl;
+        cout << endl;
+        cout << "=========OPTIMIZATION=========" << endl;
+        cout << endl << "\t1 - 2-opt\n\t2 - 3-opt\n\tb - Back\n\te - Exit"<<endl;
         cout << "\nChoose option:" << endl;
         getline(cin, input);
         if (input.size() > 1) {
@@ -472,7 +508,7 @@ bool Interface::optimization(vector<Vertex*> path){
             switch (input[0]) {
                 case ('1'): {
                     vector<Vertex*> path2opt = path; //copy of the path
-                    cout << "Please write the maximum number of iterations: " << endl;
+                    cout << "Maximum number of iterations: " << endl;
                     getline(cin, input);
                     int max_iter = 0;
                     try {
@@ -484,7 +520,7 @@ bool Interface::optimization(vector<Vertex*> path){
                     }
                     if (max_iter > 0) {
                         cout << endl << endl << "---------------------------------" << endl;
-                        cout << "2-OPT ALGORITHM" << endl;
+                        cout << algorithm <<" + 2-OPT ALGORITHM (" << max_iter << ((max_iter > 1 )?" iterations)" : " iteration)") << endl;
                         begin_time = clock();
                         total_distance = d_.tsp2opt(path2opt, max_iter);
                         cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -495,12 +531,17 @@ bool Interface::optimization(vector<Vertex*> path){
                         }
                         cout << path2opt.back()->getId() << endl;
                         cout << "Total distance: " << total_distance << endl;
+                        getApproximationRatio(lower_bound, total_distance);
                         cout << "---------------------------------" << endl;
+
+                        if(displayPage())
+                            return true;
                     }
+                    break;
                 }
                 case ('2'): {
                     vector<Vertex*> path3opt = path; //copy of the path
-                    cout << "Please write the maximum number of iterations: " << endl;
+                    cout << "Maximum number of iterations: " << endl;
                     getline(cin, input);
                     int max_iter = 0;
                     try {
@@ -508,11 +549,12 @@ bool Interface::optimization(vector<Vertex*> path){
                     }
                     catch (invalid_argument &e) {
                         cout << endl << "Not a valid number" << endl;
+                        return false;
 
                     }
                     if (max_iter > 0) {
                         cout << endl << endl << "---------------------------------" << endl;
-                        cout << "3-OPT ALGORITHM" << endl;
+                        cout << algorithm <<" + 3-OPT ALGORITHM (" << max_iter << ((max_iter > 1 )?" iterations)" : " iteration)") << endl;
                         begin_time = clock();
                         total_distance = d_.tsp3opt(path3opt, max_iter);
                         cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
@@ -523,9 +565,13 @@ bool Interface::optimization(vector<Vertex*> path){
                         }
                         cout << path3opt.back()->getId() << endl;
                         cout << "Total distance: " << total_distance << endl;
+                        getApproximationRatio(lower_bound, total_distance);
                         cout << "---------------------------------" << endl;
-                    }
 
+                        if(displayPage())
+                            return true;
+                    }
+                    break;
                 }
                 case ('b'):
                     return false;
@@ -538,7 +584,6 @@ bool Interface::optimization(vector<Vertex*> path){
         }
     }
 }
-
 
 
 bool Interface::credits() const {
@@ -571,3 +616,156 @@ bool Interface::credits() const {
     }
 }
 
+void Interface::getApproximationRatio(double lower_bound, double dist){
+    if (lower_bound != 0) {
+        double ratio = dist / lower_bound;
+        cout << "Approximation: " << round(ratio * 1000.0) / 1000.0 << "x" << endl;
+    }
+}
+
+void Interface::summary(bool isSmall, bool isComplete) {
+    //cout << endl << "=========SUMMARY=========" << endl;
+    cout << endl;
+    double lower_bound;
+    clock_t begin_time;
+    struct stat {
+        string name;
+        double dist;
+        float time;
+        double ratio;
+    };
+    vector<stat> stats;
+
+    string input;
+    int iterations2opt = 0;
+    while (true) {
+        cout << "Maximum number of iterations for 2-opt (0 if don't want to run 2-opt): " << endl;
+        getline(cin, input);
+        try {
+            iterations2opt = stoi(input);
+        }
+        catch (invalid_argument &e) {
+            cout << endl << "Not a valid number" << endl;
+            continue;
+        }
+        break;
+    }
+    int iterations3opt = 0;
+    while (true) {
+        cout << "Maximum number of iterations for 3-opt (0 if don't want to run 3-opt): " << endl;
+        getline(cin, input);
+        try {
+            iterations3opt = stoi(input);
+        }
+        catch (invalid_argument &e) {
+            cout << endl << "Not a valid number" << endl;
+            continue;
+        }
+        break;
+    }
+    cout << endl << "Running algorithms..." << endl;
+    //lowerbound/backtracking
+    if (isSmall) {
+        cout << endl << "Backtracking algorithm is running...";
+        stat s;
+        unsigned int n = d_.getG().getNumVertex();
+        int a[n];
+        begin_time = clock();
+        lower_bound = d_.tspBT(n, a);
+        s = {"Backtracking", lower_bound, float(clock() - begin_time) / CLOCKS_PER_SEC, 1};
+        stats.push_back(s);
+        cout << "Done." << endl;
+    } else {
+        cout << endl << "Lower Bound algorithm is running...";
+        stat s;
+        begin_time = clock();
+        lower_bound = d_.getG().prim();
+        s = {"Lower Bound", lower_bound, float(clock() - begin_time) / CLOCKS_PER_SEC, 1};
+        stats.push_back(s);
+        cout << "Done." << endl;
+    }
+    //TA
+    if (isSmall && !isComplete) {
+        cout << endl << "TA algorithm not available for this graph." << endl;
+    } else {
+        cout << "TA algorithm is running...";
+        stat s;
+        vector<Vertex *> path;
+        begin_time = clock();
+        double total_distance = d_.tspTriangle(path);
+        s = {"TA", total_distance, float(clock() - begin_time) / CLOCKS_PER_SEC, round ((total_distance / lower_bound) * 1000.0) / 1000.0};
+        stats.push_back(s);
+        cout << "Done." << endl;
+        //2opt
+        if(isComplete){
+            if(iterations2opt > 0){
+                cout << "TA + 2-OPT algorithm is running...";
+                vector<Vertex *> path2opt = path; //copy of the path
+                begin_time = clock();
+                total_distance = d_.tsp2opt(path2opt, iterations2opt);
+                s = {"TA + 2-OPT", total_distance, float(clock() - begin_time) / CLOCKS_PER_SEC, round ((total_distance / lower_bound) * 1000.0) / 1000.0};
+                stats.push_back(s);
+                cout << "Done." << endl;
+            }
+            if(iterations3opt > 0){
+                cout << "TA + 3-OPT algorithm is running...";
+                vector<Vertex *> path3opt = path; //copy of the path
+                begin_time = clock();
+                total_distance = d_.tsp3opt(path3opt, iterations3opt);
+                s = {"TA + 3-OPT", total_distance, float(clock() - begin_time) / CLOCKS_PER_SEC, round ((total_distance / lower_bound) * 1000.0) / 1000.0};
+                stats.push_back(s);
+                cout << "Done." << endl;
+            }
+        }
+    }
+
+    //NN
+    if(!isComplete) {
+        cout << endl << "NN algorithm not available for this graph." << endl;
+    } else {
+        cout << "NN algorithm is running...";
+        stat s;
+        vector<Vertex *> path;
+        begin_time = clock();
+        path = d_.tspNearestNeighbour();
+        float time = float(clock() - begin_time) / CLOCKS_PER_SEC;
+        double total_distance = d_.getPathDist(path);
+        s = {"NN", total_distance, time, round ((total_distance / lower_bound) * 1000.0) / 1000.0};
+        stats.push_back(s);
+        cout << "Done." << endl;
+        //2opt
+        if(iterations2opt > 0){
+            cout << "NN + 2-OPT algorithm is running...";
+            vector<Vertex *> path2opt = path; //copy of the path
+            begin_time = clock();
+            total_distance = d_.tsp2opt(path2opt, iterations2opt);
+            s = {"NN + 2-OPT", total_distance, float(clock() - begin_time) / CLOCKS_PER_SEC, round ((total_distance / lower_bound) * 1000.0) / 1000.0};
+            stats.push_back(s);
+            cout << "Done." << endl;
+        }
+        if(iterations3opt > 0){
+            cout << "NN + 3-OPT algorithm is running...";
+            vector<Vertex *> path3opt = path; //copy of the path
+            begin_time = clock();
+            total_distance = d_.tsp3opt(path3opt, iterations3opt);
+            s = {"NN + 3-OPT", total_distance, float(clock() - begin_time) / CLOCKS_PER_SEC, round ((total_distance / lower_bound) * 1000.0) / 1000.0};
+            stats.push_back(s);
+            cout << "Done." << endl;
+        }
+    }
+
+    //DRAW TABLE
+    cout << endl << setfill('=') << setw(30)<< "=" << "SUMMARY" << setw(31) << "=" << endl;
+    cout << endl;
+    cout << left << setfill(' ') << setw(15) << "Algorithm" << " |" <<  setw(15) << " Distance" << " |" << setw(15) << " Time" << " |" << setw(15) << " Approximation" << " |" << endl;
+    cout << setfill('-') << setw(16) << "-" << "+" << setfill('-') << setw(16) << "-" << "+" << setfill('-') << setw(16) << "-" << "+" << setfill('-') << setw(16) << "-" << "+" << endl;
+    for (auto &s : stats) {
+        ostringstream t, a;
+        t << s.time << "s";
+        a << s.ratio << "x";
+        cout << left << setfill(' ') << setw(15) << s.name << " |" << right << setw(15) << s.dist << " |" << setw(15) << t.str() << " |" << setw(15) << a.str() << " |" << endl;
+        cout << setfill('-') << setw(16) << "-" << "+" << setfill('-') << setw(16) << "-" << "+" << setfill('-') << setw(16) << "-" << "+" << setfill('-') << setw(16) << "-" << "+" << endl;
+    }
+    cout << endl;
+    cout << setfill('=') << setw(68) << "=" << endl;
+}
