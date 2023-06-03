@@ -75,8 +75,7 @@ void Graph::clearGraph() {
  * If the new distance is smaller than the previous distance, the vertex is inserted or updated in the priority queue accordingly.
  * Finally, the function establishes the reverse path connections between vertices in the minimum spanning tree.
  *
- * COMPLEXITY: O(E * log(V)), where V is the number of vertices in the graph and E the number of edges.
- * O( (E+V) * log(V)) ?
+ * COMPLEXITY: O((E+V) * log(V)), where V is the number of vertices in the graph and E the number of edges.
  *
  * @return The total weight of the minimum spanning tree.
  */
