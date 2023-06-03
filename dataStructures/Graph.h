@@ -36,7 +36,6 @@ public:
     int getNumVertex() const;
     std::unordered_map<int, Vertex*> getVertexSet() const;
 
-    //void prim();
     double prim();
     void dfsPrim(Vertex* source, std::vector<Vertex*>& res);
 

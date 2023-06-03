@@ -8,11 +8,6 @@ using namespace std;
 
 Interface::Interface() : d_(Data()) {}
 
-/**
- * Função imprime o menu inicial que permite ao utilizador escolher entre as opções: ler ficheiros, ver créditos ou sair do programa.
- *
- * COMPLEXIDADE: O(n).
- */
 void Interface::welcomePage() {
     string input;
     while (true) {
@@ -45,12 +40,6 @@ void Interface::welcomePage() {
     }
 }
 
-
-/**
- * Função imprime o menu de leitura dos ficheiros, permite ao utilizador escolher entre os ficheiros "default" ou alterar os ficheiros
- *
- * COMPLEXIDADE: O(n).
- */
 bool Interface::readFiles() {
     string input;
 
@@ -213,7 +202,6 @@ bool Interface::readFiles() {
                         vector<int> options = {25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900};
                         if (input2 == "b")
                             break;
-                            //return false;
                         else if (input2 == "e") {
                             cout << endl << "Exiting program..." << endl;
                             return true;
@@ -260,11 +248,6 @@ bool Interface::readFiles() {
     }
 }
 
-/**
- * Função imprime o menu principal do programa e permite ir para os outros "sub"-menus, com as funcionalidades específicas.
- *
- * COMPLEXIDADE: O(n).
- */
 bool Interface::mainMenu(bool isSmall, bool isComplete) {
     double lower_bound = 0;
     while (true) {
@@ -514,7 +497,6 @@ bool Interface::optimization(vector<Vertex*> path, string algorithm, double lowe
     }
 }
 
-
 bool Interface::credits() const {
     cout << endl << "=========CREDITS=========" << endl;
     cout << endl;
@@ -553,7 +535,6 @@ void Interface::getApproximationRatio(double lower_bound, double dist){
 }
 
 void Interface::summary(bool isSmall, bool isComplete) {
-    //cout << endl << "=========SUMMARY=========" << endl;
     cout << endl;
     double lower_bound;
     clock_t begin_time;

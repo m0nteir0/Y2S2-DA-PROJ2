@@ -128,7 +128,8 @@ double Graph::prim() {
                     }
                 }
                 if (dist == -1) {
-                    dist = Data::haversine(u->getLatitude(), u->getLongitude(), vertex.second->getLatitude(), vertex.second->getLongitude());
+                    dist = Data::haversine(u->getLatitude(), u->getLongitude(),
+                                           vertex.second->getLatitude(), vertex.second->getLongitude());
                 }
 
                 if (dist < vertex.second->getDist()) {
