@@ -219,7 +219,7 @@ double Data::tspBT(unsigned int n, int path[]) {
 /**
  * @brief Calculates distance between two nodes using the Haversine formula with the values of each latitude and longitude.
  *
- * COMPLEXITY: O(1)
+ * COMPLEXITY: O(log(n))
  *
  * @param lat1 latitude of the first node
  * @param lon1 longitude of the first node
@@ -250,7 +250,7 @@ double Data::haversine(double lat1, double lon1, double lat2, double lon2)
  *
  * This function returns a vector of vertices representing the preorder walk of the graph. The preorder walk is obtained by performing a Depth-First Search (DFS) traversal starting from the first vertex of the graph.
  *
- * COMPLEXITY: O(V)
+ * COMPLEXITY: O(V+E)
  *
  * @return path A vector of vertices representing the preorder walk of the graph.
  */
@@ -274,7 +274,7 @@ vector<Vertex*> Data::getPreorderWalk() {
  * If a direct edge exists between two adjacent vertices in the path, the weight of that edge is used.
  * Otherwise, the Haversine formula is used to calculate the distance between the vertices based on their coordinates.
  *
- * COMPLEXITY: O(V+E) / COMPLEXITY do prim?
+ * COMPLEXITY: O((V+E) * log(V))
  *
  * @param path A vector of Vertex pointers to store the resulting path.
  * @return The cost of the path.
@@ -408,7 +408,7 @@ vector<Vertex *> Data::swap2opt(vector<Vertex *> path, int start, int end) {
  * The algorithm is guaranteed to terminate, and it is also guaranteed to never produce a path longer than the original.
  * However, it is not guaranteed to produce the shortest possible path.
  *
- * COMPLEXITY: O(V^2 + E), where V is the number of vertices
+ * COMPLEXITY: O(V^2*E), where V is the number of vertices, and E the number of edges
  *
  * @param path The TSP path to be optimized.
  * @param maxIterations The maximum number of iterations to perform.
@@ -466,7 +466,7 @@ double Data::tsp2opt(vector<Vertex*> &path, int maxIterations) {
  * Like the 2-opt algorithm, the 3-opt algorithm is guaranteed to terminate and never produce a path longer than the original.
  * However, it is not guaranteed to produce the shortest possible path.
  *
- * COMPLEXITY: O(V^4 + E), where V is the number of vertices
+ * COMPLEXITY: O(V^3*E), where V is the number of vertices, and E the number of edges
  *
  * @param path The TSP path to be optimized.
  * @param maxIterations The maximum number of iterations to perform.
