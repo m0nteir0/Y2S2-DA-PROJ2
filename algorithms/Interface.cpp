@@ -18,10 +18,8 @@ void Interface::welcomePage() {
     while (true) {
         cout << endl << "=========WELCOME PAGE=========" << endl;
         cout << endl << "----> Welcome to our DA 2nd Project! Here, we will show you different ways we handled Travelling Salesperson Problem.";
-        cout << endl << "----> Some techniques are more efficient, others more accurate... Let's see! \u1F600 " << endl;
-        cout << "\t_________________";
-        cout << endl << "\t| 1 - Read files\t|\n\t| 2 - Credits\t|\n\t| e - Exit\t|" << endl;
-        cout << "\t_________________";
+        cout << endl << "----> Some techniques are more efficient, others more accurate... Let's see! " << endl;
+        cout << endl << "\t1 - Read files\n\t2 - Credits\n\te - Exit" << endl;
         cout << "\nChoose option:  ";
         cout << endl;
         getline(cin, input);
@@ -32,6 +30,7 @@ void Interface::welcomePage() {
                 case ('1'):
                     if (readFiles())
                         return;
+                    break;
                 case ('2'):
                     if (credits())
                         return;
@@ -101,7 +100,6 @@ bool Interface::readFiles() {
                                     if (mainMenu(true, false))
                                         return true;
                                     break;
-                                    //return false;
                                 case ('2'):
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIME:" << endl;
@@ -124,9 +122,9 @@ bool Interface::readFiles() {
                                     if (mainMenu(true,true))
                                         return true;
                                     break;
-                                case 'b':
+                                case ('b'):
                                     break;
-                                case 'e':
+                                case ('e'):
                                     cout << endl << "Exiting program..." << endl;
                                     return true;
                                 default:
@@ -138,8 +136,7 @@ bool Interface::readFiles() {
                     break;
                 }
                 case ('2'): {
-                    cout << endl << "Choose the graph you want to analyse.\n\n"
-                         << endl;
+                    cout << endl << "Choose the graph you want to analyse."<< endl;
                     cout << endl << "\t1 - Graph 1\n\t2 - Graph 2\n\t3 - Graph 3\n\tb - back\n\te - Exit"
                          << endl;
 
@@ -157,7 +154,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
-                                    d_.readRealData("../data/Real-World-Graphs/graph1");
+                                    d_.readRealData("../data/Real-world Graphs/graph1");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -168,7 +165,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
-                                    d_.readRealData("../data/Real-World-Graphs/graph2");
+                                    d_.readRealData("../data/Real-world Graphs/graph2");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -179,7 +176,7 @@ bool Interface::readFiles() {
                                     cout << "---------------------------------" << endl;
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
-                                    d_.readRealData("../data/Real-World-Graphs/graph3");
+                                    d_.readRealData("../data/Real-world Graphs/graph3");
                                     cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
@@ -252,7 +249,7 @@ bool Interface::readFiles() {
                     break;
                 }
                 case ('b'):
-                    break;
+                    return false;
                 case ('e'):
                     cout << endl << "Exiting program..." << endl;
                     return true;
@@ -335,40 +332,6 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     cout << "---------------------------------" << endl;
                     cout << endl;
                     if (isComplete) {
-                        /*
-                        //TODO: IF COMPLETE GRAPH
-                        cout << "Do you want to see the optimized results after applying a 2-opt algorithm? (y/n)"
-                             << endl;
-                        string input;
-                        getline(cin, input);
-                        if (input == "y") {
-                            cout << "Please write the maximum number of iterations: " << endl;
-                            getline(cin, input);
-                            int max_iter = 0;
-                            try {
-                                max_iter = stoi(input);
-                            }
-                            catch (invalid_argument &e) {
-                                cout << endl << "Not a valid number" << endl;
-
-                            }
-                            if (max_iter > 0) {
-                                cout << endl << endl << "---------------------------------" << endl;
-                                cout << "2-OPT ALGORITHM" << endl;
-                                begin_time = clock();
-                                total_distance = d_.tsp2opt(path, max_iter);
-                                cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
-                                     << endl;
-                                cout << "Path: ";
-                                for (int i = 0; i < path.size() - 1; i++) {
-                                    cout << path[i]->getId() << " -> ";
-                                }
-                                cout << path.back()->getId() << endl;
-                                cout << "Total distance: " << total_distance << endl;
-                                cout << "---------------------------------" << endl;
-                            }
-                        }
-                         */
                         if (optimization(path, "TA", lower_bound))
                             return true;
                     }
@@ -399,41 +362,6 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
                     cout << endl;
                     if (optimization(path, "NN", lower_bound))
                         return true;
-                    //else if (displayPage())
-                    //    return true;
-                    /*
-                    cout << "Do you want to see the optimized results after applying a 2-opt algorithm? (y/n)" << endl;
-                    string input;
-                    getline(cin, input);
-                    if (input == "y") {
-                        cout << "Please write the maximum number of iterations: " << endl;
-                        getline(cin, input);
-                        int max_iter = 0;
-                        try {
-                            max_iter = stoi(input);
-                        }
-                        catch (invalid_argument &e) {
-                            cout << endl << "Not a valid number" << endl;
-
-                        }
-                        if (max_iter > 0) {
-                            cout << endl << endl << "---------------------------------" << endl;
-                            cout << "2-OPT ALGORITHM" << endl;
-                            begin_time = clock();
-                            total_distance = d_.tsp2opt(path, max_iter);
-                            cout << "Execution time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s" << endl;
-                            cout << "Path: ";
-                            for (int i = 0; i < path.size() - 1; i++) {
-                                cout << path[i]->getId() << " -> ";
-                            }
-                            cout << path.back()->getId() << endl;
-                            cout << "Total distance: " << total_distance << endl;
-                            cout << "---------------------------------" << endl;
-                        }
-                    }
-                    */
-                    //if (displayPage())
-                    //    return true;
                     break;
                 }
                 case ('4'): {
@@ -470,6 +398,7 @@ bool Interface::mainMenu(bool isSmall, bool isComplete) {
         }
     }
 }
+
 bool Interface::displayPage() const {
     string input;
     while (true){
