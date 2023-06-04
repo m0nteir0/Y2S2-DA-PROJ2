@@ -147,7 +147,7 @@ bool Data::readRealEdges(string filename) {
  * This function finds the shortest path that visits all nodes in the graph, starting from node 0 and returning to it.
  * It uses a Backtracking algorithm to explore all possible paths and keeps track of the best path found.
  *
- * COMPLEXITY: O(V!), V being the number of vertexes in the graph.
+ * COMPLEXITY: O(V!), V being the number of vertices in the graph.
  *
  * @param n The number of nodes in the graph.
  * @param path An array to store the resulting path.
@@ -250,7 +250,7 @@ double Data::haversine(double lat1, double lon1, double lat2, double lon2)
  *
  * This function returns a vector of vertices representing the preorder walk of the graph. The preorder walk is obtained by performing a Depth-First Search (DFS) traversal starting from the first vertex of the graph.
  *
- * COMPLEXITY: O(V+E), where V is the number of vertices, and E the number of edges
+ * COMPLEXITY: O(V+E), where V is the number of vertices, and E is the number of edges of the MST
  *
  * @return path A vector of vertices representing the preorder walk of the graph.
  */
@@ -355,7 +355,7 @@ vector<Vertex*> Data::tspNearestNeighbour() {
 /**
  * @brief Calculates the sum of the weights of the edges in a path.
  *
- * COMPLEXITY: O(V), where V is the number of vertices, and E the number of edges
+ * COMPLEXITY: O(V+E), where V is the number of vertices, and E the number of edges
  *
  * @param path A vector of Vertex pointers representing the path.
  * @return The sum of the weights of the edges in the path.
@@ -408,7 +408,7 @@ vector<Vertex *> Data::swap2opt(vector<Vertex *> path, int start, int end) {
  * The algorithm is guaranteed to terminate, and it is also guaranteed to never produce a path longer than the original.
  * However, it is not guaranteed to produce the shortest possible path.
  *
- * COMPLEXITY: O(V^2*E), where V is the number of vertices, and E the number of edges
+ * COMPLEXITY: O(V^3*E), where V is the number of vertices, and E the number of edges
  *
  * @param path The TSP path to be optimized.
  * @param maxIterations The maximum number of iterations to perform.
@@ -466,7 +466,7 @@ double Data::tsp2opt(vector<Vertex*> &path, int maxIterations) {
  * Like the 2-opt algorithm, the 3-opt algorithm is guaranteed to terminate and never produce a path longer than the original.
  * However, it is not guaranteed to produce the shortest possible path.
  *
- * COMPLEXITY: O(V^3*E), where V is the number of vertices, and E the number of edges
+ * COMPLEXITY: O(V^4*E), where V is the number of vertices, and E the number of edges
  *
  * @param path The TSP path to be optimized.
  * @param maxIterations The maximum number of iterations to perform.
