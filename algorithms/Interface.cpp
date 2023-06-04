@@ -12,8 +12,8 @@ void Interface::welcomePage() {
     string input;
     while (true) {
         cout << endl << "=========WELCOME PAGE=========" << endl;
-        cout << endl << "----> Welcome to our DA 2nd Project! Here, we will show you different ways we handled Travelling Salesperson Problem.";
-        cout << endl << "----> Some techniques are more efficient, others more accurate... Let's see! " << endl;
+        cout << endl << "Welcome to our 2nd DA Project! Here, we will show you different ways we handled Travelling Salesperson Problem.";
+        cout << endl << "Some algorithms are more efficient, others more accurate... Let's see! " << endl;
         cout << endl << "\t1 - Read files\n\t2 - Credits\n\te - Exit" << endl;
         cout << "\nChoose option:  ";
         cout << endl;
@@ -82,7 +82,7 @@ bool Interface::readFiles() {
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readToyData("../data/Toy-Graphs/shipping.csv");
-                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                    cout << "total time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
 
@@ -94,7 +94,7 @@ bool Interface::readFiles() {
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readToyData("../data/Toy-Graphs/stadiums.csv");
-                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                    cout << "total time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
                                     if (mainMenu(true,true))
@@ -105,7 +105,7 @@ bool Interface::readFiles() {
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readToyData("../data/Toy-Graphs/tourism.csv");
-                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                    cout << "total time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
                                     if (mainMenu(true,true))
@@ -144,7 +144,7 @@ bool Interface::readFiles() {
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readRealData("../data/Real-world Graphs/graph1");
-                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                    cout << "total time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
                                     if (mainMenu(false,true))
@@ -155,7 +155,7 @@ bool Interface::readFiles() {
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readRealData("../data/Real-world Graphs/graph2");
-                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                    cout << "total time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
                                     if (mainMenu(false,false))
@@ -166,7 +166,7 @@ bool Interface::readFiles() {
                                     cout << "EXECUTION TIME:" << endl;
                                     begin_time = clock();
                                     d_.readRealData("../data/Real-world Graphs/graph3");
-                                    cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                    cout << "total time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                          << endl;
                                     cout << "---------------------------------" << endl;
                                     if (mainMenu(false,false))
@@ -222,7 +222,7 @@ bool Interface::readFiles() {
                                 d_.readFullyConnectedData(
                                         "../data/Extra_Fully_Connected_Graphs/edges_" +
                                         to_string(n_vertexes) + ".csv");
-                                cout << "Total time:" << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
+                                cout << "total time: " << float(clock() - begin_time) / CLOCKS_PER_SEC << "s"
                                      << endl;
                                 cout << "---------------------------------" << endl;
                                 if (mainMenu(false,true))
