@@ -1,0 +1,97 @@
+\hypertarget{_mutable_priority_queue_8h_source}{}\doxysection{Mutable\+Priority\+Queue.\+h}
+\label{_mutable_priority_queue_8h_source}\index{C:/Users/User/Desktop/DA projetos/DA2023\_PRJ2\_G15\_1/DA-\/PROJECT2/src/dataStructures/MutablePriorityQueue.h@{C:/Users/User/Desktop/DA projetos/DA2023\_PRJ2\_G15\_1/DA-\/PROJECT2/src/dataStructures/MutablePriorityQueue.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DA\_PROJECT2\_MUTABLEPRIORITYQUEUE\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DA\_PROJECT2\_MUTABLEPRIORITYQUEUE\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 }
+\DoxyCodeLine{11 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{12 \textcolor{keyword}{class }\mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue}} \{}
+\DoxyCodeLine{13     std::vector<T *> H;}
+\DoxyCodeLine{14     \textcolor{keywordtype}{void} heapifyUp(\textcolor{keywordtype}{unsigned} i);}
+\DoxyCodeLine{15     \textcolor{keywordtype}{void} heapifyDown(\textcolor{keywordtype}{unsigned} i);}
+\DoxyCodeLine{16     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} set(\textcolor{keywordtype}{unsigned} i, T * x);}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue}}();}
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} insert(T * x);}
+\DoxyCodeLine{20     T * extractMin();}
+\DoxyCodeLine{21     \textcolor{keywordtype}{void} decreaseKey(T * x);}
+\DoxyCodeLine{22     \textcolor{keywordtype}{bool} empty();}
+\DoxyCodeLine{23 \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{comment}{// Index calculations}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define parent(i) ((i) / 2)}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define leftChild(i) ((i) * 2)}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{30 \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::MutablePriorityQueue}}() \{}
+\DoxyCodeLine{31     H.push\_back(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{32     \textcolor{comment}{// indices will be used starting in 1}}
+\DoxyCodeLine{33     \textcolor{comment}{// to facilitate parent/child calculations}}
+\DoxyCodeLine{34 \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{37 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::empty}}() \{}
+\DoxyCodeLine{38     \textcolor{keywordflow}{return} H.size() == 1;}
+\DoxyCodeLine{39 \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{42 T* \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::extractMin}}() \{}
+\DoxyCodeLine{43     \textcolor{keyword}{auto} x = H[1];}
+\DoxyCodeLine{44     H[1] = H.back();}
+\DoxyCodeLine{45     H.pop\_back();}
+\DoxyCodeLine{46     \textcolor{keywordflow}{if}(H.size() > 1) heapifyDown(1);}
+\DoxyCodeLine{47     x-\/>queueIndex = 0;}
+\DoxyCodeLine{48     \textcolor{keywordflow}{return} x;}
+\DoxyCodeLine{49 \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{52 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::insert}}(T *x) \{}
+\DoxyCodeLine{53     H.push\_back(x);}
+\DoxyCodeLine{54     heapifyUp(H.size()-\/1);}
+\DoxyCodeLine{55 \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{58 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::decreaseKey}}(T *x) \{}
+\DoxyCodeLine{59     heapifyUp(x-\/>queueIndex);}
+\DoxyCodeLine{60 \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{63 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::heapifyUp}}(\textcolor{keywordtype}{unsigned} i) \{}
+\DoxyCodeLine{64     \textcolor{keyword}{auto} x = H[i];}
+\DoxyCodeLine{65     \textcolor{keywordflow}{while} (i > 1 \&\& *x < *H[parent(i)]) \{}
+\DoxyCodeLine{66         set(i, H[parent(i)]);}
+\DoxyCodeLine{67         i = parent(i);}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69     set(i, x);}
+\DoxyCodeLine{70 \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{73 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::heapifyDown}}(\textcolor{keywordtype}{unsigned} i) \{}
+\DoxyCodeLine{74     \textcolor{keyword}{auto} x = H[i];}
+\DoxyCodeLine{75     \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{76         \textcolor{keywordtype}{unsigned} k = leftChild(i);}
+\DoxyCodeLine{77         \textcolor{keywordflow}{if} (k >= H.size())}
+\DoxyCodeLine{78             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{79         \textcolor{keywordflow}{if} (k+1 < H.size() \&\& *H[k+1] < *H[k])}
+\DoxyCodeLine{80             ++k; \textcolor{comment}{// right child of i}}
+\DoxyCodeLine{81         \textcolor{keywordflow}{if} ( ! (*H[k] < *x) )}
+\DoxyCodeLine{82             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{83         set(i, H[k]);}
+\DoxyCodeLine{84         i = k;}
+\DoxyCodeLine{85     \}}
+\DoxyCodeLine{86     set(i, x);}
+\DoxyCodeLine{87 \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{90 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::set}}(\textcolor{keywordtype}{unsigned} i, T * x) \{}
+\DoxyCodeLine{91     H[i] = x;}
+\DoxyCodeLine{92     x-\/>queueIndex = i;}
+\DoxyCodeLine{93 \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DA\_PROJECT2\_MUTABLEPRIORITYQUEUE\_H}}
+
+\end{DoxyCode}

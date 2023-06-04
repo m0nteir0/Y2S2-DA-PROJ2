@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "../dataStructures/Graph.h"
+#include "../../dataStructures/Graph.h"
 
 
 using namespace std;
