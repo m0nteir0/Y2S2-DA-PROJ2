@@ -1,4 +1,7 @@
-# DA-PROJECT2
+# PROJECT2
+
+### Grade: 19.1/20
+
 For the program to run, the following file configuration should be followed, starting from the project root:
 
 - /data/
