@@ -1,0 +1,63 @@
+\hypertarget{_data_8h_source}{}\doxysection{Data.\+h}
+\label{_data_8h_source}\index{C:/Users/User/Desktop/DA projetos/DA2023\_PRJ2\_G15\_1/DA-\/PROJECT2/src/algorithms/Data.h@{C:/Users/User/Desktop/DA projetos/DA2023\_PRJ2\_G15\_1/DA-\/PROJECT2/src/algorithms/Data.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DA\_PROJECT2\_DATA\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DA\_PROJECT2\_DATA\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}../../dataStructures/Graph.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{class_data}{Data}} \{}
+\DoxyCodeLine{15 \textcolor{keyword}{private}:}
+\DoxyCodeLine{16     \mbox{\hyperlink{class_graph}{Graph}} g;}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \mbox{\hyperlink{class_graph}{Graph}} \&getG();}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{bool} readToyData(\textcolor{keywordtype}{string} filename);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{keywordtype}{bool} readFullyConnectedData(\textcolor{keywordtype}{string} filename);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keywordtype}{bool} readRealData(\textcolor{keywordtype}{string} folder);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keywordtype}{bool} readRealNodes(\textcolor{keywordtype}{string} filename);}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keywordtype}{bool} readRealEdges(\textcolor{keywordtype}{string} filename);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_data_a1947b3d8101c095e648980d3d7a6fd61}{tspBTAux}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} path[], \textcolor{keywordtype}{int} currentPath[],}
+\DoxyCodeLine{32                   \textcolor{keywordtype}{double} curr, \textcolor{keywordtype}{double} \&best, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} curr\_n);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_data_a4962c86093432dd3093b71805add323a}{tspBT}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} path[]);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keyword}{static} \textcolor{keywordtype}{double} \mbox{\hyperlink{class_data_acb6d36a153496f215344da5c2c1dcc68}{haversine}}(\textcolor{keywordtype}{double} lat1, \textcolor{keywordtype}{double} lon1, \textcolor{keywordtype}{double} lat2, \textcolor{keywordtype}{double} lon2);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     vector<Vertex *> \mbox{\hyperlink{class_data_a8887ef4ba084b4f8c60858e9d16ef0a8}{getPreorderWalk}}();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_data_ab96c3f81fbb888c414a2f850d0121ee7}{tspTriangle}}(vector<Vertex *> \&path);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     vector<Vertex *> \mbox{\hyperlink{class_data_afe856ec5dc4cad1c2759a7142a88b82b}{tspNearestNeighbour}}();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_data_a6618cadfe8ee097da166f3e8c801bc37}{getPathDist}}(vector<Vertex *> path);}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     vector<Vertex *> \mbox{\hyperlink{class_data_a8fb1a0ae925c6c9a7e871078ae2a886b}{swap2opt}}(vector<Vertex *> path, \textcolor{keywordtype}{int} i, \textcolor{keywordtype}{int} j);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_data_ab69aab8c0caa7e223bfc11971a31c572}{tsp2opt}}(vector<Vertex *> \&path, \textcolor{keywordtype}{int} maxIterations);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     vector<Vertex *> swap3opt(vector<Vertex *> path, \textcolor{keywordtype}{int} start, \textcolor{keywordtype}{int} mid, \textcolor{keywordtype}{int} end);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_data_adbd42922f24f064c09c8960c5a4abe5b}{tsp3opt}}(vector<Vertex *> \&path, \textcolor{keywordtype}{int} maxIterations);}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DA\_PROJECT2\_DATA\_H}}
+
+\end{DoxyCode}

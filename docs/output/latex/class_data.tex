@@ -1,0 +1,283 @@
+\hypertarget{class_data}{}\doxysection{Data Class Reference}
+\label{class_data}\index{Data@{Data}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_data_a0cce205a1314635a99dc86902abdfa31}\label{class_data_a0cce205a1314635a99dc86902abdfa31}} 
+\mbox{\hyperlink{class_graph}{Graph}} \& {\bfseries getG} ()
+\item 
+\mbox{\Hypertarget{class_data_a5d68124b7a2f41ccd294c1fdb266ab2e}\label{class_data_a5d68124b7a2f41ccd294c1fdb266ab2e}} 
+bool {\bfseries read\+Toy\+Data} (string filename)
+\item 
+\mbox{\Hypertarget{class_data_aeecfd8a42c8751063511aefa81324520}\label{class_data_aeecfd8a42c8751063511aefa81324520}} 
+bool {\bfseries read\+Fully\+Connected\+Data} (string filename)
+\item 
+\mbox{\Hypertarget{class_data_a3409b472c590f4027699d554be2d5a38}\label{class_data_a3409b472c590f4027699d554be2d5a38}} 
+bool {\bfseries read\+Real\+Data} (string folder)
+\item 
+\mbox{\Hypertarget{class_data_ad85894af01995458983b6fa9e3b25b69}\label{class_data_ad85894af01995458983b6fa9e3b25b69}} 
+bool {\bfseries read\+Real\+Nodes} (string filename)
+\item 
+\mbox{\Hypertarget{class_data_aaaa4a432defb3db40269f4fef8295a34}\label{class_data_aaaa4a432defb3db40269f4fef8295a34}} 
+bool {\bfseries read\+Real\+Edges} (string filename)
+\item 
+void \mbox{\hyperlink{class_data_a1947b3d8101c095e648980d3d7a6fd61}{tsp\+BTAux}} (unsigned int n, int path\mbox{[}$\,$\mbox{]}, int current\+Path\mbox{[}$\,$\mbox{]}, double curr, double \&best, unsigned int curr\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Auxiliar function to solve the Travelling Salesperson Problem (TSP) using a Backtracking algorithm. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_data_a4962c86093432dd3093b71805add323a}{tsp\+BT}} (unsigned int n, int path\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Solves the Travelling Salesperson Problem (TSP) using a Backtracking algorithm. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{class_data_a8887ef4ba084b4f8c60858e9d16ef0a8}{get\+Preorder\+Walk}} ()
+\begin{DoxyCompactList}\small\item\em Get the Preorder Walk of the \mbox{\hyperlink{class_graph}{Graph}}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_data_ab96c3f81fbb888c414a2f850d0121ee7}{tsp\+Triangle}} (vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Calculates the cost of the TSP path using the Triangle Inequality heuristic. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{class_data_afe856ec5dc4cad1c2759a7142a88b82b}{tsp\+Nearest\+Neighbour}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the cost of the Travelling Salesperson Problem (TSP) path using the Nearest Neighbour heuristic. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_data_a6618cadfe8ee097da166f3e8c801bc37}{get\+Path\+Dist}} (vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ path)
+\begin{DoxyCompactList}\small\item\em Calculates the sum of the weights of the edges in a path. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{class_data_a8fb1a0ae925c6c9a7e871078ae2a886b}{swap2opt}} (vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ path, int i, int j)
+\begin{DoxyCompactList}\small\item\em Swaps a portion of the given path using the 2-\/opt technique. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_data_ab69aab8c0caa7e223bfc11971a31c572}{tsp2opt}} (vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&path, int max\+Iterations)
+\begin{DoxyCompactList}\small\item\em Applies the 2-\/opt algorithm to improve the given TSP path. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_data_ac1d8ed2a5a9764a20e0b8c0100dfc729}\label{class_data_ac1d8ed2a5a9764a20e0b8c0100dfc729}} 
+vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ {\bfseries swap3opt} (vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ path, int start, int mid, int end)
+\item 
+double \mbox{\hyperlink{class_data_adbd42922f24f064c09c8960c5a4abe5b}{tsp3opt}} (vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&path, int max\+Iterations)
+\begin{DoxyCompactList}\small\item\em Applies the 3-\/opt algorithm to improve the given TSP path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{class_data_acb6d36a153496f215344da5c2c1dcc68}{haversine}} (double lat1, double lon1, double lat2, double lon2)
+\begin{DoxyCompactList}\small\item\em Calculates distance between two nodes using the Haversine formula with the values of each latitude and longitude. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_data_a6618cadfe8ee097da166f3e8c801bc37}\label{class_data_a6618cadfe8ee097da166f3e8c801bc37}} 
+\index{Data@{Data}!getPathDist@{getPathDist}}
+\index{getPathDist@{getPathDist}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getPathDist()}{getPathDist()}}
+{\footnotesize\ttfamily double Data\+::get\+Path\+Dist (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$}]{path }\end{DoxyParamCaption})}
+
+
+
+Calculates the sum of the weights of the edges in a path. 
+
+COMPLEXITY\+: O(V+E), where V is the number of vertices, and E the number of edges
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & A vector of \mbox{\hyperlink{class_vertex}{Vertex}} pointers representing the path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sum of the weights of the edges in the path. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_a8887ef4ba084b4f8c60858e9d16ef0a8}\label{class_data_a8887ef4ba084b4f8c60858e9d16ef0a8}} 
+\index{Data@{Data}!getPreorderWalk@{getPreorderWalk}}
+\index{getPreorderWalk@{getPreorderWalk}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{getPreorderWalk()}{getPreorderWalk()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ Data\+::get\+Preorder\+Walk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Preorder Walk of the \mbox{\hyperlink{class_graph}{Graph}}. 
+
+This function returns a vector of vertices representing the preorder walk of the graph. The preorder walk is obtained by performing a Depth-\/\+First Search (DFS) traversal starting from the first vertex of the graph.
+
+COMPLEXITY\+: O(V+E), where V is the number of vertices, and E is the number of edges of the MST
+
+\begin{DoxyReturn}{Returns}
+path A vector of vertices representing the preorder walk of the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_acb6d36a153496f215344da5c2c1dcc68}\label{class_data_acb6d36a153496f215344da5c2c1dcc68}} 
+\index{Data@{Data}!haversine@{haversine}}
+\index{haversine@{haversine}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{haversine()}{haversine()}}
+{\footnotesize\ttfamily double Data\+::haversine (\begin{DoxyParamCaption}\item[{double}]{lat1,  }\item[{double}]{lon1,  }\item[{double}]{lat2,  }\item[{double}]{lon2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates distance between two nodes using the Haversine formula with the values of each latitude and longitude. 
+
+COMPLEXITY\+: O(log(n))
+
+
+\begin{DoxyParams}{Parameters}
+{\em lat1} & latitude of the first node \\
+\hline
+{\em lon1} & longitude of the first node \\
+\hline
+{\em lat2} & latitude of the second node \\
+\hline
+{\em lon2} & longitude of the second node \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+distance between the two nodes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_a8fb1a0ae925c6c9a7e871078ae2a886b}\label{class_data_a8fb1a0ae925c6c9a7e871078ae2a886b}} 
+\index{Data@{Data}!swap2opt@{swap2opt}}
+\index{swap2opt@{swap2opt}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{swap2opt()}{swap2opt()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ Data\+::swap2opt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$}]{path,  }\item[{int}]{start,  }\item[{int}]{end }\end{DoxyParamCaption})}
+
+
+
+Swaps a portion of the given path using the 2-\/opt technique. 
+
+COMPLEXITY\+: O(\+V), where V is the number of vertices
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The original path to be modified. \\
+\hline
+{\em start} & The starting index of the portion to be swapped. \\
+\hline
+{\em end} & The ending index of the portion to be swapped. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The modified path with the specified portion swapped. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_ab69aab8c0caa7e223bfc11971a31c572}\label{class_data_ab69aab8c0caa7e223bfc11971a31c572}} 
+\index{Data@{Data}!tsp2opt@{tsp2opt}}
+\index{tsp2opt@{tsp2opt}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{tsp2opt()}{tsp2opt()}}
+{\footnotesize\ttfamily double Data\+::tsp2opt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&}]{path,  }\item[{int}]{max\+Iterations }\end{DoxyParamCaption})}
+
+
+
+Applies the 2-\/opt algorithm to improve the given TSP path. 
+
+The 2-\/opt algorithm is an iterative algorithm that attempts to improve an existing path by swapping two edges. It does this by trying to find two edges that, if swapped, would result in a shorter path. If such edges are found, the swap is performed and the process is repeated until no further improvements can be made. The algorithm is guaranteed to terminate, and it is also guaranteed to never produce a path longer than the original. However, it is not guaranteed to produce the shortest possible path.
+
+COMPLEXITY\+: O(\+V$^\wedge$3$\ast$\+E), where V is the number of vertices, and E the number of edges
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The TSP path to be optimized. \\
+\hline
+{\em max\+Iterations} & The maximum number of iterations to perform. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The optimized TSP path\textquotesingle{}s total distance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_adbd42922f24f064c09c8960c5a4abe5b}\label{class_data_adbd42922f24f064c09c8960c5a4abe5b}} 
+\index{Data@{Data}!tsp3opt@{tsp3opt}}
+\index{tsp3opt@{tsp3opt}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{tsp3opt()}{tsp3opt()}}
+{\footnotesize\ttfamily double Data\+::tsp3opt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&}]{path,  }\item[{int}]{max\+Iterations }\end{DoxyParamCaption})}
+
+
+
+Applies the 3-\/opt algorithm to improve the given TSP path. 
+
+The 3-\/opt algorithm is an iterative algorithm that attempts to improve an existing path by swapping three edges. In this case, it can apply swaps to both pairs or groups of three edges (combining 2-\/opt with pure 3-\/opt approach), to provide a better solution. It does this by trying to find three edges that, if swapped, would result in a shorter path. If such edges are found, the swap is performed and the process is repeated until no further improvements can be made. Like the 2-\/opt algorithm, the 3-\/opt algorithm is guaranteed to terminate and never produce a path longer than the original. However, it is not guaranteed to produce the shortest possible path.
+
+COMPLEXITY\+: O(\+V$^\wedge$4$\ast$\+E), where V is the number of vertices, and E the number of edges
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The TSP path to be optimized. \\
+\hline
+{\em max\+Iterations} & The maximum number of iterations to perform. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The optimized TSP path\textquotesingle{}s total distance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_a4962c86093432dd3093b71805add323a}\label{class_data_a4962c86093432dd3093b71805add323a}} 
+\index{Data@{Data}!tspBT@{tspBT}}
+\index{tspBT@{tspBT}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{tspBT()}{tspBT()}}
+{\footnotesize\ttfamily double Data\+::tsp\+BT (\begin{DoxyParamCaption}\item[{unsigned int}]{n,  }\item[{int}]{path\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Solves the Travelling Salesperson Problem (TSP) using a Backtracking algorithm. 
+
+This function finds the shortest path that visits all nodes in the graph, starting from node 0 and returning to it. It uses a Backtracking algorithm by calling the auxiliary function tsp\+BTAux. Explores all possible paths and returns the cost of the best path found. It\textquotesingle{}s only useful for small graphs, because of its time complexity.
+
+COMPLEXITY\+: O(V!), V being the number of vertices in the graph.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The number of nodes in the graph. \\
+\hline
+{\em path} & An array to store the resulting path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cost of the best path found. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_a1947b3d8101c095e648980d3d7a6fd61}\label{class_data_a1947b3d8101c095e648980d3d7a6fd61}} 
+\index{Data@{Data}!tspBTAux@{tspBTAux}}
+\index{tspBTAux@{tspBTAux}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{tspBTAux()}{tspBTAux()}}
+{\footnotesize\ttfamily void Data\+::tsp\+BTAux (\begin{DoxyParamCaption}\item[{unsigned int}]{n,  }\item[{int}]{path\mbox{[}$\,$\mbox{]},  }\item[{int}]{current\+Path\mbox{[}$\,$\mbox{]},  }\item[{double}]{curr,  }\item[{double \&}]{best,  }\item[{unsigned int}]{curr\+\_\+n }\end{DoxyParamCaption})}
+
+
+
+Auxiliar function to solve the Travelling Salesperson Problem (TSP) using a Backtracking algorithm. 
+
+This function finds the shortest path that visits all nodes in the graph, starting from node 0 and returning to it. It uses a Backtracking algorithm to explore all possible paths and keeps track of the best path found.
+
+COMPLEXITY\+: O(V!), V being the number of vertices in the graph.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The number of nodes in the graph. \\
+\hline
+{\em path} & An array to store the resulting path. \\
+\hline
+{\em current\+Path} & An array to store the current path being explored. \\
+\hline
+{\em curr} & The current cost of the path being explored. \\
+\hline
+{\em best} & The best cost found so far. \\
+\hline
+{\em curr\+\_\+n} & The current number of nodes visited in the path. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_data_afe856ec5dc4cad1c2759a7142a88b82b}\label{class_data_afe856ec5dc4cad1c2759a7142a88b82b}} 
+\index{Data@{Data}!tspNearestNeighbour@{tspNearestNeighbour}}
+\index{tspNearestNeighbour@{tspNearestNeighbour}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{tspNearestNeighbour()}{tspNearestNeighbour()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ Data\+::tsp\+Nearest\+Neighbour (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculates the cost of the Travelling Salesperson Problem (TSP) path using the Nearest Neighbour heuristic. 
+
+Starts with vertex 0 as the starting point and repeatedly selects the nearest unvisited vertex to extend the current path. This process continues until all vertices have been visited, and then the path is closed by returning to the initial vertex. The resulting path may not always be the optimal solution, but it provides a reasonably good approximation.
+
+COMPLEXITY\+: O(V + E), where V is the number of vertices, and E the number of edges \begin{DoxyReturn}{Returns}
+A vector of \mbox{\hyperlink{class_vertex}{Vertex}} pointers representing the TSP path generated by the Nearest Neighbour heuristic. The path starts and ends at the same vertex, forming a closed loop. If the graph is not complete (some vertices are not connected), an empty path is returned. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_data_ab96c3f81fbb888c414a2f850d0121ee7}\label{class_data_ab96c3f81fbb888c414a2f850d0121ee7}} 
+\index{Data@{Data}!tspTriangle@{tspTriangle}}
+\index{tspTriangle@{tspTriangle}!Data@{Data}}
+\doxysubsubsection{\texorpdfstring{tspTriangle()}{tspTriangle()}}
+{\footnotesize\ttfamily double Data\+::tsp\+Triangle (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Calculates the cost of the TSP path using the Triangle Inequality heuristic. 
+
+It first constructs a minimum spanning tree of the graph using Prim\textquotesingle{}s algorithm. Then, it generates a preorder walk of the minimum spanning tree and appends the starting vertex to form a closed path. Finally, it calculates the total cost of the path by summing the weights of the edges. If a direct edge exists between two adjacent vertices in the path, the weight of that edge is used. Otherwise, the Haversine formula is used to calculate the distance between the vertices based on their coordinates.
+
+COMPLEXITY\+: O((V+E) $\ast$ log(\+V)), where V is the number of vertices, and E the number of edges
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & A vector of \mbox{\hyperlink{class_vertex}{Vertex}} pointers to store the resulting path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cost of the path. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+User/\+Desktop/\+DA projetos/\+DA2023\+\_\+\+PRJ2\+\_\+\+G15\+\_\+1/\+DA-\/\+PROJECT2/src/algorithms/Data.\+h\item 
+C\+:/\+Users/\+User/\+Desktop/\+DA projetos/\+DA2023\+\_\+\+PRJ2\+\_\+\+G15\+\_\+1/\+DA-\/\+PROJECT2/src/algorithms/Data.\+cpp\end{DoxyCompactItemize}

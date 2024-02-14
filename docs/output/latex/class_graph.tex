@@ -1,0 +1,90 @@
+\hypertarget{class_graph}{}\doxysection{Graph Class Reference}
+\label{class_graph}\index{Graph@{Graph}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_ad354c018724ef3f137a0b8554089105e}\label{class_graph_ad354c018724ef3f137a0b8554089105e}} 
+bool {\bfseries add\+Vertex} (const int \&id)
+\item 
+\mbox{\Hypertarget{class_graph_abece134d2ebd0c024a67619ea46dbd64}\label{class_graph_abece134d2ebd0c024a67619ea46dbd64}} 
+bool {\bfseries add\+Vertex} (const int \&id, double latitude, double longitude)
+\item 
+\mbox{\Hypertarget{class_graph_a516f4487d70f4b15e413447afa8c2310}\label{class_graph_a516f4487d70f4b15e413447afa8c2310}} 
+bool {\bfseries add\+Edge} (const int \&sourc, const int \&dest, double w)
+\item 
+\mbox{\Hypertarget{class_graph_a5d6b6b10ebe49cc0191ab45151cd49e7}\label{class_graph_a5d6b6b10ebe49cc0191ab45151cd49e7}} 
+bool {\bfseries add\+Bidirectional\+Edge} (const int \&sourc, const int \&dest, double w)
+\item 
+\mbox{\Hypertarget{class_graph_abb5e0517e2979c54eebdafc2a9875e8f}\label{class_graph_abb5e0517e2979c54eebdafc2a9875e8f}} 
+int {\bfseries get\+Num\+Vertex} () const
+\item 
+\mbox{\Hypertarget{class_graph_a34dc8268e703217705d6ba9ac8b02170}\label{class_graph_a34dc8268e703217705d6ba9ac8b02170}} 
+std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ {\bfseries get\+Vertex\+Set} () const
+\item 
+double \mbox{\hyperlink{class_graph_a559b70457eba466fe03bc54134879431}{prim}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a minimum spanning tree using Prim\textquotesingle{}s algorithm and returns its total weight. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_aa566776683d3b9b0ca53b97fa5ba1e66}{dfs\+Prim}} (\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$source, std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&res)
+\begin{DoxyCompactList}\small\item\em Performs a Depth-\/\+First Search traversal on the minimum spanning tree rooted at the specified source vertex. This function recursively traverses the minimum spanning tree in a depth-\/first manner starting from the given source vertex. It marks each visited vertex as visited and adds it to the resulting vector in the order of the traversal. For each vertex in the reverse path of the current vertex, it recursively calls the dfs\+Prim function if the vertex has not been visited. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_ad1c7af5ab7a9fc6ce190779170bb655c}{clear\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Clears the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_ab857650ab750306ac716ae6b8510fe41}\label{class_graph_ab857650ab750306ac716ae6b8510fe41}} 
+std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ {\bfseries vertex\+Set}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graph_ad1c7af5ab7a9fc6ce190779170bb655c}\label{class_graph_ad1c7af5ab7a9fc6ce190779170bb655c}} 
+\index{Graph@{Graph}!clearGraph@{clearGraph}}
+\index{clearGraph@{clearGraph}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{clearGraph()}{clearGraph()}}
+{\footnotesize\ttfamily void Graph\+::clear\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clears the graph. 
+
+The function deletes all the vertices in the graph and clears the vertex set. \mbox{\Hypertarget{class_graph_aa566776683d3b9b0ca53b97fa5ba1e66}\label{class_graph_aa566776683d3b9b0ca53b97fa5ba1e66}} 
+\index{Graph@{Graph}!dfsPrim@{dfsPrim}}
+\index{dfsPrim@{dfsPrim}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{dfsPrim()}{dfsPrim()}}
+{\footnotesize\ttfamily void Graph\+::dfs\+Prim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{source,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Performs a Depth-\/\+First Search traversal on the minimum spanning tree rooted at the specified source vertex. This function recursively traverses the minimum spanning tree in a depth-\/first manner starting from the given source vertex. It marks each visited vertex as visited and adds it to the resulting vector in the order of the traversal. For each vertex in the reverse path of the current vertex, it recursively calls the dfs\+Prim function if the vertex has not been visited. 
+
+COMPLEXITY\+: O(V+E), where V is the number of vertices and E is the number of edges of the MST (obtained by the prim algorithm).
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & \mbox{\hyperlink{class_vertex}{Vertex}} pointer that represents the source vertex from which the traversal starts. \\
+\hline
+{\em res} & A vector of \mbox{\hyperlink{class_vertex}{Vertex}} pointers to store the resulting traversal path. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a559b70457eba466fe03bc54134879431}\label{class_graph_a559b70457eba466fe03bc54134879431}} 
+\index{Graph@{Graph}!prim@{prim}}
+\index{prim@{prim}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{prim()}{prim()}}
+{\footnotesize\ttfamily double Graph\+::prim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructs a minimum spanning tree using Prim\textquotesingle{}s algorithm and returns its total weight. 
+
+The function constructs a minimum spanning tree of the graph using Prim\textquotesingle{}s algorithm. Iteratively selects the vertex with the minimum distance from the priority queue and marks it as visited. For each unvisited vertex, it checks if there is a direct edge from the selected vertex to that vertex. If such an edge exists, it updates the distance and path information of the vertex if the new distance is smaller. If there is no direct edge, uses the Haversine formula. If the new distance is smaller than the previous distance, the vertex is inserted or updated in the priority queue accordingly. Finally, the function establishes the reverse path connections between vertices in the minimum spanning tree.
+
+COMPLEXITY\+: O((V+E) $\ast$ log(\+V)), where V is the number of vertices in the graph and E the number of edges.
+
+\begin{DoxyReturn}{Returns}
+The total weight of the minimum spanning tree. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+User/\+Desktop/\+DA projetos/\+DA2023\+\_\+\+PRJ2\+\_\+\+G15\+\_\+1/\+DA-\/\+PROJECT2/src/data\+Structures/Graph.\+h\item 
+C\+:/\+Users/\+User/\+Desktop/\+DA projetos/\+DA2023\+\_\+\+PRJ2\+\_\+\+G15\+\_\+1/\+DA-\/\+PROJECT2/src/data\+Structures/Graph.\+cpp\end{DoxyCompactItemize}
